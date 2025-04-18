@@ -1,0 +1,140 @@
+/* ========== Reset & Global ========== */
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: 'Noto Sans KR', sans-serif;
+}
+
+a {
+   color: inherit;
+   text-decoration: none;
+}
+
+/* ========== Layout Base ========== */
+body {
+   line-height: 1.5;
+   min-height: 100vh;
+   height: 100%;
+}
+
+#container {
+   min-height: 100vh;
+   width: 100%;
+   max-width: 1280px;
+   margin: 0 auto;
+}
+
+/* ========== Header ========== */
+#header {
+   overflow: hidden;
+   margin-top: 20px;
+   display: flex;
+   height: 80px;
+   border-bottom: 1px solid #ccc;
+}
+
+.leftMenu {
+   align-items: center;
+   display: flex;
+   justify-content: center;
+   width: 20%;
+   height: 100%;
+}
+
+.headerLogoImg {
+   width: 100%;
+   height: 100%;
+   object-fit: contain;
+}
+
+.middleMenu {
+   display: flex;
+   text-decoration: none;
+   justify-content: center;
+   width: 50%;
+   gap: 20px;
+   color: #333333;
+   align-items: center;
+}
+
+.middleMenu p {
+   font-size: 22px;
+   color: #333333;
+}
+
+.middleMenu a {
+   color: #333;
+}
+
+.rightMenu {
+   width: 30%;
+   gap: 20px;
+   display: flex;
+}
+
+.totalSearch {
+   width: 70%;
+   display: flex;
+   position: relative;
+}
+
+.searchBox {
+   position: relative;
+   display: flex;
+   align-items: center;
+   width: 100%;
+}
+
+..searchBox i {
+   position: absolute;
+   top: 50%;
+   right: 10px;
+   transform: translateY(-50%);
+   font-size: 18px;
+   color: #999;
+}
+
+.searchBox input {
+   width: 100%;
+   padding: 10px 10px 10px 35px; /* 상, 우, 하, 좌 순서로 패딩 설정 */
+   border-radius: 5px;
+   border: 1px solid #ccc;
+}
+
+.buttonBox {
+   display: flex;
+   width: 30%;
+   align-items: center;
+   gap: 10px;
+}
+
+/* ========== Footer ========== */
+#footer {
+   background-color: #FAF6F0;
+   display: flex;
+   padding: 20px 0;
+   align-items: center;
+}
+
+.campLogo {
+   width: 30%;
+   height: 100px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.footerLogoImg {
+   max-height: 200px;
+   width: auto;
+}
+
+.footerInfo {
+   font-size: 14px;
+   color: #333;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   flex: 1;
+}
