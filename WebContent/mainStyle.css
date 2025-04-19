@@ -1,0 +1,364 @@
+@import url('global.css');
+
+/* ====== 공통 영역 ====== */
+.main-img {
+	background-color: white;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	padding-bottom: 20px;
+	cursor: pointer;
+	padding: 10px;
+}
+
+#section1 {
+	width: 80%;
+}
+
+.topCamp {
+	height: 400px;
+}
+
+.topList {
+	height: 100%;
+	display: flex;
+	gap: 15px;
+}
+
+.topLeft {
+	height: 100%;
+	width: 70%;
+}
+
+.campTitle {
+	font-weight: bold;
+}
+
+.topImg1, .topImg2, .topImg3 {
+	width: 100%;
+}
+
+.topImg1 img {
+	width: 100%;
+	border-radius: 10px;
+}
+
+.topImg2 img {
+	width: 100%;
+	border-radius: 10px;
+}
+
+.topImg3 img {
+	width: 100%;
+	border-radius: 10px;
+}
+
+.topRight {
+	height: 100%;
+	width: 30%;
+}
+
+.campData {
+	display: flex;
+	color: gray;
+	justify-content: space-between;
+}
+
+.loveDate {
+	display: flex;
+}
+
+.main-img img {
+	height: 100%;
+	display: flex;
+	width: 100%;
+	max-height: 380px;
+	object-fit: cover;
+	border-radius: 8px;
+	width: 100%;
+}
+
+.main-img:hover {
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+	transition: 0.2s ease;
+}
+
+.main-text {
+	font-weight: bold;
+	padding: 10px 20px;
+}
+
+.sub-bottom {
+	display: flex;
+	justify-content: space-between;
+	font-size: 14px;
+	color: gray;
+	margin-top: 8px;
+}
+
+/* ====== 인기 서브 게시글 (세로 카드) ====== */
+.sub-articles-vertical {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	gap: 20px;
+}
+
+.sub-articles-vertical .sub-card {
+	background-color: white;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+	cursor: pointer;
+	transition: transform 0.2s;
+}
+
+.sub-articles-vertical .sub-card:hover {
+	transform: translateY(-4px);
+}
+
+.sub-articles-vertical .sub-card img {
+	width: 100%;
+	height: 150px;
+	object-fit: cover;
+}
+
+.sub-articles-vertical .card-text {
+	padding: 12px;
+	text-align: center;
+}
+
+.sub-articles-vertical .card-text .title {
+	font-weight: bold;
+	font-size: 15px;
+	margin-bottom: 6px;
+}
+
+.sub-articles-vertical .card-text {
+	font-size: 14px;
+}
+
+.userData {
+	justify-content: space-between;
+	display: flex;
+	color: gray;
+}
+
+.date {
+	display: flex;
+}
+
+/* ====== 장비 리뷰 영역 ====== */
+.gear-review {
+	flex: 3;
+	border: 1px solid #ccc;
+	margin-top: 40px;
+}
+
+.gear-review h2 {
+	margin-bottom: 15px;
+}
+
+.review-items {
+	display: flex;
+	gap: 20px;
+}
+
+.review-items .item {
+	background-color: white;
+	padding: 10px;
+	border-radius: 10px;
+	flex: 1;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+	text-align: center;
+}
+
+.review-items img {
+	width: 100%;
+	height: 150px;
+	object-fit: cover;
+	border-radius: 8px;
+}
+
+/* ====== 명예의 캠핑로거 영역 ====== */
+.honor {
+	width: 20%;
+	border: 1px solid #ccc;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	border: 1px solid #ccc;
+}
+
+.badge-icon {
+	height: 0.8em;
+	vertical-align: baseline;
+	margin-left: 4px;
+	opacity: 0.9;
+	animation: sparkle 2s infinite ease-in-out;
+}
+
+@
+keyframes sparkle { 0%, 100% {
+	filter: brightness(1);
+}
+
+50%
+{
+filter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+brightness
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(1
+.8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+);
+}
+}
+
+/* ====== 광고 영역 ====== */
+.ad {
+	background-color: #fff4dc;
+	padding: 20px;
+	border-radius: 10px;
+	text-align: center;
+	font-size: 16px;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.ad img {
+	display: block;
+	margin: 0 auto 10px;
+}
+
+.ad strong {
+	font-size: 24px;
+	color: #e26a00;
+}
+
+.ad button {
+	margin-top: 10px;
+	padding: 8px 12px;
+	background-color: #e26a00;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+/* ====== 미사용 or 예비 영역 (서브 아티클 등) ====== */
+.sub-articles {
+	display: flex;
+	gap: 20px;
+	margin-top: 20px;
+}
+
+.sub-article {
+	background-color: white;
+	flex: 1;
+	border-radius: 10px;
+	padding: 10px;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+	cursor: pointer;
+}
+
+.sub-post {
+	display: flex;
+	padding: 5px;
+}
+
+.subtitle {
+	width: 50%;
+	margin-right: 15px;
+}
+
+.subimg {
+	width: 50%;
+}
+
+.sub-article img.thumb {
+	width: 100%;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 8px;
+	margin-bottom: 10px;
+}
+
+.info {
+	display: flex;
+	justify-content: space-between;
+	padding: 0 16px 12px;
+	font-size: 14px;
+	color: gray;
+}
