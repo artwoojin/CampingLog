@@ -1,364 +1,224 @@
-@import url('global.css');
+@import url('./global.css');
 
-/* ====== 공통 영역 ====== */
-.main-img {
-	background-color: white;
-	border-radius: 10px;
-	overflow: hidden;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-	padding-bottom: 20px;
-	cursor: pointer;
-	padding: 10px;
+#section {
+	display: grid;
+	margin-top: 40px;
+	margin-bottom: 50px;
+	grid-template-columns: 3fr 1fr;
+	gap: 24px;
+	grid-template-columns: 3fr 1fr;
+	grid-template-columns: 3fr 1fr;
 }
 
-#section1 {
-	width: 80%;
+.content1 {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
 }
 
-.topCamp {
-	height: 400px;
+/* 인기 상승 캠핑장 */
+.topTitle p {
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin-bottom: 1rem;
 }
 
 .topList {
-	height: 100%;
 	display: flex;
-	gap: 15px;
+	gap: 24px;
+	height: 100%;
+	align-items: stretch;
 }
 
 .topLeft {
-	height: 100%;
 	width: 70%;
 }
 
-.campTitle {
-	font-weight: bold;
+.topLeft, .topRight {
+	display: flex;
+	flex-direction: column;
 }
 
-.topImg1, .topImg2, .topImg3 {
-	width: 100%;
+.topLeft .topCard {
+  flex: 1; /* 자동으로 높이 맞춰짐 */
 }
 
 .topImg1 img {
 	width: 100%;
-	border-radius: 10px;
+	height: auto;
+	border-radius: 12px;
+	object-fit: cover;
+}
+
+.topRight {
+	width: 30%;
+	gap: 16px;
+	flex: 1; /* 전체 높이 자동 채움 */
+}
+
+.topCard {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	border-radius: 12px;
+	padding: 16px;
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+	box-sizing: border-box;
+}
+
+.topRight .topCard {
+	flex: 1; /* 각각 동일한 비율로 나눠짐 */
 }
 
 .topImg2 img {
 	width: 100%;
-	border-radius: 10px;
+	border-radius: 8px;
+	object-fit: cover;
+	margin-bottom: 0.5rem;
 }
 
 .topImg3 img {
 	width: 100%;
-	border-radius: 10px;
+	border-radius: 8px;
+	object-fit: cover;
+	margin-bottom: 0.5rem;
 }
 
-.topRight {
-	height: 100%;
-	width: 30%;
+.campTitle {
+	font-size: 1rem;
+	font-weight: 600;
+	margin-bottom: 0.5rem;
 }
 
 .campData {
 	display: flex;
-	color: gray;
 	justify-content: space-between;
+	font-size: 0.875rem;
+	color: #666;
 }
 
 .loveDate {
 	display: flex;
+	gap: 8px;
 }
 
-.main-img img {
-	height: 100%;
-	display: flex;
-	width: 100%;
-	max-height: 380px;
-	object-fit: cover;
-	border-radius: 8px;
-	width: 100%;
-}
-
-.main-img:hover {
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-	transition: 0.2s ease;
-}
-
-.main-text {
+.downTitle p {
+	font-size: 1.5rem;
 	font-weight: bold;
-	padding: 10px 20px;
+	margin-bottom: 1rem;
 }
 
-.sub-bottom {
+.downList {
+	display: flex;
+	gap: 16px;
+}
+
+.downCard {
+	padding: 10px;
+	height: 100%;
+	border-radius: 12px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	min-width: 220px;
+	border-radius: 12px;
+	border-radius: 12px;
+}
+
+.downtop {
+	display: flex;
+}
+
+.downImg img {
+	max-width: 150px;
+	max-height: 100px;
+	border-radius: 12px;
+	object-fit: cover;
+}
+
+.downCard .campTitle {
+	font-size: 1rem;
+	font-weight: bold;
+	padding: 0.75rem 1rem 0.25rem;
+}
+
+.downCard .campData {
+	padding: 0 1rem 1rem;
+	font-size: 0.875rem;
 	display: flex;
 	justify-content: space-between;
-	font-size: 14px;
-	color: gray;
-	margin-top: 8px;
+	color: #555;
 }
 
-/* ====== 인기 서브 게시글 (세로 카드) ====== */
-.sub-articles-vertical {
+/* 오른쪽 랭킹 + 광고 */
+.content2 {
 	display: flex;
 	flex-direction: column;
-	height: 100%;
-	gap: 20px;
-}
-
-.sub-articles-vertical .sub-card {
-	background-color: white;
-	border-radius: 10px;
-	overflow: hidden;
-	box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-	cursor: pointer;
-	transition: transform 0.2s;
-}
-
-.sub-articles-vertical .sub-card:hover {
-	transform: translateY(-4px);
-}
-
-.sub-articles-vertical .sub-card img {
-	width: 100%;
-	height: 150px;
-	object-fit: cover;
-}
-
-.sub-articles-vertical .card-text {
-	padding: 12px;
-	text-align: center;
-}
-
-.sub-articles-vertical .card-text .title {
-	font-weight: bold;
-	font-size: 15px;
-	margin-bottom: 6px;
-}
-
-.sub-articles-vertical .card-text {
-	font-size: 14px;
-}
-
-.userData {
-	justify-content: space-between;
-	display: flex;
-	color: gray;
-}
-
-.date {
-	display: flex;
-}
-
-/* ====== 장비 리뷰 영역 ====== */
-.gear-review {
-	flex: 3;
 	border: 1px solid #ccc;
-	margin-top: 40px;
 }
 
-.gear-review h2 {
-	margin-bottom: 15px;
-}
-
-.review-items {
-	display: flex;
-	gap: 20px;
-}
-
-.review-items .item {
-	background-color: white;
-	padding: 10px;
-	border-radius: 10px;
-	flex: 1;
-	box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-	text-align: center;
-}
-
-.review-items img {
-	width: 100%;
-	height: 150px;
-	object-fit: cover;
-	border-radius: 8px;
-}
-
-/* ====== 명예의 캠핑로거 영역 ====== */
-.honor {
-	width: 20%;
-	border: 1px solid #ccc;
+.downRankAd {
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
-	border: 1px solid #ccc;
+	gap: 10px;
 }
 
-.badge-icon {
-	height: 0.8em;
-	vertical-align: baseline;
-	margin-left: 4px;
-	opacity: 0.9;
-	animation: sparkle 2s infinite ease-in-out;
+.downRank {
+	background: #fff;
+	border-radius: 12px;
+	padding: 1rem;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-@
-keyframes sparkle { 0%, 100% {
-	filter: brightness(1);
-}
-
-50%
-{
-filter
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-brightness
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-(1
-.8
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-);
-}
-}
-
-/* ====== 광고 영역 ====== */
-.ad {
-	background-color: #fff4dc;
-	padding: 20px;
-	border-radius: 10px;
-	text-align: center;
-	font-size: 16px;
-	box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-}
-
-.ad img {
-	display: block;
-	margin: 0 auto 10px;
-}
-
-.ad strong {
-	font-size: 24px;
-	color: #e26a00;
-}
-
-.ad button {
-	margin-top: 10px;
-	padding: 8px 12px;
-	background-color: #e26a00;
-	color: white;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-}
-
-/* ====== 미사용 or 예비 영역 (서브 아티클 등) ====== */
-.sub-articles {
+.rankList {
 	display: flex;
-	gap: 20px;
-	margin-top: 20px;
+	flex-direction: column;
+	gap: 16px;
+	margin-top: 1rem;
 }
 
-.sub-article {
-	background-color: white;
-	flex: 1;
-	border-radius: 10px;
-	padding: 10px;
-	box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-	cursor: pointer;
-}
-
-.sub-post {
+.rankDate {
 	display: flex;
-	padding: 5px;
+	justify-content: flex-end;
 }
 
-.subtitle {
-	width: 50%;
-	margin-right: 15px;
+.rankCard {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	border-bottom: 1px solid #ccc;
 }
 
-.subimg {
-	width: 50%;
+.rankBadge img {
+	width: 32px;
+	height: 32px;
 }
 
-.sub-article img.thumb {
+.rankInfo {
+	display: flex;
+	gap: 8px;
+	font-size: 0.95rem;
+}
+
+.rankDetail {
+	font-weight: bold;
+}
+
+.downAd img {
 	width: 100%;
-	height: 100px;
+	height: 100%;
+	border-radius: 12px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 	object-fit: cover;
-	border-radius: 8px;
-	margin-bottom: 10px;
 }
 
-.info {
-	display: flex;
-	justify-content: space-between;
-	padding: 0 16px 12px;
-	font-size: 14px;
-	color: gray;
+@media ( max-width : 768px) {
+	#section {
+		grid-template-columns: 1fr;
+	}
+	.topList {
+		flex-direction: column;
+	}
+	.downList {
+		flex-direction: row;
+	}
 }
