@@ -1,4 +1,4 @@
-@import url('./global.css');
+@import url('global.css');
 
 #section {
 	display: grid;
@@ -16,6 +16,13 @@
 	gap: 32px;
 }
 
+.
+.topCamp {
+	flex: 1; /* 또는 height: 60%; 도 가능 */
+	display: flex;
+	flex-direction: column;
+}
+
 /* 인기 상승 캠핑장 */
 .topTitle p {
 	font-size: 1.5rem;
@@ -26,7 +33,6 @@
 .topList {
 	display: flex;
 	gap: 24px;
-	height: 100%;
 	align-items: stretch;
 }
 
@@ -40,7 +46,7 @@
 }
 
 .topLeft .topCard {
-  flex: 1; /* 자동으로 높이 맞춰짐 */
+	flex: 1; /* 자동으로 높이 맞춰짐 */
 }
 
 .topImg1 img {
@@ -71,18 +77,11 @@
 	flex: 1; /* 각각 동일한 비율로 나눠짐 */
 }
 
-.topImg2 img {
+.topImg1 img, .topImg2 img, .topImg3 img {
+	aspect-ratio: 16/9;
 	width: 100%;
-	border-radius: 8px;
 	object-fit: cover;
-	margin-bottom: 0.5rem;
-}
-
-.topImg3 img {
-	width: 100%;
-	border-radius: 8px;
-	object-fit: cover;
-	margin-bottom: 0.5rem;
+	border-radius: 12px;
 }
 
 .campTitle {
@@ -120,8 +119,6 @@
 	border-radius: 12px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 	min-width: 220px;
-	border-radius: 12px;
-	border-radius: 12px;
 }
 
 .downtop {
@@ -153,21 +150,32 @@
 .content2 {
 	display: flex;
 	flex-direction: column;
-	border: 1px solid #ccc;
+	height: 100%;
 }
 
 .downRankAd {
 	display: flex;
 	flex-direction: column;
+	height: 100%;
+	flex: 1;
 	gap: 10px;
 }
 
+
+
 .downRank {
+	flex: 0 0 auto; /* 콘텐츠만큼만 차지 */
 	background: #fff;
 	border-radius: 12px;
 	padding: 1rem;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
+
+.downAd {
+	flex: 1; /* 남은 공간 전부 차지 */
+	overflow: hidden;
+}
+
 
 .rankList {
 	display: flex;
@@ -206,9 +214,12 @@
 .downAd img {
 	width: 100%;
 	height: 100%;
-	border-radius: 12px;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 	object-fit: cover;
+	border-radius: 12px;
+}
+
+.adImg {
+	height: 100%;
 }
 
 @media ( max-width : 768px) {
