@@ -10,14 +10,14 @@ public class PostVO {
 	 private int categoryId;
 	 private String nickName;
 	 private String memberImage;
-	 private String badgelmage;
+	 private String badgeImage;
 	
 	public PostVO(){}
 	
-	public PostVO(String nickName, String memberImage, String badgelmage) {
+	public PostVO(String nickName, String memberImage, String badgeImage) {
 		this.nickName = nickName;
 		this.memberImage = memberImage;
-		this.badgelmage = badgelmage;
+		this.badgeImage = badgeImage;
 	}
 
 	public PostVO(String postTitle, String postContents, String postImage, String memberId, int categoryId) {
@@ -41,7 +41,7 @@ public class PostVO {
 	
 
 	public PostVO(int postId, String postTitle, String postContents, String postImage, String postDate, String memberId,
-			int categoryId, String nickName, String memberImage, String badgelmage) {
+			int categoryId, String nickName, String memberImage, String badgeImage) {
 		this.postId = postId;
 		this.postTitle = postTitle;
 		this.postContents = postContents;
@@ -51,7 +51,7 @@ public class PostVO {
 		this.categoryId = categoryId;
 		this.nickName = nickName;
 		this.memberImage = memberImage;
-		this.badgelmage = badgelmage;
+		this.badgeImage = badgeImage;
 	}
 
 	public int getPostId() {
@@ -126,19 +126,19 @@ public class PostVO {
 		this.memberImage = memberImage;
 	}
 
-	public String getBadgelmage() {
-		return badgelmage;
+	public String getbadgeImage() {
+		return badgeImage;
 	}
 
-	public void setBadgelmage(String badgelmage) {
-		this.badgelmage = badgelmage;
+	public void setbadgeImage(String badgeImage) {
+		this.badgeImage = badgeImage;
 	}
 
 	@Override
 	public String toString() {
 		return "PostVO [postId=" + postId + ", postTitle=" + postTitle + ", postContents=" + postContents
 				+ ", postImage=" + postImage + ", postDate=" + postDate + ", memberId=" + memberId + ", categoryId="
-				+ categoryId + ", nickName=" + nickName + ", memberImage=" + memberImage + ", badgelmage=" + badgelmage
+				+ categoryId + ", nickName=" + nickName + ", memberImage=" + memberImage + ", badgeImage=" + badgeImage
 				+ "]";
 	}
 	
