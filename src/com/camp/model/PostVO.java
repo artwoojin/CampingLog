@@ -11,6 +11,7 @@ public class PostVO {
 	 private String nickName;
 	 private String memberImage;
 	 private String badgeImage;
+	 private int likeCount;
 	
 	public PostVO(){}
 	
@@ -126,12 +127,20 @@ public class PostVO {
 		this.memberImage = memberImage;
 	}
 
-	public String getbadgeImage() {
+	public String getBadgeImage() {
 		return badgeImage;
 	}
 
-	public void setbadgeImage(String badgeImage) {
+	public void setBadgeImage(String badgeImage) {
 		this.badgeImage = badgeImage;
+	}
+
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
 	}
 
 	@Override
@@ -139,8 +148,9 @@ public class PostVO {
 		return "PostVO [postId=" + postId + ", postTitle=" + postTitle + ", postContents=" + postContents
 				+ ", postImage=" + postImage + ", postDate=" + postDate + ", memberId=" + memberId + ", categoryId="
 				+ categoryId + ", nickName=" + nickName + ", memberImage=" + memberImage + ", badgeImage=" + badgeImage
-				+ "]";
+				+ ", likeCount=" + likeCount + "]";
 	}
+
 	
 	
 	
