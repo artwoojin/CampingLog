@@ -12,6 +12,7 @@ public class PostVO {
 	 private String memberImage;
 	 private String badgeImage;
 	 private int likeCount;
+	 private int bookmarkCount;
 	
 	public PostVO(){}
 	
@@ -143,14 +144,23 @@ public class PostVO {
 		this.likeCount = likeCount;
 	}
 
+	public int getBookmarkCount() {
+		return bookmarkCount;
+	}
+
+	public void setBookmarkCount(int bookmarkCount) {
+		this.bookmarkCount = bookmarkCount;
+	}
+
 	@Override
 	public String toString() {
 		return "PostVO [postId=" + postId + ", postTitle=" + postTitle + ", postContents=" + postContents
 				+ ", postImage=" + postImage + ", postDate=" + postDate + ", memberId=" + memberId + ", categoryId="
 				+ categoryId + ", nickName=" + nickName + ", memberImage=" + memberImage + ", badgeImage=" + badgeImage
-				+ ", likeCount=" + likeCount + "]";
+				+ ", likeCount=" + likeCount + ", bookmarkCount=" + bookmarkCount + "]";
 	}
 
+	
 	
 	
 	
