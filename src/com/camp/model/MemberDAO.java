@@ -17,7 +17,6 @@ public class MemberDAO {
 			result = true;
 		}catch(Exception e){
 			conn.rollback();
-			e.printStackTrace();
 		}finally{
 			conn.close();
 		}
