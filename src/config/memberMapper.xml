@@ -4,14 +4,12 @@
 
 	<insert id="addMember" parameterType="com.camp.model.MemberVO">
 		INSERT INTO MEMBER (
-		memberId, pw, email, nickName, name, phoneNumber, inDate, memberImage,
-		gradeId
-		)
-		VALUES (
-		#{memberId}, #{pw}, #{email}, #{nickName}, #{name},
-		#{phoneNumber},
-		SYSDATE, #{memberImage, jdbcType=VARCHAR}, #{gradeId}
-		)
+		memberId, pw, email, nickName, name, phoneNumber, inDate,
+		memberImage,gradeId)
+		VALUES ( #{memberId}, #{pw}, #{email},
+		#{nickName}, #{name},#{phoneNumber},
+		SYSDATE, #{memberImage,
+		jdbcType=VARCHAR}, #{gradeId})
 	</insert>
 
 	<select id="getMembers" resultType="com.camp.model.MemberVO">
@@ -34,5 +32,18 @@
 		FROM MEMBER
 		WHERE memberId = #{memberId} AND pw = #{pw}
 	</select>
+
+	<update id="updateProfile" parameterType="com.camp.model.MemberVO">
+		UPDATE MEMBER
+		<set>
+			<if test="email != null">email = #{email},</if>
+			<if test="nickName != null">nickName = #{nickName},</if>
+			<if test="name != null">name = #{name},</if>
+			<if test="phoneNumber != null">phoneNumber = #{phoneNumber},</if>
+			<if test="memberImage != null">memberImage = #{memberImage}</if>
+		</set>
+		WHERE memberId = #{memberId}
+	</update>
+
 
 </mapper>
