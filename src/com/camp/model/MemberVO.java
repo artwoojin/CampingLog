@@ -30,6 +30,16 @@ public class MemberVO {
 	}
 	
 	
+	public MemberVO(String memberId, String pw, String email, String nickName, String name, String phoneNumber) {
+		super();
+		this.memberId = memberId;
+		this.pw = pw;
+		this.email = email;
+		this.nickName = nickName;
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+	}
+
 	public MemberVO(String memberId, String pw, String email, String nickName, String name, String phoneNumber,
 			String inDate, int gradeId) {
 		super();
