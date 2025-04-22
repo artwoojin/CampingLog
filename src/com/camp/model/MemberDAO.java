@@ -31,4 +31,19 @@ public class MemberDAO {
 		conn.close();
 		return list;
 	}
+	
+	// 내 정보 수정 전 비밀번호 확인
+	public boolean pwCheck(MemberVO vo) {
+		SqlSession session = DBCP.getSqlSessionFactory().openSession();
+		boolean result = false;
+
+		try {
+			int count = session.selectOne("memberMapper.pwCheck", vo);
+			result = (count == 1);
+		} finally {
+			session.close();
+		}
+		return result;
+	}
+
 }

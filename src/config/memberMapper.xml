@@ -4,23 +4,35 @@
 
 	<insert id="addMember" parameterType="com.camp.model.MemberVO">
 		INSERT INTO MEMBER (
-		memberId, pw, email, nickName, name, phoneNumber, inDate, memberImage, gradeId
+		memberId, pw, email, nickName, name, phoneNumber, inDate, memberImage,
+		gradeId
 		)
 		VALUES (
-		#{memberId}, #{pw}, #{email}, #{nickName}, #{name}, #{phoneNumber},
+		#{memberId}, #{pw}, #{email}, #{nickName}, #{name},
+		#{phoneNumber},
 		SYSDATE, #{memberImage, jdbcType=VARCHAR}, #{gradeId}
 		)
 	</insert>
 
 	<select id="getMembers" resultType="com.camp.model.MemberVO">
-		select memberId, email, nickName, name, phoneNumber, inDate
+		select memberId, email,
+		nickName, name, phoneNumber, inDate
 		from member
 	</select>
-	
-	<select id="login" parameterType="com.camp.model.MemberVO" resultType="String">
+
+	<select id="login" parameterType="com.camp.model.MemberVO"
+		resultType="String">
 		select nickName
 		from member
-		where memberId=#{memberId} and pw=#{pw}
+		where memberId=#{memberId} and
+		pw=#{pw}
+	</select>
+
+	<select id="pwCheck" parameterType="com.camp.model.MemberVO"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE memberId = #{memberId} AND pw = #{pw}
 	</select>
 
 </mapper>
