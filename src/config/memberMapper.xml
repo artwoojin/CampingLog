@@ -30,7 +30,8 @@
 		resultType="int">
 		SELECT COUNT(*)
 		FROM MEMBER
-		WHERE memberId = #{memberId} AND pw = #{pw}
+		WHERE memberId = #{memberId} AND
+		pw = #{pw}
 	</select>
 
 	<update id="updateProfile" parameterType="com.camp.model.MemberVO">
@@ -43,6 +44,13 @@
 			<if test="memberImage != null">memberImage = #{memberImage}</if>
 		</set>
 		WHERE memberId = #{memberId}
+	</update>
+
+	<update id="updatePw" parameterType="map">
+		UPDATE MEMBER
+		SET pw = #{newPw}
+		WHERE memberId = #{memberId}
+		AND pw = #{pw}
 	</update>
 
 
