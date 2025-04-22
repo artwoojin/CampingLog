@@ -13,6 +13,8 @@ public class PostVO {
 	 private String badgeImage;
 	 private int likeCount;
 	 private int bookmarkCount;
+	 private String categoryName;
+	 private int commentCount;
 	
 	public PostVO(){}
 	
@@ -151,21 +153,32 @@ public class PostVO {
 	public void setBookmarkCount(int bookmarkCount) {
 		this.bookmarkCount = bookmarkCount;
 	}
+	
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+	
+	
+
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
 
 	@Override
 	public String toString() {
 		return "PostVO [postId=" + postId + ", postTitle=" + postTitle + ", postContents=" + postContents
 				+ ", postImage=" + postImage + ", postDate=" + postDate + ", memberId=" + memberId + ", categoryId="
 				+ categoryId + ", nickName=" + nickName + ", memberImage=" + memberImage + ", badgeImage=" + badgeImage
-				+ ", likeCount=" + likeCount + ", bookmarkCount=" + bookmarkCount + "]";
+				+ ", likeCount=" + likeCount + ", bookmarkCount=" + bookmarkCount + ", categoryName=" + categoryName
+				+ ", commentCount=" + commentCount + "]";
 	}
-
-	
-	
-	
-	
-	
-
-	 
 }
 
