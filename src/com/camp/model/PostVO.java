@@ -8,7 +8,17 @@ public class PostVO {
 	 private String postDate;
 	 private String memberId;      
 	 private int categoryId;
-	 
+	
+	public PostVO(){}
+	
+	public PostVO(String postTitle, String postContents, String postImage, String memberId, int categoryId) {
+		this.postTitle = postTitle;
+		this.postContents = postContents;
+		this.postImage = postImage;
+		this.memberId = memberId;
+		this.categoryId = categoryId;
+	}
+
 	public PostVO(int postId, String postTitle, String postContents, String postImage, String postDate, String memberId,
 			int categoryId) {
 		super();
