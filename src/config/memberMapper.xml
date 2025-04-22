@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+	
+	<insert id="addMember" parameterType="com.camp.model.MemberVO">
+    INSERT INTO MEMBER (
+        memberId, pw, email, nickName, name, phoneNumber, inDate, memberImage, gradeId
+    )
+    VALUES (
+        #{memberId}, #{pw}, #{email}, #{nickName}, #{name}, #{phoneNumber},
+        SYSDATE, #{memberImage, jdbcType=VARCHAR}, #{gradeId}
+    )
+</insert>
+	
+	<select id="getMembers" resultType="com.camp.model.MemberVO">
+	select memberId, email, nickName, name, phoneNumber, inDate
+	from member
+	</select>
+	
+</mapper>

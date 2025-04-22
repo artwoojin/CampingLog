@@ -1,5 +1,7 @@
 package com.camp.model;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 public class MemberDAO {
@@ -12,6 +14,7 @@ public class MemberDAO {
 		try{
 			conn.insert("memberMapper.addMember",vo);
 			conn.commit();
+			result = true;
 		}catch(Exception e){
 			conn.rollback();
 		}finally{
@@ -20,4 +23,12 @@ public class MemberDAO {
 		return result;
 	}
 	
+	
+	public List<MemberVO> getMembers(){
+		List<MemberVO> list = null;
+		SqlSession conn = DBCP.getSqlSessionFactory().openSession();
+		list = conn.selectList("memberMapper.getMembers");
+		conn.close();
+		return list;
+	}
 }
