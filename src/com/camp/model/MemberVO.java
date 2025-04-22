@@ -11,6 +11,10 @@ public class MemberVO {
 	private String memberImage;
 	private int gradeId;
 	
+	public MemberVO() {
+		super();
+	}
+
 	public MemberVO(String memberId, String pw) {
 		super();
 		this.memberId = memberId;
