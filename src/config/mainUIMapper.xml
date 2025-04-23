@@ -31,6 +31,23 @@
     ) 
     WHERE ROWNUM <= 5
   ]]>
-</select>
+  </select>
+  <select id="getPopularEquList" parameterType="com.camp.model.PostVO" resultType="com.camp.model.PostVO">
+  <![CDATA[
+    SELECT * FROM (
+      SELECT inner_result.* FROM (
+        SELECT p.postId, p.postTitle, p.postImage, TO_CHAR(p.postDate, 'YYYY.MM.DD') AS postDate,
+               m.nickName, COUNT(l.postId) AS likeCount
+        FROM Post p
+        JOIN Member m ON p.memberId = m.memberId
+        LEFT JOIN Likes l ON p.postId = l.postId
+        WHERE p.categoryId = #{categoryId}
+        GROUP BY p.postId, p.postTitle, p.postImage, p.postDate, m.nickName
+        ORDER BY likeCount DESC
+      ) inner_result
+      WHERE ROWNUM <= 3
+    )
+  ]]>
+  </select>
    
 </mapper>
