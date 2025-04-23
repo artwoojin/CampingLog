@@ -25,4 +25,17 @@ public class PostDAO {
         conn.close();
         return count;
     }
+    
+    public PostVO getDetailContents(SqlSession session, int postId){
+        return session.selectOne("postMapper.getContents", postId);
+    }
+
+    public List<String> getDetailTag(SqlSession session, int postId) {
+        return session.selectList("postMapper.getTag", postId);
+    }
+
+    public String getMemberImage(SqlSession session, String memberId) {
+        return session.selectOne("commentsMapper.getMemberImage", memberId);
+    }
+    
 }
