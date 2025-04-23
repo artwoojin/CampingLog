@@ -6,10 +6,10 @@
 		INSERT INTO MEMBER (
 		memberId, pw, email, nickName, name, phoneNumber, inDate,
 		memberImage,gradeId)
-		VALUES ( #{memberId}, #{pw}, #{email},
-		#{nickName}, #{name},#{phoneNumber},
-		SYSDATE, #{memberImage,
-		jdbcType=VARCHAR}, #{gradeId})
+		VALUES ( #{memberId}, #{pw}, #{email},#{nickName},
+		#{name},#{phoneNumber},
+		SYSDATE, #{memberImage, jdbcType=VARCHAR},
+		#{gradeId})
 	</insert>
 
 	<select id="getMembers" resultType="com.camp.model.MemberVO">
@@ -49,7 +49,8 @@
 
 	<update id="updatePw" parameterType="map">
 		UPDATE MEMBER
-		SET pw = #{newPw}
+		SET pw =
+		#{newPw}
 		WHERE memberId = #{memberId}
 		AND pw = #{pw}
 	</update>
@@ -64,13 +65,16 @@
 		UPDATE MEMBER
 		SET
 		memberImage = #{memberImage, jdbcType=VARCHAR}
-		WHERE memberId = #{memberId}
+		WHERE memberId =
+		#{memberId}
 	</update>
 
 	<update id="updateMemberImage" parameterType="map">
 		UPDATE MEMBER
-		SET memberImage = #{memberImage, jdbcType=VARCHAR}
-		WHERE memberId = #{memberId}
+		SET
+		memberImage = #{memberImage, jdbcType=VARCHAR}
+		WHERE memberId =
+		#{memberId}
 	</update>
 
 	<update id="setDefaultImage" parameterType="string">
@@ -79,6 +83,44 @@
 		memberImage = 'defaultMemberImage.png'
 		WHERE memberId = #{memberId}
 	</update>
+
+	<select id="getMyInfo" parameterType="string" resultType="com.camp.model.MemberVO">
+		SELECT
+		m.memberId, m.email, m.nickName, m.name, m.phoneNumber, m.memberImage,
+		m.inDate, m.gradeId,
+		(SELECT COUNT(*) FROM Post p WHERE p.memberId =
+		m.memberId) AS postCount,
+		(SELECT COUNT(*) FROM Likes l JOIN Post p ON
+		l.postId = p.postId
+		WHERE p.memberId = m.memberId) AS likeCount
+		FROM
+		MEMBER m
+		JOIN GRADE g ON m.gradeId = g.gradeId
+		WHERE m.memberId =
+		#{memberId}
+	</select>
+
+	<select id="getMyPosts" parameterType="string" resultType="map">
+		SELECT
+		p.postId AS "postId",
+		p.postTitle AS "postTitle",
+		p.postDate AS "postDate",
+		p.postImage AS "postImage"
+		FROM Post p
+		WHERE p.memberId = #{memberId}
+		ORDER BY p.postDate DESC
+	</select>
+
+	<select id="getMyBookmarks" parameterType="string" resultType="map">
+		SELECT
+		p.postTitle AS "postTitle",
+		p.postImage AS "postImage",
+		b.bookmarkDate AS "bookmarkDate"
+		FROM Post p
+		JOIN Bookmark b ON p.postId = b.postId
+		WHERE b.memberId = #{memberId}
+		ORDER BY b.bookmarkDate DESC
+	</select>
 
 
 
