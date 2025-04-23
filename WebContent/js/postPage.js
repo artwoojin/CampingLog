@@ -20,8 +20,11 @@ $(document).ready(function () {
 					resp = JSON.parse(resp);
 				}
 				totalCount = resp.totalPostCount;     // 서버에서 오는 총 게시물 수
-				renderPosts(resp.postList);           // 서버에서 오는 게시물 목록
+				renderPostList(resp.postList);           // 서버에서 오는 게시물 목록
 				renderPagination(resp.currentPage, totalCount, pageSize, blockSize); //  현재 페이지
+				
+				console.log(totalCount);
+				console.log(renderPostList);
 			},
 			error: function () {
 				console.error("페이지 데이터 로드 실패");
@@ -30,14 +33,14 @@ $(document).ready(function () {
 	}
 
 	// 2) 게시물 렌더링
-	function renderPosts(list) {
+	function renderPostList(list) {
 		var $list = $(".postCardList");
 		$list.empty();
 		$.each(list, function (i, post) {
 
 			var postDate = new Date(post.postDate);
 			var formattedDate = postDate.toISOString().split('T')[0];  // '2025-04-21' 형태로 변환
-			
+//			2025-04-21 (T15:04:03.000Z)<< 삭제인거임
 			var postImage = post.postImage && post.postImage !== "null" ? post.postImage : 'img/postImg1.png';
 			
 			var html = ''
@@ -62,6 +65,9 @@ $(document).ready(function () {
 
 	// 3) pagination 버튼 렌더링
 	function renderPagination(currentPage, totalCount, pageSize, blockSize) {
+//		Math.ceil()은 소수점 이하가 있는 숫자를 올림하여 정수로 반환합니다. 예를 들어, Math.ceil(4.3)은 5를 반환합니다.
+//		반대로, Math.floor()는 소수점 이하를 내림하여 가장 큰 정수를 반환합니다. 예를 들어, Math.floor(4.7)은 4를 반환합니다.
+//		Math.round()는 소수점 이하를 반올림하여 가장 가까운 정수를 반환합니다. 예를 들어, Math.round(4.5)는 5를 반환합니다.	
 		var totalPages = Math.ceil(totalCount / pageSize);
 		var currentBlock = Math.floor((currentPage - 1) / blockSize);
 		var startPage = currentBlock * blockSize + 1;
@@ -112,5 +118,5 @@ $(document).ready(function () {
 	});
 
 	// 최초 1페이지 로드
-	loadPage(1);
+	loadPage(1)
 });
