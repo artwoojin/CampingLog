@@ -25,7 +25,16 @@ public class MainUIDAO {
 	    conn.close();
 	    return List;
 	}
-	
 	//상위5명 프로필 상세조회
 
+	
+	/* 인기 장비리뷰 상위 3개*/
+	public Collection<PostVO> getPopularEquList(int categoryId) {
+		SqlSession conn = DBCP.getSqlSessionFactory().openSession();
+		List<PostVO> list = conn.selectList("CampingLogMapper.getPopularEquList", categoryId);
+		conn.close();
+		return list;
+	}
+	
+	//상위3개 상세조회
 }
