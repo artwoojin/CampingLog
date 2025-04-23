@@ -141,7 +141,7 @@ public class MemberDAO {
 	public boolean updateMemberImage(String memberId, String newImageFileName, String uploadDirPath) {
 		SqlSession session = DBCP.getSqlSessionFactory().openSession();
 		boolean result = false;
-		
+
 		try {
 			// 1. 기존 이미지 조회
 			String oldImage = session.selectOne("memberMapper.getMemberImage", memberId);
@@ -225,4 +225,45 @@ public class MemberDAO {
 			file.delete();
 		}
 	}
+
+	// 마이페이지 조회(내 정보)
+	public MemberVO getMyInfo(String memberId) {
+		SqlSession session = DBCP.getSqlSessionFactory().openSession();
+		try {
+			return session.selectOne("memberMapper.getMyInfo", memberId);
+		} finally {
+			session.close();
+		}
+	}
+
+	// 내가 쓴 글 리스트 조회
+	public List<HashMap<String, Object>> getMyPosts(String memberId) {
+		SqlSession session = DBCP.getSqlSessionFactory().openSession();
+		try {
+			return session.selectList("memberMapper.getMyPosts", memberId);
+		} finally {
+			session.close();
+		}
+	}
+
+	// 북마크한 글 리스트 조회
+	public List<HashMap<String, Object>> getMyBookmarks(String memberId) {
+		SqlSession session = DBCP.getSqlSessionFactory().openSession();
+		try {
+			return session.selectList("memberMapper.getMyBookmarks", memberId);
+		} finally {
+			session.close();
+		}
+	}
+
+	// 상대방 마이 페이지 조회
+	public MemberVO getYourInfo(String memberId) {
+		SqlSession session = DBCP.getSqlSessionFactory().openSession();
+		try {
+			return session.selectOne("memberMapper.getYourInfo", memberId);
+		} finally {
+			session.close();
+		}
+	}
+
 }
