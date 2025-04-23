@@ -23,7 +23,8 @@
 		select nickName
 		from member
 		where memberId=#{memberId} and
-		pw=#{pw}
+		pw
+		= #{pw}
 	</select>
 
 	<select id="pwCheck" parameterType="com.camp.model.MemberVO"
@@ -52,6 +53,33 @@
 		WHERE memberId = #{memberId}
 		AND pw = #{pw}
 	</update>
+
+	<select id="getMemberImage" parameterType="string" resultType="string">
+		SELECT memberImage
+		FROM MEMBER
+		WHERE memberId = #{memberId}
+	</select>
+
+	<update id="setMemberImage" parameterType="map">
+		UPDATE MEMBER
+		SET
+		memberImage = #{memberImage, jdbcType=VARCHAR}
+		WHERE memberId = #{memberId}
+	</update>
+
+	<update id="updateMemberImage" parameterType="map">
+		UPDATE MEMBER
+		SET memberImage = #{memberImage, jdbcType=VARCHAR}
+		WHERE memberId = #{memberId}
+	</update>
+
+	<update id="setDefaultImage" parameterType="string">
+		UPDATE MEMBER
+		SET
+		memberImage = 'defaultMemberImage.png'
+		WHERE memberId = #{memberId}
+	</update>
+
 
 
 </mapper>
