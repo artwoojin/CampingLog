@@ -10,6 +10,7 @@ public class MemberVO {
 	private String inDate;
 	private String memberImage;
 	private int gradeId;
+	private String badgeImage;
 	
 	public MemberVO() {
 		super();
@@ -28,7 +29,6 @@ public class MemberVO {
 		this.nickName = nickName;
 		this.inDate = inDate;
 	}
-	
 	
 	public MemberVO(String memberId, String pw, String email, String nickName, String name, String phoneNumber) {
 		super();
@@ -65,6 +65,21 @@ public class MemberVO {
 		this.inDate = inDate;
 		this.memberImage = memberImage;
 		this.gradeId = gradeId;
+	}
+
+	public MemberVO(String memberId, String pw, String email, String nickName, String name, String phoneNumber,
+			String inDate, String memberImage, int gradeId, String badgeImage) {
+		super();
+		this.memberId = memberId;
+		this.pw = pw;
+		this.email = email;
+		this.nickName = nickName;
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+		this.inDate = inDate;
+		this.memberImage = memberImage;
+		this.gradeId = gradeId;
+		this.badgeImage = badgeImage;
 	}
 
 	public String getMemberId() {
@@ -121,13 +136,23 @@ public class MemberVO {
 	public void setGradeId(int gradeId) {
 		this.gradeId = gradeId;
 	}
+	
+	public String getBadgeImage() {
+		return badgeImage;
+	}
+
+	public void setBadgeImage(String badgeImage) {
+		this.badgeImage = badgeImage;
+	}
 
 	@Override
 	public String toString() {
 		return "MemberVO [memberId=" + memberId + ", pw=" + pw + ", email=" + email + ", nickName=" + nickName
 				+ ", name=" + name + ", phoneNumber=" + phoneNumber + ", inDate=" + inDate + ", memberImage="
-				+ memberImage + ", gradeId=" + gradeId + "]";
+				+ memberImage + ", gradeId=" + gradeId + ", badgeImage=" + badgeImage + "]";
 	}
+
+	
 	
 	
 }
