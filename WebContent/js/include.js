@@ -24,5 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const s2 = document.createElement('script');
     s2.src = "js/mainRankList.js";
     document.body.appendChild(s2);
+    
+    const s3 = document.createElement('script');
+    s3.src = "js/mainEquList.js";
+    document.body.appendChild(s3);
+
   });
 });
