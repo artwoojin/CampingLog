@@ -256,5 +256,14 @@ public class MemberDAO {
 		}
 	}
 
+	// 상대방 마이 페이지 조회
+	public MemberVO getYourInfo(String memberId) {
+		SqlSession session = DBCP.getSqlSessionFactory().openSession();
+		try {
+			return session.selectOne("memberMapper.getYourInfo", memberId);
+		} finally {
+			session.close();
+		}
+	}
 
 }

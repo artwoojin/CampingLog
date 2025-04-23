@@ -104,10 +104,12 @@
 		SELECT
 		p.postId AS "postId",
 		p.postTitle AS "postTitle",
-		p.postDate AS "postDate",
+		p.postDate AS
+		"postDate",
 		p.postImage AS "postImage"
 		FROM Post p
-		WHERE p.memberId = #{memberId}
+		WHERE p.memberId =
+		#{memberId}
 		ORDER BY p.postDate DESC
 	</select>
 
@@ -117,11 +119,23 @@
 		p.postImage AS "postImage",
 		b.bookmarkDate AS "bookmarkDate"
 		FROM Post p
-		JOIN Bookmark b ON p.postId = b.postId
+		JOIN Bookmark b ON p.postId
+		= b.postId
 		WHERE b.memberId = #{memberId}
 		ORDER BY b.bookmarkDate DESC
 	</select>
 
-
+	<select id="getYourInfo" parameterType="string" resultType="com.camp.model.MemberVO">
+		SELECT
+		m.memberId, m.email, m.nickName, m.inDate, g.badgeImage,
+		(SELECT COUNT(*) FROM Post p
+		WHERE p.memberId = m.memberId) AS postCount,
+		(SELECT COUNT(*) FROM Likes l
+		JOIN Post p ON l.postId = p.postId
+		WHERE p.memberId = m.memberId) AS likeCount
+		FROM MEMBER m
+		JOIN GRADE g ON m.gradeId = g.gradeId
+		WHERE m.memberId = #{memberId}
+	</select>
 
 </mapper>
