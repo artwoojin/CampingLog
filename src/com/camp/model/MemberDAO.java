@@ -12,7 +12,7 @@ public class MemberDAO {
 
 	// 회원가입
 	public boolean addMember(MemberVO vo){
-		SqlSession conn = DBCP.getSqlSessionFactory().openSession();
+		SqlSession session = DBCP.getSqlSessionFactory().openSession();
 		boolean result = false;
 
 		// memberImage가 null이거나 공백일 경우 디폴트 이미지 설정
@@ -21,18 +21,17 @@ public class MemberDAO {
 		}
 
 		try{
-			conn.insert("memberMapper.addMember", vo);
-			conn.commit();
+			session.insert("memberMapper.addMember", vo);
+			session.commit();
 			result = true;
 		}catch(Exception e){
-			conn.rollback();
+			session.rollback();
 			e.printStackTrace();
 		}finally{
-			conn.close();
+			session.close();
 		}
 		return result;
 	}
-
 
 
 	public List<MemberVO> getMembers(){
@@ -264,6 +263,24 @@ public class MemberDAO {
 		} finally {
 			session.close();
 		}
+	}
+	
+	// 회원 탈퇴(삭제)
+	public boolean deleteMember(MemberVO vo) {
+		SqlSession session = DBCP.getSqlSessionFactory().openSession();
+		boolean result = false;
+
+		try{
+			session.delete("memberMapper.deleteMember", vo);
+			session.commit();
+			result = true;
+		}catch(Exception e){
+			session.rollback();
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return result;
 	}
 
 }
