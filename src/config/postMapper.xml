@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="postMapper">
+	<select id="getTotalPostCount" resultType="int">
+		SELECT COUNT(*) FROM
+		POST
+	</select>
+
+	<select id="getPostsByPage" resultType="com.camp.model.PostVO">
+		SELECT * FROM (
+		SELECT
+		ROWNUM rn,
+		p.POSTID,
+		p.POSTTITLE,
+		p.POSTCONTENTS,
+		p.POSTIMAGE,
+		p.POSTDATE,
+		p.MEMBERID,
+		p.CATEGORYID,
+		c.CATEGORYNAME,
+		NVL(l.LIKECOUNT, 0) AS
+		LIKECOUNT,
+		NVL(t.TAGLIST, '') AS TAGLIST
+		FROM (
+		SELECT * FROM POST ORDER
+		BY POSTID DESC
+		) p
+		LEFT JOIN (
+		SELECT POSTID, COUNT(*) AS LIKECOUNT
+		FROM
+		LIKES
+		GROUP BY POSTID
+		) l ON p.POSTID = l.POSTID
+		LEFT JOIN (
+		SELECT
+		pt.POSTID, LISTAGG(t.TAGNAME, ', ') WITHIN GROUP (ORDER BY t.TAGNAME)
+		AS TAGLIST
+		FROM POSTTAG pt
+		JOIN TAG t ON pt.TAGID = t.TAGID
+		GROUP BY
+		pt.POSTID
+		) t ON p.POSTID = t.POSTID
+		 LEFT JOIN CATEGORY c ON p.CATEGORYID = c.CATEGORYID
+		WHERE ROWNUM &lt;= #{end}
+		)
+		WHERE rn
+		&gt;= #{start}
+	</select>
+</mapper>
