@@ -49,5 +49,36 @@
     )
   ]]>
   </select>
-   
+  <update id="updateAllMemberGrade">
+  UPDATE MEMBER m
+  SET m.gradeId = (
+    SELECT MAX(g.gradeId)
+    FROM GRADE g
+    WHERE (
+      SELECT COUNT(l.postId)
+      FROM POST p
+      LEFT JOIN LIKES l ON p.postId = l.postId
+      WHERE p.memberId = m.memberId
+    ) >= g.gradeLevel
+  )
+  WHERE EXISTS (
+    SELECT 1
+    FROM POST p
+    WHERE p.memberId = m.memberId
+  )  
+  </update>
+  <update id="updateMemberGradeById" parameterType="String">
+  UPDATE MEMBER m
+  SET m.gradeId = (
+    SELECT MAX(g.gradeId)
+    FROM GRADE g
+    WHERE (
+      SELECT COUNT(l.postId)
+      FROM POST p
+      LEFT JOIN LIKES l ON p.postId = l.postId
+      WHERE p.memberId = #{memberId}
+    ) >= g.gradeLevel
+  )
+  WHERE m.memberId = #{memberId}
+  </update>
 </mapper>
