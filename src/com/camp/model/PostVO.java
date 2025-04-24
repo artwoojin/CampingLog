@@ -57,6 +57,15 @@ public class PostVO {
 		this.memberImage = memberImage;
 		this.badgeImage = badgeImage;
 	}
+	
+	public PostVO(int postId, String title, String contents, String image, String memberId, int categoryId) {
+	    this.postId = postId;
+	    this.postTitle = title;
+	    this.postContents = contents;
+	    this.postImage = image;
+	    this.memberId = memberId;
+	    this.categoryId = categoryId;
+	}
 
 	public int getPostId() {
 		return postId;
