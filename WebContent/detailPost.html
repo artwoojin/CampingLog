@@ -4,20 +4,21 @@
 <meta charset="UTF-8">
 <title>캠핑장 리뷰</title>
 <link rel="stylesheet" href="css/detail.css">
-<script src="js/include.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/CampingLog/js/detail.js"></script>
 </head>
 <body>
 	<div id="container">
 		<div data-include="header.html"></div>
-		<div class="page-title">캠핑장 리뷰</div>
+		<div class="page-title"></div>
 
 		<div class="post">
 			<div class="post-header">
 				<div class="profile">
-					<img src="img/ad.png" alt="프로필 이미지" class="profile-img">
+					<img src="" alt="프로필 이미지" class="profile-img">
 					<div class="profile-name-badge">
-						<img src="img/grade1.png" class="badge">
-						<div class="nickname">캠핑왕홍길동</div>
+						<img src="" class="badge">
+						<div class="nickName">캠핑왕홍길동</div>
 					</div>
 				</div>
 
@@ -26,10 +27,10 @@
 						<button id="edit-btn">수정</button>
 						<button id="delete-btn">삭제</button>
 					</div>
-					<div class="post-title">겨울 캠핑의 시작, 우리만 사용했던 당진 무명낚시캠핑장 후기</div>
+					<div class="post-title"></div>
 					<div class="tags">
-						<div>#무료</div> 
-						<div>#반려동물</div>
+						<div></div> 
+						<div></div>
 					</div>
 				</div>
 				<div class="post-info">
@@ -39,24 +40,15 @@
 
 			<div class="post-content">
 				<div class="post-image">
-					<img src="img/duck.jpg" alt="캠핑장 사진">
+					<img src="" alt="캠핑장 사진">
 				</div>
 
 				<div class="post-body">
-					<p>
-						충남 당진 무명캠핑장. 지난 번에 찾은 이후 너무 마음에 들어 가족끼리 다시 찾았다.<br> <br>
-						한 달 새 겨울로 바뀐 당진 무명낚시캠핑장의 모습도 변했지만 넓은 캠핑장에 소수의 인원만 방문해 조용하고 여유 있는
-						모습은 그대로다.<br> <br> 캠핑장 뒤에 숲이 있어, 숲 속을 지나가면 노을 명소가 나온다.
-						당진 무명낚시캠핑장 가보신다면 꼭 가보시길 바란다.<br> <br> 불멍은 포기할 수 없어 텐트 앞에
-						불을 피웠다. 평소 같으면 귀찮아서 하지도 않았을 텐데 이런 맑은 공기와 여유 있는 공간에서 불멍할 조건이 갖춰줬다.<br>
-						<br> 12월 날씨치고는 추운 날씨였지만 추위를 이길만한 아름다운 하늘풍경을 보았다. 새벽에 들려오는 산새
-						소리가 잊히는 게 없다.<br> <br> 근처에 편의점이 없어서 아침을 거르게 됐다. 지난 번에
-						근처에 편의점이 있어서 아침에 아무것도 못 먹었다. 이번에는 라면과 김치로 챙겨와 먹었다. 맛있었다.
-					</p>
+				
 				</div>
 
 				<div class="post-footer">
-					<div>불</div> <div>저장</div>
+					<div class="like-count"></div> <div class="bookmark-count"></div>
 				</div>
 			</div>
 		</div>
@@ -64,7 +56,7 @@
 		<div class="comments">
 			<h3>댓글</h3>
 			<div class="comment-input">
-				<img src="img/equip1.png" alt="내 프로필" class="comment-profile-img"> <input
+				<img src="" alt="내 프로필" class="comment-profile-img"> <input
 					type="text" placeholder="댓글을 남겨주세요.">
 				<button id="comment-btn">등록</button>
 			</div>
@@ -73,13 +65,13 @@
 				<div class="profile">
 					<img src="img/duck.jpg" alt="프로필 이미지" class="comment-profile-img">
 					<div class="profile-name-badge">
-						<div class="comment-badge">👑</div> 
-						<div class="comment-nickname">캠핑왕홍길동</div>
+						<div class="comment-badge"></div> 
+						<div class="comment-nickName"></div>
 					</div>
 				</div>
 				<div class="comment-box">
-					<div class="comment-text">진짜진짜 프로캠핑러 bb</div>
-					<div class="comment-date">2024-12-24</div>
+					<div class="comment-text"></div>
+					<div class="comment-date"></div>
 				</div>
 			</div>
 			
@@ -87,13 +79,13 @@
 				<div class="profile">
 					<img src="img/goldenbadge.png" alt="프로필 이미지" class="comment-profile-img">
 					<div class="profile-name-badge">
-						<div class="comment-badge">👑</div> 
-						<div class="comment-nickname">캠핑초보길동</div>
+						<div class="comment-badge"></div> 
+						<div class="comment-nickName"></div>
 					</div>
 				</div>
 				<div class="comment-box">
-					<div class="comment-text">진짜</div>
-					<div class="comment-date">2024-12-26</div>
+					<div class="comment-text"></div>
+					<div class="comment-date"></div>
 				</div>
 			</div>
 
@@ -107,5 +99,36 @@
 		</div>
 		<div data-include="footer.html"></div>
 	</div>
+	
+//	<script>
+//  $(function () {
+//    const includes = document.querySelectorAll('[data-include]');
+//    const promises = Array.from(includes).map(el =>
+//     fetch(el.getAttribute('data-include'))
+ //       .then(res => res.text())
+ //       .then(data => {
+ //         el.innerHTML = data;
+ //       })
+ //   );
+
+//    Promise.all(promises).then(() => {
+ //     const postId = new URLSearchParams(window.location.search).get("postId");
+  //    console.log("🔥 postId:", postId);
+
+//      $.ajax({
+ //       url: `/CampingLog/controller?cmd=detail&postId=${postId}`,
+  //      method: "GET",
+    //    dataType: "json",
+   //     success: function (data) {
+    //      console.log("✅ 받은 데이터:", data);
+     //     $(".post-title").text(data.postTitle);
+      //  },
+      //  error: function () {
+       //   console.error("❌ 데이터를 불러오는 데 실패했습니다.");
+      //  }
+    //  });
+   // });
+ // });
+ // </script>
 </body>
 </html>
