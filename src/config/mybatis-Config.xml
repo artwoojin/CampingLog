@@ -24,6 +24,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     <mapper resource="config/memberMapper.xml"/>
     <mapper resource="config/memberMapper.xml"/>  
     -->
+    <mapper resource="config/commentsMapper.xml"/>
+    <mapper resource="config/tagMapper.xml"/>
   </mappers>
   
 </configuration>
