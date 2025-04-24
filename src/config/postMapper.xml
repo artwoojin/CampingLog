@@ -46,4 +46,26 @@
 		WHERE rn
 		&gt;= #{start}
 	</select>
+	
+	<select id="getContents" parameterType="int" resultType="com.camp.model.PostVO">
+		SELECT c.categoryName, m.nickName, p.postId, (SELECT badgeImage FROM
+			grade g WHERE g.gradeId=m.gradeId) badgeImage, m.memberImage, p.postTitle,
+			p.postContents, p.postImage, p.postDate, (SELECT COUNT(postId) FROM
+			bookmark bm
+			WHERE bm.postId=p.postId ) bookmarkCount, (SELECT COUNT(postId) FROM likes l
+			WHERE l.postId=p.postId ) likeCount
+		FROM post p
+		INNER JOIN member m ON p.memberId=m.memberId
+		INNER JOIN category c ON p.categoryId=c.categoryId
+		WHERE p.postId=#{postId}
+	</select>
+
+	<select id="getTag" parameterType="int" resultType="String">
+		SELECT
+		t.tagName
+		FROM post p
+		LEFT OUTER JOIN postTag pt ON p.postId=pt.postId
+		LEFT OUTER JOIN tag t ON pt.tagId=t.tagId
+		WHERE p.postId=#{postId}
+	</select>
 </mapper>
