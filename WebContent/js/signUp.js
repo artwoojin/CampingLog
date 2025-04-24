@@ -14,7 +14,7 @@ $(document).ready(function () {
 
 		$.ajax({
 			type: "POST",
-			url: "/CampingLog/signUpResult.jsp",
+			url: "/CampingLog/controller?cmd=signUp",
 			data: data,
 			success: function (response) {
 				try {

@@ -11,27 +11,27 @@ import org.apache.ibatis.session.SqlSession;
 public class MemberDAO {
 
 	// 회원가입
-		public boolean addMember(MemberVO vo){
-			SqlSession session = DBCP.getSqlSessionFactory().openSession();
-			boolean result = false;
+	public boolean addMember(MemberVO vo){
+		SqlSession session = DBCP.getSqlSessionFactory().openSession();
+		boolean result = false;
 
-			// memberImage가 null이거나 공백일 경우 디폴트 이미지 설정
-			if (vo.getMemberImage() == null || vo.getMemberImage().isEmpty()) {
-				vo.setMemberImage("defaultMemberImage.png");
-			}
-
-			try{
-				session.insert("memberMapper.addMember", vo);
-				session.commit();
-				result = true;
-			}catch(Exception e){
-				session.rollback();
-				e.printStackTrace();
-			}finally{
-				session.close();
-			}
-			return result;
+		// memberImage가 null이거나 공백일 경우 디폴트 이미지 설정
+		if (vo.getMemberImage() == null || vo.getMemberImage().isEmpty()) {
+			vo.setMemberImage("defaultMemberImage.png");
 		}
+
+		try{
+			session.insert("memberMapper.addMember", vo);
+			session.commit();
+			result = true;
+		}catch(Exception e){
+			session.rollback();
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return result;
+	}
 
 
 	public List<MemberVO> getMembers(){
@@ -264,7 +264,7 @@ public class MemberDAO {
 			session.close();
 		}
 	}
-	
+
 	// 회원 탈퇴(삭제)
 	public boolean deleteMember(MemberVO vo) {
 		SqlSession session = DBCP.getSqlSessionFactory().openSession();
