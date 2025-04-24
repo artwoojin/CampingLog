@@ -104,7 +104,6 @@ public class PostService {
 
 			dao.deleteTagsByPostId(session, postId); 
 
-
 			int r = dao.deletePost(session, postId);
 
 			session.commit();
