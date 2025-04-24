@@ -4,9 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.JsonObject;
 import com.camp.model.PostVO;
 import com.camp.service.PostService;
 import com.oreilly.servlet.MultipartRequest;
@@ -14,8 +12,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class UpdatePostAction implements Action {
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    public String execute(HttpServletRequest request) throws ServletException, IOException {
 
         MultipartRequest multi = new MultipartRequest(
             request,
@@ -29,6 +26,9 @@ public class UpdatePostAction implements Action {
         String title = multi.getParameter("postTitle");
         String contents = multi.getParameter("postContents");
         String image = multi.getFilesystemName("postImageFile");
+        if (image == null || image.trim().isEmpty()) {
+            image = multi.getParameter("originalImageName");
+        }
         int categoryId = Integer.parseInt(multi.getParameter("categoryId"));
         String[] tagIds = multi.getParameterValues("tagId");
 
@@ -36,17 +36,12 @@ public class UpdatePostAction implements Action {
 
         PostService service = new PostService();
         boolean result = service.updatePostWithTags(vo, tagIds);
+    
 
-        JsonObject json = new JsonObject();
-        json.addProperty("result", result ? "success" : "fail");
+        // JSP에서 꺼내 쓸 수 있도록 저장
+        request.setAttribute("result", result ? "success" : "fail");
 
-        response.setContentType("application/json; charset=UTF-8");
-        response.getWriter().write(json.toString());
-
-        return null;
+        // 공통 JSON 응답용 JSP로 포워드
+        return "updatePost.jsp";
     }
-
-	
 }
-
-

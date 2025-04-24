@@ -1,25 +1,26 @@
 package com.camp.servlet;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.camp.model.PostVO;
 import com.camp.service.PostService;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import com.google.gson.JsonObject;
-
 public class WriteAction implements Action {
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    public String execute(HttpServletRequest request) throws ServletException, IOException {
 
         String uploadPath = request.getServletContext().getRealPath("/upload");
         int maxSize = 10 * 1024 * 1024; // 10MB
+        
 
         MultipartRequest multi = new MultipartRequest(
             request,
@@ -29,25 +30,27 @@ public class WriteAction implements Action {
             new DefaultFileRenamePolicy()
         );
 
-        String image = multi.getFilesystemName("postImageFile"); // ← HTML input name과 맞춰야 함
+        String image = multi.getFilesystemName("postImageFile");
         String title = multi.getParameter("postTitle");
         String contents = multi.getParameter("postContents");
-        String memberId = "user01"; // 추후 세션으로 변경 예정
+        String memberId = "user01"; // 세션에서 추출 예정
         int categoryId = Integer.parseInt(multi.getParameter("categoryId"));
         String[] tagIds = multi.getParameterValues("tagId");
 
         PostVO vo = new PostVO(title, contents, image, memberId, categoryId);
+        
+        if (image != null) {
+            File src = new File(uploadPath, image);
+            File dest = new File("C:/OOPSW/workspace/99_CAMP/WebContent/upload", image); 
+            Files.copy(src.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        }
 
         PostService service = new PostService();
         boolean result = service.registerPostWithTags(vo, tagIds);
-        
-        JsonObject json = new JsonObject();
-        json.addProperty("result", result ? "success" : "fail");
 
-        response.setContentType("application/json; charset=UTF-8");
-        response.getWriter().write(json.toString());
+        // JSON 응답을 JSP에서 만들기 위해 request에 저장
+        request.setAttribute("result", result ? "success" : "fail");
 
-        return null;
-
+        return "write.jsp"; // jsonView.jsp에서 JSON 출력
     }
 }
