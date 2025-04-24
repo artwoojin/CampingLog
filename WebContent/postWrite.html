@@ -1,61 +1,59 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>게시글 작성</title>
-<link rel="stylesheet" href="css/postWrite.css">
-<script src="js/include.js" defer></script>
+  <meta charset="UTF-8" />
+  <title>게시글 작성</title>
+  <link rel="stylesheet" href="css/postWrite.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="js/include.js" defer></script>
+  <script src="js/validatePostForm.js" defer></script>
+  <script src="js/imagePreview.js" defer></script>
+  <script src="js/tagToggle.js" defer></script>
+  <script src="js/tagLoader.js" defer></script>
+  <script src="js/writePost.js" defer></script>
 </head>
 <body>
-	<div id="container">
-		<div data-include="header.html"></div>
-		<h2>게시글 작성</h2>
+  <div id="container">
+    <div data-include="header.html"></div>
+    <h2>게시글 작성</h2>
 
-		<input type="text" placeholder="제목을 입력하세요" /> <select>
-			<option>카테고리 선택</option>
-			<option>캠핑장 리뷰</option>
-			<option>장비 리뷰</option>
-			<option>Q&A</option>
-		</select>
+    <form id="postForm" enctype="multipart/form-data">
+      <input type="text" name="postTitle" placeholder="제목을 입력하세요" required />
 
-		<div class="editor-box">
-			<textarea placeholder="내용을 입력하세요"></textarea>
-		</div>
+      <select name="categoryId" id="categorySelect" required>
+        <option value="">카테고리 선택</option>
+        <option value="2">초보꿀팁</option>
+        <option value="3">캠핑장 리뷰</option>
+        <option value="4">장비 리뷰</option>
+        <option value="5">Q&A</option>
+      </select>
 
-		<div class="add-photo-box">
-			<button>사진 추가</button>
-		</div>
+      <div class="editor-box">
+        <textarea name="postContents" placeholder="내용을 입력하세요" required></textarea>
+      </div>
 
-		<div class="image-upload-box">
-			<p>
-				<img src="img/aa.jpg" alt="카메라 아이콘"
-					style="width: 40px; height: 40px; margin-bottom: 10px;"> <br>이미지를
-				드래그 인 드롭 혹은 클릭하여 파일을 업로드하세요
-			</p>
-		</div>
+      <div class="add-photo-box">
+        <label for="imageInput">이미지 파일명</label>
+      </div>
 
-		<div class="tag-grid">
-			<div class="row row-top">
-				<button class="tag">#유료</button>
-				<button class="tag">#무료</button>
-				<button class="tag">#캠핑</button>
-				<button class="tag">#글램핑</button>
-				<button class="tag">#반려동물</button>
-				<button class="tag">#주차가능</button>
-			</div>
-			<div class="row row-bottom">
-				<button class="tag">#개별화장실</button>
-				<button class="tag">#데크</button>
-				<button class="tag">#자갈</button>
-				<button class="tag">#잔디</button>
-				<button class="tag">#산</button>
-				<button class="tag">#바다</button>
-			</div>
-		</div>
+      <input type="file" id="imageInput" name="postImageFile" accept="image/*" style="display: none;" />
+      <input type="text" id="imageFileNameDisplay" placeholder="선택된 파일 없음" readonly />
 
-		<button class="submit-btn">게시하기</button>
-		<div data-include="footer.html"></div>
-	</div>
+      <div class="image-upload-box" onclick="triggerImageUpload()">
+        <p id="imagePreviewBox">
+          <img src="img/photoicon.png" alt="미리보기" id="previewImg" class="preview-image" />
+          <br />
+          <span id="uploadGuide">클릭하여 파일을 업로드하세요</span>
+        </p>
+      </div>
 
+      <div id="selectedTags"></div>
+      <div class="tag-grid" id="tagContainer"></div>
+
+      <button type="submit" class="submit-btn">게시하기</button>
+    </form>
+
+    <div data-include="footer.html"></div>
+  </div>
 </body>
 </html>

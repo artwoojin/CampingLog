@@ -43,18 +43,6 @@ textarea {
   border-radius: 0 0 6px 6px;
 }
 
-/* 사진 추가 버튼 */
-.add-photo-box {
-  margin: 20px 0 10px;
-}
-
-.add-photo-box button {
-  background-color: #ddd;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-}
 
 /* 이미지 업로드 박스 */
 .image-upload-box {
@@ -66,6 +54,14 @@ textarea {
   margin-bottom: 20px;
   transition: background-color 0.2s;
 }
+
+.preview-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
 
 .image-upload-box:hover {
   background-color: #fff0cc;
@@ -102,6 +98,13 @@ textarea {
 .tag:hover {
   background-color: #eee;
 }
+
+.tag.selected {
+  background-color: #1f7d44; 
+  color: white; 
+  border: 1px solid #1f7d44; 
+}
+
 
 /* 제출 버튼 */
 .submit-btn {
