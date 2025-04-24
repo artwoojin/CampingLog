@@ -5,6 +5,9 @@
 <title>캠핑장 리뷰</title>
 <link rel="stylesheet" href="css/detail.css">
 <script src="js/include.js" defer></script>
+<script src="js/editButton.js" defer></script>
+<script src="js/loadEditPost.js" defer></script>
+<script src="js/deletePost.js"></script>
 </head>
 <body>
 	<div id="container">
@@ -12,11 +15,12 @@
 		<div class="page-title">캠핑장 리뷰</div>
 
 		<div class="post">
+			<input type="hidden" id="postId" value="45"> <!-- 일단 강제로 넣음 게시글 아이디 -->
 			<div class="post-header">
 				<div class="profile">
-					<img src="img/ad.png" alt="프로필 이미지" class="profile-img">
+					<img src="img/king.png" alt="프로필 이미지" class="profile-img">
 					<div class="profile-name-badge">
-						<img src="img/grade1.png" class="badge">
+						<div class="badge">👑</div> 
 						<div class="nickname">캠핑왕홍길동</div>
 					</div>
 				</div>
@@ -33,13 +37,14 @@
 					</div>
 				</div>
 				<div class="post-info">
+					<div>조회수 1,235</div> 
 					<div>2024-12-20</div>
 				</div>
 			</div>
 
 			<div class="post-content">
 				<div class="post-image">
-					<img src="img/duck.jpg" alt="캠핑장 사진">
+					<img src="img/top1.png" alt="캠핑장 사진">
 				</div>
 
 				<div class="post-body">
@@ -64,14 +69,14 @@
 		<div class="comments">
 			<h3>댓글</h3>
 			<div class="comment-input">
-				<img src="img/equip1.png" alt="내 프로필" class="comment-profile-img"> <input
+				<img src="img/king.png" alt="내 프로필" class="comment-profile-img"> <input
 					type="text" placeholder="댓글을 남겨주세요.">
 				<button id="comment-btn">등록</button>
 			</div>
 
 			<div class="comment">
 				<div class="profile">
-					<img src="img/duck.jpg" alt="프로필 이미지" class="comment-profile-img">
+					<img src="img/king.png" alt="프로필 이미지" class="comment-profile-img">
 					<div class="profile-name-badge">
 						<div class="comment-badge">👑</div> 
 						<div class="comment-nickname">캠핑왕홍길동</div>
@@ -85,7 +90,7 @@
 			
 			<div class="comment">
 				<div class="profile">
-					<img src="img/goldenbadge.png" alt="프로필 이미지" class="comment-profile-img">
+					<img src="img/king.png" alt="프로필 이미지" class="comment-profile-img">
 					<div class="profile-name-badge">
 						<div class="comment-badge">👑</div> 
 						<div class="comment-nickname">캠핑초보길동</div>
@@ -107,5 +112,6 @@
 		</div>
 		<div data-include="footer.html"></div>
 	</div>
+
 </body>
 </html>
