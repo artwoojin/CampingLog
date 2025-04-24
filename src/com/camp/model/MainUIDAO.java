@@ -37,4 +37,30 @@ public class MainUIDAO {
 	}
 	
 	//상위3개 상세조회
+	
+	
+	
+	
+	/* 실시간 좋아요 회원 승급*/
+	public void updateMemberGradeById(String memberId) {
+	    try (SqlSession session = DBCP.getSqlSessionFactory().openSession(true)) {
+	        int updated = session.update("mainUIMapper.updateMemberGradeById", memberId);
+	        System.out.println("memberId=" + memberId + " 등급 갱신 결과: " + updated + "건");
+	    }
+		
+	}
+	
+	
+	/* 홈화면 회원 승급*/
+	public void updateAllMemberGrade() {
+	    try (SqlSession session = DBCP.getSqlSessionFactory().openSession(true)) {
+	    	int updatedRows = session.update("mainUIMapper.updateAllMemberGrade");
+	        System.out.println("등급 갱신된 회원 수: " + updatedRows);
+	    }	
+	}
+
+
+
+
+	
 }
