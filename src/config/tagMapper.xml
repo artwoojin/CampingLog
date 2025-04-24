@@ -3,11 +3,30 @@
 <mapper namespace="tagMapper">
 
 	<select id="getTag" parameterType="int" resultType="String">
-		SELECT t.tagName
+		SELECT
+		t.tagName
 		FROM post p
 		LEFT OUTER JOIN postTag pt ON p.postId=pt.postId
 		LEFT OUTER JOIN tag t ON pt.tagId=t.tagId
 		WHERE p.postId=#{postId}
+	</select>
+
+	<select id="getTagsByCategory" parameterType="int"
+		resultType="com.camp.model.TagVO">
+		SELECT tagId, tagName
+		FROM TAG
+		WHERE categoryId =
+		#{categoryId}
+	</select>
+	<select id="getAllTags" resultType="com.camp.model.TagVO">
+		SELECT * FROM tag
+	</select>
+	<select id="getTagsByCategoryId" parameterType="int"
+		resultType="com.camp.model.TagVO">
+		SELECT tagId, tagName, categoryId
+		FROM Tag
+		WHERE categoryId =
+		#{categoryId}
 	</select>
 
 </mapper>

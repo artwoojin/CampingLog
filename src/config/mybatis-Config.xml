@@ -20,6 +20,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     <mapper resource="config/postMapper.xml"/>
     <mapper resource="config/memberMapper.xml"/>
     <mapper resource="config/mainUIMapper.xml"/>
+    <mapper resource="config/tagMapper.xml"/>
+    <mapper resource="config/postTagMapper.xml"/>
    <!--     ml
     <mapper resource="config/memberMapper.xml"/>
     <mapper resource="config/memberMapper.xml"/>  
