@@ -57,7 +57,7 @@ async function initPage() {
       break;
 
     case 'detailPost.html':
-      // 예: detailPost 전용 스크립트가 있다면 여기서 로드
+      await loadScript('js/detail.js');
       break;
 
     case 'myPage.html':
