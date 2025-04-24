@@ -10,28 +10,28 @@ import org.apache.ibatis.session.SqlSession;
 
 public class MemberDAO {
 
-	// È¸¿ø°¡ÀÔ
-	public boolean addMember(MemberVO vo){
-		SqlSession session = DBCP.getSqlSessionFactory().openSession();
-		boolean result = false;
+	// íšŒì›ê°€ì…
+		public boolean addMember(MemberVO vo){
+			SqlSession session = DBCP.getSqlSessionFactory().openSession();
+			boolean result = false;
 
-		// memberImage°¡ nullÀÌ°Å³ª °ø¹éÀÏ °æ¿ì µğÆúÆ® ÀÌ¹ÌÁö ¼³Á¤
-		if (vo.getMemberImage() == null || vo.getMemberImage().isEmpty()) {
-			vo.setMemberImage("defaultMemberImage.png");
-		}
+			// memberImageê°€ nullì´ê±°ë‚˜ ê³µë°±ì¼ ê²½ìš° ë””í´íŠ¸ ì´ë¯¸ì§€ ì„¤ì •
+			if (vo.getMemberImage() == null || vo.getMemberImage().isEmpty()) {
+				vo.setMemberImage("defaultMemberImage.png");
+			}
 
-		try{
-			session.insert("memberMapper.addMember", vo);
-			session.commit();
-			result = true;
-		}catch(Exception e){
-			session.rollback();
-			e.printStackTrace();
-		}finally{
-			session.close();
+			try{
+				session.insert("memberMapper.addMember", vo);
+				session.commit();
+				result = true;
+			}catch(Exception e){
+				session.rollback();
+				e.printStackTrace();
+			}finally{
+				session.close();
+			}
+			return result;
 		}
-		return result;
-	}
 
 
 	public List<MemberVO> getMembers(){
@@ -42,7 +42,7 @@ public class MemberDAO {
 		return list;
 	}
 
-	// ³» Á¤º¸ ¼öÁ¤ Àü ºñ¹Ğ¹øÈ£ È®ÀÎ
+	// ë‚´ ì •ë³´ ìˆ˜ì • ì „ ë¹„ë°€ë²ˆí˜¸ í™•ì¸
 	public boolean pwCheck(MemberVO vo) {
 		SqlSession session = DBCP.getSqlSessionFactory().openSession();
 		boolean result = false;
@@ -56,7 +56,7 @@ public class MemberDAO {
 		return result;
 	}
 
-	// ³» Á¤º¸ ¼öÁ¤
+	// ë‚´ ì •ë³´ ìˆ˜ì •
 	public boolean updateProfile(MemberVO vo){
 		SqlSession session = DBCP.getSqlSessionFactory().openSession();
 		boolean result = false;
@@ -76,7 +76,7 @@ public class MemberDAO {
 		return result;
 	}
 
-	// ºñ¹Ğ¹øÈ£ ¼öÁ¤
+	// ë¹„ë°€ë²ˆí˜¸ ìˆ˜ì •
 	public boolean updatePw(String memberId, String pw, String newPw){
 		SqlSession session = DBCP.getSqlSessionFactory().openSession();
 		boolean result = false;
@@ -99,7 +99,7 @@ public class MemberDAO {
 		return result;
 	}
 
-	// ÇÁ·ÎÇÊ »çÁø Á¶È¸
+	// í”„ë¡œí•„ ì‚¬ì§„ ì¡°íšŒ
 	public String getMemberImage(String memberId) {
 		SqlSession session = DBCP.getSqlSessionFactory().openSession();
 		String imageName = null;
@@ -112,7 +112,7 @@ public class MemberDAO {
 		return imageName;
 	}
 
-	// ÇÁ·ÎÇÊ »çÁø µî·Ï
+	// í”„ë¡œí•„ ì‚¬ì§„ ë“±ë¡
 	public boolean setMemberImage(String memberId, String memberImage){
 		SqlSession session = DBCP.getSqlSessionFactory().openSession();
 		boolean result = false;
@@ -136,23 +136,23 @@ public class MemberDAO {
 		return result;
 	}
 
-	// ÇÁ·ÎÇÊ »çÁø ¼öÁ¤ ¹× ±âÁ¸ ÀÌ¹ÌÁö ÆÄÀÏ »èÁ¦
+	// í”„ë¡œí•„ ì‚¬ì§„ ìˆ˜ì • ë° ê¸°ì¡´ ì´ë¯¸ì§€ íŒŒì¼ ì‚­ì œ
 	public boolean updateMemberImage(String memberId, String newImageFileName, String uploadDirPath) {
 		SqlSession session = DBCP.getSqlSessionFactory().openSession();
 		boolean result = false;
 
 		try {
-			// 1. ±âÁ¸ ÀÌ¹ÌÁö Á¶È¸
+			// 1. ê¸°ì¡´ ì´ë¯¸ì§€ ì¡°íšŒ
 			String oldImage = session.selectOne("memberMapper.getMemberImage", memberId);
 
-			// 2. DB º¯°æ(»õ ÀÌ¹ÌÁö·Î)
+			// 2. DB ë³€ê²½(ìƒˆ ì´ë¯¸ì§€ë¡œ)
 			HashMap<String, String> map = new HashMap<>();
 			map.put("memberId", memberId);
 			map.put("memberImage", newImageFileName);
 
 			int updated = session.update("memberMapper.setMemberImage", map);
 
-			// 3. ¼º°øÇÏ¸é Ä¿¹Ô + ±âÁ¸ ÀÌ¹ÌÁö »èÁ¦
+			// 3. ì„±ê³µí•˜ë©´ ì»¤ë°‹ + ê¸°ì¡´ ì´ë¯¸ì§€ ì‚­ì œ
 			if (updated == 1) {
 				session.commit();
 				result = true;
@@ -172,28 +172,28 @@ public class MemberDAO {
 	}
 
 
-	// ÇÁ·ÎÇÊ »çÁø »èÁ¦ + µğÆúÆ® ÀÌ¹ÌÁö ¼³Á¤
+	// í”„ë¡œí•„ ì‚¬ì§„ ì‚­ì œ + ë””í´íŠ¸ ì´ë¯¸ì§€ ì„¤ì •
 	public boolean deleteAndSetDefaultImage(MemberVO vo, String uploadDirPath) {
 		String memberId = vo.getMemberId();
 
-		// 1. ±âÁ¸ ÀÌ¹ÌÁö ÆÄÀÏ¸í ÃßÃâ(VO)
+		// 1. ê¸°ì¡´ ì´ë¯¸ì§€ íŒŒì¼ëª… ì¶”ì¶œ(VO)
 		String oldImage = vo.getMemberImage();
 
-		// 2. DB ¾÷µ¥ÀÌÆ®: µğÆúÆ® ÀÌ¹ÌÁö·Î º¯°æ
+		// 2. DB ì—…ë°ì´íŠ¸: ë””í´íŠ¸ ì´ë¯¸ì§€ë¡œ ë³€ê²½
 		boolean updated = setDefaultImage(memberId);
 
-		// 3. ±âÁ¸ ÀÌ¹ÌÁö ÆÄÀÏ »èÁ¦
+		// 3. ê¸°ì¡´ ì´ë¯¸ì§€ íŒŒì¼ ì‚­ì œ
 		if (updated && oldImage != null && !oldImage.equals("defaultMemberImage.png")) {
 			deleteImageFile(oldImage, uploadDirPath);
 
-			// 4. memberImage ¾÷µ¥ÀÌÆ®(VO)
+			// 4. memberImage ì—…ë°ì´íŠ¸(VO)
 			vo.setMemberImage("defaultMemberImage.png");
 		}
 
 		return updated;
 	}
 
-	// ¸â¹öÀÌ¹ÌÁö »èÁ¦ ³»ºÎ ¸Ş¼­µå1: DB¿¡¼­ memberImage¸¦ µğÆúÆ® ÀÌ¹ÌÁö·Î ¼³Á¤
+	// ë©¤ë²„ì´ë¯¸ì§€ ì‚­ì œ ë‚´ë¶€ ë©”ì„œë“œ1: DBì—ì„œ memberImageë¥¼ ë””í´íŠ¸ ì´ë¯¸ì§€ë¡œ ì„¤ì •
 	private boolean setDefaultImage(String memberId) {
 		SqlSession session = DBCP.getSqlSessionFactory().openSession();
 		boolean result = false;
@@ -213,7 +213,7 @@ public class MemberDAO {
 		return result;
 	}
 
-	// ¸â¹öÀÌ¹ÌÁö »èÁ¦ ³»ºÎ ¸Ş¼­µå2: ¼­¹ö¿¡ ÀúÀåµÈ ±âÁ¸ ÀÌ¹ÌÁö ÆÄÀÏ »èÁ¦
+	// ë©¤ë²„ì´ë¯¸ì§€ ì‚­ì œ ë‚´ë¶€ ë©”ì„œë“œ2: ì„œë²„ì— ì €ì¥ëœ ê¸°ì¡´ ì´ë¯¸ì§€ íŒŒì¼ ì‚­ì œ
 	private void deleteImageFile(String imageFileName, String uploadDirPath) {
 		if (imageFileName == null || imageFileName.isEmpty()) return;
 
@@ -225,7 +225,7 @@ public class MemberDAO {
 		}
 	}
 
-	// ¸¶ÀÌÆäÀÌÁö Á¶È¸(³» Á¤º¸)
+	// ë§ˆì´í˜ì´ì§€ ì¡°íšŒ(ë‚´ ì •ë³´)
 	public MemberVO getMyInfo(String memberId) {
 		SqlSession session = DBCP.getSqlSessionFactory().openSession();
 		try {
@@ -235,7 +235,7 @@ public class MemberDAO {
 		}
 	}
 
-	// ³»°¡ ¾´ ±Û ¸®½ºÆ® Á¶È¸
+	// ë‚´ê°€ ì“´ ê¸€ ë¦¬ìŠ¤íŠ¸ ì¡°íšŒ
 	public List<HashMap<String, Object>> getMyPosts(String memberId) {
 		SqlSession session = DBCP.getSqlSessionFactory().openSession();
 		try {
@@ -245,7 +245,7 @@ public class MemberDAO {
 		}
 	}
 
-	// ºÏ¸¶Å©ÇÑ ±Û ¸®½ºÆ® Á¶È¸
+	// ë¶ë§ˆí¬í•œ ê¸€ ë¦¬ìŠ¤íŠ¸ ì¡°íšŒ
 	public List<HashMap<String, Object>> getMyBookmarks(String memberId) {
 		SqlSession session = DBCP.getSqlSessionFactory().openSession();
 		try {
@@ -255,7 +255,7 @@ public class MemberDAO {
 		}
 	}
 
-	// »ó´ë¹æ ¸¶ÀÌ ÆäÀÌÁö Á¶È¸
+	// ìƒëŒ€ë°© ë§ˆì´ í˜ì´ì§€ ì¡°íšŒ
 	public MemberVO getYourInfo(String memberId) {
 		SqlSession session = DBCP.getSqlSessionFactory().openSession();
 		try {
@@ -265,7 +265,7 @@ public class MemberDAO {
 		}
 	}
 	
-	// È¸¿ø Å»Åğ(»èÁ¦)
+	// íšŒì› íƒˆí‡´(ì‚­ì œ)
 	public boolean deleteMember(MemberVO vo) {
 		SqlSession session = DBCP.getSqlSessionFactory().openSession();
 		boolean result = false;
