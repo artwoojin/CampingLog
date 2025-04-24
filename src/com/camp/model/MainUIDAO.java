@@ -9,7 +9,7 @@ public class MainUIDAO {
 	/* 인기 상승 캠핑장 상위 3개*/
 	public Collection<PostVO> getPopularCampingList(int categoryId) {
 		SqlSession conn = DBCP.getSqlSessionFactory().openSession();
-		List<PostVO> list = conn.selectList("CampingLogMapper.getPopularCampingList", categoryId);
+		List<PostVO> list = conn.selectList("mainUIMapper.getPopularCampingList", categoryId);
 		conn.close();
 		return list;
 	}
@@ -21,7 +21,7 @@ public class MainUIDAO {
 	public Collection<MemberVO> getTopMembersByLikes(int i) {
 	    SqlSession conn = DBCP.getSqlSessionFactory().openSession();
 	    List<MemberVO> List = null;
-	    List = conn.selectList("CampingLogMapper.getTopMemberRank", 5);
+	    List = conn.selectList("mainUIMapper.getTopMemberRank", 5);
 	    conn.close();
 	    return List;
 	}
@@ -31,7 +31,7 @@ public class MainUIDAO {
 	/* 인기 장비리뷰 상위 3개*/
 	public Collection<PostVO> getPopularEquList(int categoryId) {
 		SqlSession conn = DBCP.getSqlSessionFactory().openSession();
-		List<PostVO> list = conn.selectList("CampingLogMapper.getPopularEquList", categoryId);
+		List<PostVO> list = conn.selectList("mainUIMapper.getPopularEquList", categoryId);
 		conn.close();
 		return list;
 	}
