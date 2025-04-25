@@ -78,4 +78,18 @@ public class PostDAO {
 	public int deletePost(SqlSession session, int postId) {
 	    return session.delete("postMapper.deletePost", postId);
 	}
+	
+	/* 실시간 좋아요 추가*/
+	public int insertLike(int postId, String memberId) {
+	    Map<String, Object> param = new HashMap<>();
+	    param.put("postId", postId);
+	    param.put("memberId", memberId);
+
+	    SqlSession conn = DBCP.getSqlSessionFactory().openSession();
+	    int result = conn.insert("insertLike", param);
+	    conn.commit();
+	    conn.close();
+	    return result;
+	}
+
 }
