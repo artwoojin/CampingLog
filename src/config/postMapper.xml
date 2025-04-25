@@ -117,7 +117,7 @@
 	</delete>
 	<insert id="insertLike" parameterType="map">
     	INSERT INTO LIKES (postId, memberId)
-    	VALUES (#{postId}, #{memberId})
+    	VALUES (#{postId}, #{memberId}, SYSDATE)
 	</insert>
 	
 </mapper>
