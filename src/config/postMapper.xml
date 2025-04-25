@@ -116,8 +116,7 @@
 		postId = #{postId}
 	</delete>
 	<insert id="insertLike" parameterType="map">
-    	INSERT INTO LIKES (postId, memberId)
+    	INSERT INTO LIKES (postId, memberId, likeDate)
     	VALUES (#{postId}, #{memberId}, SYSDATE)
 	</insert>
-	
 </mapper>
