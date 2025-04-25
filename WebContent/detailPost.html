@@ -1,145 +1,106 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>캠핑장 리뷰</title>
-  <link rel="stylesheet" href="css/detail.css">
-
-  <!-- jQuery (상대방 코드) -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <!-- 공통 스크립트들 (너의 코드) -->
-  <script src="js/include.js" defer></script>
-  <script src="js/editButton.js" defer></script>
-  <script src="js/loadEditPost.js" defer></script>
-  <script src="js/deletePost.js"></script>
-  <script src="/CampingLog/js/detail.js"></script>
+<meta charset="UTF-8">
+<title>캠핑장 리뷰</title>
+<link rel="stylesheet" href="css/detail.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/CampingLog/js/detail.js"></script>
 </head>
 <body>
-  <div id="container">
-    <div data-include="header.html"></div>
-    <div class="page-title"></div>
+	<div id="container">
+		<div data-include="header.html"></div>
+		<div class="page-title"></div>
 
-    <div class="post">
-      <input type="hidden" id="postId" value="45">
-      <div class="post-header">
-        <div class="profile">
-          <img src="img/king.png" alt="프로필 이미지" class="profile-img">
-          <div class="profile-name-badge">
-            <div class="badge">👑</div>
-            <div class="nickname">캠핑왕홍길동</div>
-          </div>
-        </div>
+		<div class="post">
+			<div class="post-header">
+				<div class="profile">
+					<img src="" alt="프로필 이미지" class="profile-img">
+					<div class="profile-name-badge">
+						<img src="" class="badge">
+						<div class="nickName">캠핑왕홍길동</div>
+					</div>
+				</div>
 
-        <div class="title">
-          <div class="manage-post">
-            <button id="edit-btn">수정</button>
-            <button id="delete-btn">삭제</button>
-          </div>
-          <div class="post-title"></div>
-          <div class="tags">
-            <div></div>
-            <div></div>
-          </div>
-        </div>
-        <div class="post-info">
-          <div>조회수 1,235</div>
-          <div>2024-12-20</div>
-        </div>
-      </div>
+				<div class="title">
+					<div class="manage-post">
+						<button id="edit-btn">수정</button>
+						<button id="delete-btn">삭제</button>
+					</div>
+					<div class="post-title"></div>
+					<div class="tags">
+						<div></div> 
+						<div></div>
+					</div>
+				</div>
+				<div class="post-info">
+					<div>2024-12-20</div>
+				</div>
+			</div>
 
-      <div class="post-content">
-        <div class="post-image">
-          <img src="img/top1.png" alt="캠핑장 사진">
-        </div>
+			<div class="post-content">
+				<div class="post-image">
+					<img src="" alt="캠핑장 사진">
+				</div>
 
-        <div class="post-body"></div>
+				<div class="post-body">
+				
+				</div>
 
-        <div class="post-footer">
-          <div class="like-count"></div>
-          <div class="bookmark-count"></div>
-        </div>
-      </div>
-    </div>
+				<div class="post-footer">
+					<div class="like-count"></div> <div class="bookmark-count"></div>
+				</div>
+			</div>
+		</div>
 
-    <div class="comments">
-      <h3>댓글</h3>
-      <div class="comment-input">
-        <img src="img/king.png" alt="내 프로필" class="comment-profile-img">
-        <input type="text" placeholder="댓글을 남겨주세요.">
-        <button id="comment-btn">등록</button>
-      </div>
-
-      <div class="comment">
-        <div class="profile">
-          <img src="img/king.png" alt="프로필 이미지" class="comment-profile-img">
-          <div class="profile-name-badge">
-            <div class="comment-badge"></div>
-            <div class="comment-nickName"></div>
-          </div>
-        </div>
-        <div class="comment-box">
-          <div class="comment-text"></div>
-          <div class="comment-date"></div>
-        </div>
-      </div>
-
-      <div class="comment">
-        <div class="profile">
-          <img src="img/king.png" alt="프로필 이미지" class="comment-profile-img">
-          <div class="profile-name-badge">
-            <div class="comment-badge"></div>
-            <div class="comment-nickName"></div>
-          </div>
-        </div>
-        <div class="comment-box">
-          <div class="comment-text"></div>
-          <div class="comment-date"></div>
-        </div>
-      </div>
-
-      <div class="pagination">
-        <div class="arrow">&laquo;</div>
-        <div class="current-page">1</div>
-        <div class="page">2</div>
-        <div class="page">3</div>
-        <div class="arrow">&raquo;</div>
-      </div>
-    </div>
-
-    <div data-include="footer.html"></div>
-  </div>
+		<div class="comments">
+			<h3>댓글</h3>
+			<div class="comment-input">
+				<img src="" alt="내 프로필" class="comment-profile-img"> <input
+					type="text" placeholder="댓글을 남겨주세요.">
+				<button id="comment-btn">등록</button>
+			</div>
+			
+<!-- 
+			<div class="comment">
+				<div class="profile">
+					<img src="img/duck.jpg" alt="프로필 이미지" class="comment-profile-img">
+					<div class="profile-name-badge">
+						<div class="comment-badge"></div> 
+						<div class="comment-nickName"></div>
+					</div>
+				</div>
+				<div class="comment-box">
+					<div class="comment-text"></div>
+					<div class="comment-date"></div>
+				</div>
+			</div>
+			
+			<div class="comment">
+				<div class="profile">
+					<img src="img/goldenbadge.png" alt="프로필 이미지" class="comment-profile-img">
+					<div class="profile-name-badge">
+						<div class="comment-badge"></div> 
+						<div class="comment-nickName"></div>
+					</div>
+				</div>
+				<div class="comment-box">
+					<div class="comment-text"></div>
+					<div class="comment-date"></div>
+				</div>
+			</div>
+-->
+			<div class="pagination">
+				<div class="arrow">&laquo;</div> 
+				<div class="current-page">1</div> 
+				<div class="page">2</div>
+				<div class="page">3</div> 
+				<div class="arrow">&raquo;</div>
+			</div>
+		</div>
+		<div data-include="footer.html"></div>
+	</div>
 	
-	<script>
-//  $(function () {
-//    const includes = document.querySelectorAll('[data-include]');
-//    const promises = Array.from(includes).map(el =>
-//     fetch(el.getAttribute('data-include'))
- //       .then(res => res.text())
- //       .then(data => {
- //         el.innerHTML = data;
- //       })
- //   );
-
-//    Promise.all(promises).then(() => {
- //     const postId = new URLSearchParams(window.location.search).get("postId");
-  //    console.log("🔥 postId:", postId);
-
-//      $.ajax({
- //       url: `/CampingLog/controller?cmd=detail&postId=${postId}`,
-  //      method: "GET",
-    //    dataType: "json",
-   //     success: function (data) {
-    //      console.log("✅ 받은 데이터:", data);
-     //     $(".post-title").text(data.postTitle);
-      //  },
-      //  error: function () {
-       //   console.error("❌ 데이터를 불러오는 데 실패했습니다.");
-      //  }
-    //  });
-   // });
- // });
-  </script>
 
 </body>
 </html>
