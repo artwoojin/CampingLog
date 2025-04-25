@@ -37,11 +37,10 @@ public class UpdatePostAction implements Action {
         PostService service = new PostService();
         boolean result = service.updatePostWithTags(vo, tagIds);
     
-
-        // JSP에서 꺼내 쓸 수 있도록 저장
+       
         request.setAttribute("result", result ? "success" : "fail");
 
-        // 공통 JSON 응답용 JSP로 포워드
+      
         return "updatePost.jsp";
     }
 }
