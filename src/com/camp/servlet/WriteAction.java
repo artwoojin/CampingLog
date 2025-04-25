@@ -48,9 +48,9 @@ public class WriteAction implements Action {
         PostService service = new PostService();
         boolean result = service.registerPostWithTags(vo, tagIds);
 
-        // JSON 응답을 JSP에서 만들기 위해 request에 저장
+       
         request.setAttribute("result", result ? "success" : "fail");
 
-        return "write.jsp"; // jsonView.jsp에서 JSON 출력
+        return "write.jsp"; 
     }
 }

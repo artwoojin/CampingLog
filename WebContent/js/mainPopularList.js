@@ -9,9 +9,10 @@ $(document).ready(function () {
 
 			if (data.length >= 1) {
 				const post = data[0];
+				const imageSrc = post.postImage ? post.postImage : "defaultImage.png";
 				let html = ''
 					+ '<div class="topCard">'
-					+ '  <div class="topImg1"><img src="img/' + post.postImage + '" alt="1위"></div>'
+					+ '  <div class="topImg1"><img src="img/' + imageSrc + '" alt="1위"></div>'
 					+ '  <div class="campTitle"><p>' + post.postTitle + '</p></div>'
 					+ '  <div class="campData">'
 					+ '    <div class="campUser"><p>' + post.nickName + '</p></div>'
@@ -24,9 +25,10 @@ $(document).ready(function () {
 			let htmlRight = "";
 			for (let i = 1; i < data.length; i++) {
 				const post = data[i];
+				const imageSrc = post.postImage ? post.postImage : "defaultImage.png";
 				htmlRight += ''
 					+ '<div class="topCard">'
-					+ '  <div class="topImg2"><img src="img/' + post.postImage + '" alt="인기"></div>'
+					+ '  <div class="topImg2"><img src="img/' + imageSrc + '" alt="인기"></div>'
 					+ '  <div class="campTitle"><p>' + post.postTitle + '</p></div>'
 					+ '  <div class="campData">'
 					+ '    <div class="campUser"><p>' + post.nickName + '</p></div>'

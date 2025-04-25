@@ -115,4 +115,9 @@
 		DELETE FROM post WHERE
 		postId = #{postId}
 	</delete>
+	<insert id="insertLike" parameterType="map">
+    	INSERT INTO LIKES (postId, memberId)
+    	VALUES (#{postId}, #{memberId})
+	</insert>
+	
 </mapper>
