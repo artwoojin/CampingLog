@@ -5,7 +5,7 @@
 
 <mapper namespace="noticeMapper">
 
-    <select id="getNoticeList" resultType="com.oopsw.model.NoticeVO">
+    <select id="getNoticeList" resultType="com.camp.model.NoticeVO">
         SELECT noticeId, noticeName, noticeContents
         FROM notice
     </select>
