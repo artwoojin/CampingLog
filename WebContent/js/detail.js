@@ -1,7 +1,9 @@
 console.log("📄 detail.js 로드됨");
 
 $(document).ready(function () {
-  const postId = document.getElementById("postId")?.value;
+	  const urlParams = new URLSearchParams(window.location.search);
+	  const postId = urlParams.get("postId");
+	  
   if (!postId) {
     console.error("❌ postId 없음. input[type=hidden] 확인 필요.");
     return;
@@ -10,10 +12,14 @@ $(document).ready(function () {
   $.ajax({
     url: "controller",
     method: "GET",
-    data: { cmd: "detail", postId: postId },
+    data: {
+      cmd: "detail",
+      postId: postId
+    },
     success: function (responseText) {
       const data = typeof responseText === "string" ? JSON.parse(responseText) : responseText;
 
+      // 게시글 본문 정보
       $(".post-title").text(data.postTitle);
       $(".nickName").text(data.nickName);
       $(".post-info div").text(data.postDate);
@@ -52,41 +58,42 @@ $(document).ready(function () {
           + '</div>';
       }
       $(".pagination").before(commentHtml);
-
-      // 좋아요 버튼 기능
-      $(".like-btn").on("click", function () {
-        const memberId = $(this).data("memberid");
-        if (!memberId) {
-          alert("⚠️ memberId가 설정되지 않았습니다.");
-          return;
-        }
-
-        $.ajax({
-          url: "controller",
-          method: "POST",
-          data: {
-            cmd: "addHeartAction",
-            postId: postId,
-            memberId: memberId
-          },
-          success: function (responseText) {
-            const res = typeof responseText === "string" ? JSON.parse(responseText) : responseText;
-            if (res.result === "success") {
-              alert("❤️ 좋아요 성공");
-              const current = parseInt($(".like-count").text());
-              $(".like-count").text(current + 1);
-            } else {
-              alert("이미 좋아요를 누르셨거나 오류가 발생했습니다.");
-            }
-          },
-          error: function () {
-            alert("서버 통신 중 오류 발생");
-          }
-        });
-      });
     },
     error: function () {
       console.error("❌ 게시글 상세 데이터를 불러오는 데 실패했습니다.");
     }
+  });
+
+  // 좋아요 버튼 기능 (동적 이벤트 위임)
+  $(document).on("click", ".like-btn", function () {
+    const memberId = $(this).data("memberid");
+
+    if (!memberId) {
+      alert("⚠️ memberId가 설정되지 않았습니다.");
+      return;
+    }
+
+    $.ajax({
+      url: "controller",
+      method: "POST",
+      data: {
+        cmd: "addHeartAction",
+        postId: postId,
+        memberId: memberId
+      },
+      success: function (responseText) {
+        const res = typeof responseText === "string" ? JSON.parse(responseText) : responseText;
+        if (res.result === "success") {
+          alert("❤️ 좋아요 성공");
+          const current = parseInt($(".like-count").text()) || 0;
+          $(".like-count").text(current + 1);
+        } else {
+          alert("이미 좋아요를 누르셨거나 오류가 발생했습니다.");
+        }
+      },
+      error: function () {
+        alert("서버 통신 중 오류 발생");
+      }
+    });
   });
 });
