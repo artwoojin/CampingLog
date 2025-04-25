@@ -26,6 +26,12 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
 }
 
+.accordion-header-wrapper {
+  background-color: #fffaf2;
+  padding: 16px 20px;
+  border-radius: 8px;
+}
+
 .accordion-header {
   width: 100%;
   text-align: left;
@@ -36,6 +42,7 @@
   cursor: pointer;
   position: relative;
   font-weight: bold;
+  margin-bottom: 8px;
 }
 
 .accordion-header::after {
@@ -56,6 +63,9 @@
   font-size: 14px;
   color: #333;
   display: none;
+  max-width: 90%;
+  margin: 0 auto;
+  border-radius: 8px;
 }
 
 .accordion-item.active .accordion-body {
@@ -63,3 +73,5 @@
   background-color: #e0e0e0;
   border-top: 1px solid #ccc;
 }
+
+
