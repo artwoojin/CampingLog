@@ -10,7 +10,7 @@ $(document).on("click", ".tag", function () {
   $(this).toggleClass("selected");
 
   if (!isSelected) {
-    // 선택 → hidden input 추가
+   
     $("#selectedTags").append(
       $("<input>").attr({
         type: "hidden",
@@ -20,7 +20,7 @@ $(document).on("click", ".tag", function () {
       })
     );
   } else {
-    // 해제 → hidden input 제거
+   
     $(".hidden-tag-" + tagId).remove();
   }
 });

@@ -1,15 +1,9 @@
-function getPostIdFromURL() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get("postId");
-}
+$(document).ready(function () {
+  const postId = $("#postId").val();
+  const $editBtn = $("#edit-btn");
 
-document.addEventListener("DOMContentLoaded", function () {
-  const editBtn = document.getElementById("edit-btn");
-  //const postId = getPostIdFromURL();
-  const postId = document.getElementById("postId").value;
-
-  if (editBtn && postId) {
-    editBtn.addEventListener("click", function () {
+  if ($editBtn.length && postId) {
+    $editBtn.on("click", function () {
       window.location.href = `postEdit.html?postId=${postId}`;
     });
   }

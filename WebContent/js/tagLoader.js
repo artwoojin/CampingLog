@@ -1,34 +1,42 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const categorySelect = document.querySelector("select[name='categoryId']");
-  const tagContainer = document.querySelector(".tag-grid");
+$(document).ready(function () {
+  const $categorySelect = $("select[name='categoryId']");
+  const $tagContainer = $(".tag-grid");
+  const $selectedTags = $("#selectedTags");
 
-  categorySelect.addEventListener("change", function () {
-    const categoryId = this.value;
+  $categorySelect.on("change", function () {
+    const categoryId = $(this).val();
 
-    tagContainer.innerHTML = "";
-    document.getElementById("selectedTags").innerHTML = "";
+    $tagContainer.empty();
+    $selectedTags.empty();
 
     if (!categoryId) return;
 
-    fetch(`controller?cmd=tagListAction&categoryId=${categoryId}`)
-      .then(res => res.json())
-      .then(data => {
-        const rowTop = document.createElement("div");
-        rowTop.className = "row row-top";
-        const rowBottom = document.createElement("div");
-        rowBottom.className = "row row-bottom";
+    $.ajax({
+      url: "controller",
+      method: "GET",
+      data: {
+        cmd: "tagListAction",
+        categoryId: categoryId
+      },
+      success: function (data) {
+        const $rowTop = $("<div>").addClass("row row-top");
+        const $rowBottom = $("<div>").addClass("row row-bottom");
 
         data.forEach((tag, index) => {
-          const btn = document.createElement("button");
-          btn.type = "button";
-          btn.className = "tag";
-          btn.dataset.tagid = tag.tagId;
-          btn.textContent = `#${tag.tagName}`;
-          (index < 6 ? rowTop : rowBottom).appendChild(btn);
+          const $btn = $("<button>")
+            .attr("type", "button")
+            .addClass("tag")
+            .data("tagid", tag.tagId)
+            .text(`#${tag.tagName}`);
+
+          (index < 6 ? $rowTop : $rowBottom).append($btn);
         });
 
-        tagContainer.appendChild(rowTop);
-        tagContainer.appendChild(rowBottom);
-      });
+        $tagContainer.append($rowTop, $rowBottom);
+      },
+      error: function () {
+        alert("태그 정보를 불러오는 데 실패했습니다.");
+      }
+    });
   });
 });
