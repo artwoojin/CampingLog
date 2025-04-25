@@ -17,7 +17,8 @@ public class CommentsDAO {
             session.insert("commentsMapper.addComments", vo);
             result = true;
         } catch (Exception e) {
-            
+            e.printStackTrace();
+            System.out.println("댓글 등록 중 오류 발생: " + e.getMessage());
         }
         return result;
     }
