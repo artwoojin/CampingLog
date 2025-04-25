@@ -2,7 +2,7 @@ $(function () {
   const postId = new URLSearchParams(window.location.search).get("postId");
 
   if (!postId) {
-    console.error("❌ postId가 없습니다. URL을 확인하세요.");
+    console.error("postId가 없습니다. URL을 확인하세요.");
     return;
   }
 
@@ -34,7 +34,7 @@ $(function () {
     	      <div class="profile">
     	        <img src="img/${comment.memberImage}" alt="프로필 이미지" class="comment-profile-img">
     	        <div class="profile-name-badge">
-    	          <img class="comment-badge" src="img+'${comment.badgeImage}'"></div>
+    	          <img src="img/${comment.badgeImage}" class="comment-badge">
     	          <div class="comment-nickName">${comment.nickName}</div>
     	        </div>
     	      </div>
@@ -44,7 +44,7 @@ $(function () {
     	      </div>
     	    </div>
     	  `;
-    	  $(".comments").append(commentHtml);
+    	  $(".pagination").before(commentHtml);
     	});
     },
     error: function () {

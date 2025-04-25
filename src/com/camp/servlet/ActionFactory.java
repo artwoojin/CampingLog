@@ -8,6 +8,9 @@ public class ActionFactory {
       Action a;
       System.out.println(cmd);
       switch (cmd) {
+      case "detail":
+    	  a=new DetailAction();
+    	  break;
       case "searchResult":
          a=new SearchResultAction();
          break;
