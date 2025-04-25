@@ -12,7 +12,8 @@
 		<div data-include="header.html"></div>
 		<h2>게시글 수정</h2>
 		<form id="editForm" enctype="multipart/form-data">
-			<input type="hidden" name="postId" id="postId"> 
+			<input type="hidden" name="postId" id="postId">
+			<input type="hidden" name="originalImageName" id="originalImageName" /> 
 			<input type="text" id="postTitle" name="postTitle" placeholder="제목을 입력하세요" required />
 			<select name="categoryId" id="categoryId" required>
 				<option value="">카테고리 선택</option>
@@ -50,6 +51,7 @@
 	</div>
 
 	<script src="js/loadEditPost.js"></script>
+	<script src="js/tagLoader.js" defer></script>
 	<script src="js/imagePreview.js" defer></script>
 	<script src="js/tagToggle.js" defer></script>
 	<script src="js/editPost.js"></script>
