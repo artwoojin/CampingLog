@@ -47,6 +47,14 @@ public class PostDAO {
         return count;
     }
     
+	//게시글 카테고리 가져오기
+	public List<PostVO> getCategoryName() {
+		SqlSession conn = DBCP.getSqlSessionFactory().openSession();
+		List<PostVO> list = conn.selectList("postMapper.getCategoryName");
+		conn.close();
+		return list;
+	}
+    
     public PostVO getDetailContents(SqlSession session, int postId){
         return session.selectOne("postMapper.getContents", postId);
     }
