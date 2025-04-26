@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.camp.model.PostVO;
 
 public class PostDAO {
-
+	
 	// 전체 게시글 페이징 조회
 	public List<PostVO> getPostPage(int start, int end) {
         SqlSession conn = DBCP.getSqlSessionFactory().openSession();
@@ -21,14 +21,6 @@ public class PostDAO {
         return list;
     }
 	
-    // 전체 게시글 수 가져오기
-    public int getTotalPostCount() {
-        SqlSession conn = DBCP.getSqlSessionFactory().openSession();
-        int count = conn.selectOne("postMapper.getTotalPostCount");
-        conn.close();
-        return count;
-    }
-    
 	// 카테고리별 페이징 조회 
 	public List<PostVO> getPostPageByCategory(int categoryId, int start, int end) {
 		try (SqlSession conn = DBCP.getSqlSessionFactory().openSession()) {
@@ -47,13 +39,13 @@ public class PostDAO {
 		}
 	}
 	
-	//게시글 카테고리 가져오기
-	public List<PostVO> getCategoryName() {
-		SqlSession conn = DBCP.getSqlSessionFactory().openSession();
-		List<PostVO> list = conn.selectList("postMapper.getCategoryName");
-		conn.close();
-		return list;
-	}
+    // 전체 게시글 수 가져오기
+    public int getTotalPostCount() {
+        SqlSession conn = DBCP.getSqlSessionFactory().openSession();
+        int count = conn.selectOne("postMapper.getTotalPostCount");
+        conn.close();
+        return count;
+    }
     
     public PostVO getDetailContents(SqlSession session, int postId){
         return session.selectOne("postMapper.getContents", postId);
