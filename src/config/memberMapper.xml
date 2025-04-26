@@ -152,5 +152,24 @@
 		JOIN GRADE g ON m.gradeId = g.gradeId
 		WHERE m.memberId = #{memberId}
 	</select>
+	
+	<update id="updateProfileImage" parameterType="map">
+    UPDATE member
+    SET MEMBERIMAGE = #{fileName}
+    WHERE MEMBERID = #{memberId}
+</update>
+
+	<update id="updateMemberInfo" parameterType="com.camp.model.MemberVO">
+    UPDATE member
+    SET
+        EMAIL = #{email},
+        NICKNAME = #{nickName},
+        NAME = #{name},
+        PHONENUMBER = #{phoneNumber}
+    WHERE MEMBERID = #{memberId}
+</update>
+	
+	
+	
 
 </mapper>
