@@ -50,6 +50,7 @@ public class WriteAction implements Action {
 
        
         request.setAttribute("result", result ? "success" : "fail");
+        
 
         return "write.jsp"; 
     }
