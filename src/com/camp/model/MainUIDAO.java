@@ -59,6 +59,14 @@ public class MainUIDAO {
 	    }	
 	}
 
+	/* 홈화면 어제 날짜 기준으로 좋아요 수 TOP 5 조회 */
+	public Collection<MemberVO> getYesterdayTopMembersByLikes(String date) {
+	    SqlSession conn = DBCP.getSqlSessionFactory().openSession();
+	    List<MemberVO> list = conn.selectList("mainUIMapper.getYesterdayTopMemberRank", date);
+	    conn.close();
+	    return list;
+	}
+
 
 
 
