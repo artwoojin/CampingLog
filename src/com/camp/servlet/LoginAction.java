@@ -31,7 +31,7 @@ public class LoginAction implements Action {
 
         if (loginSuccess) {
             HttpSession session = request.getSession();
-            session.setAttribute("loginMember", member); // 로그인한 유저 정보를 세션에 저장
+            session.setAttribute("loginUser", member); // 로그인한 유저 정보를 세션에 저장
             System.out.println("[LoginAction] 세션에 사용자 정보 저장 완료");
 
             request.setAttribute("nickname", member.getNickName()); // nickname을 JSP로 전달
