@@ -18,8 +18,13 @@ public class YesterdayRankListAction implements Action {
         MainUIDAO dao = new MainUIDAO();
 
         // 어제 날짜를 구해서 (yyyy-MM-dd 형식)
-        LocalDate yesterday = LocalDate.now().minusDays(1);
-        String date = yesterday.format(DateTimeFormatter.ISO_DATE);
+        String date = "2025-04-21"; // 무조건 2025-04-25로 고정
+        //String date = request.getParameter("date");
+
+        if (date == null || date.isEmpty()) {
+            LocalDate yesterday = LocalDate.now().minusDays(1);
+            date = yesterday.format(DateTimeFormatter.ISO_DATE);
+        }
         System.out.println("어제 날짜: " + date);
         // 어제 날짜 기준으로 랭킹 조회
         Collection<MemberVO> rankList = dao.getYesterdayTopMembersByLikes(date);
