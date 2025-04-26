@@ -14,7 +14,7 @@ public class MainRankUpAction implements Action {
         MainUIDAO dao = new MainUIDAO();
         dao.updateAllMemberGrade();
         request.setAttribute("result", "success");
-        return "jsonView"; 
+        return "mainRankUp.jsp"; 
 	}
 
 }
