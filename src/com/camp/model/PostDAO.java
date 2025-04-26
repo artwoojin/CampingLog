@@ -10,6 +10,7 @@ import com.camp.model.PostVO;
 
 public class PostDAO {
 
+	// 전체 게시글 페이징 조회
 	public List<PostVO> getPostPage(int start, int end) {
         SqlSession conn = DBCP.getSqlSessionFactory().openSession();
         Map<String, Integer> map = new HashMap<>();
@@ -27,6 +28,32 @@ public class PostDAO {
         conn.close();
         return count;
     }
+    
+	// 카테고리별 페이징 조회 
+	public List<PostVO> getPostPageByCategory(int categoryId, int start, int end) {
+		try (SqlSession conn = DBCP.getSqlSessionFactory().openSession()) {
+			Map<String, Integer> map = new HashMap<>();
+			map.put("categoryId", categoryId);
+			map.put("start",      start);
+			map.put("end",        end);
+			return conn.selectList("postMapper.getPostsByCategoryPage", map);
+		}
+	}
+	
+	// 카테고리별 총 게시글 수 조회 
+	public int getTotalPostCountByCategory(int categoryId) {
+		try (SqlSession conn = DBCP.getSqlSessionFactory().openSession()) {
+			return conn.selectOne("postMapper.getTotalPostCountByCategory", categoryId);
+		}
+	}
+	
+	//게시글 카테고리 가져오기
+	public List<PostVO> getCategoryName() {
+		SqlSession conn = DBCP.getSqlSessionFactory().openSession();
+		List<PostVO> list = conn.selectList("postMapper.getCategoryName");
+		conn.close();
+		return list;
+	}
     
     public PostVO getDetailContents(SqlSession session, int postId){
         return session.selectOne("postMapper.getContents", postId);
