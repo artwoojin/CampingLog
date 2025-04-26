@@ -18,31 +18,25 @@ public class GetPostsByPageAction implements Action {
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
 		// 파라미터 받기
         int page = Integer.parseInt(request.getParameter("page"));
+        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
         int pageSize = 4;
+        System.out.println(categoryId);
 
         int start = (page - 1) * pageSize + 1;
         int end = page * pageSize;
         
         System.out.println(start + " " + end);
 
+
         PostDAO dao = new PostDAO();
-        List<PostVO> posts = dao.getPostPage(start, end);
-        int totalPosts = dao.getTotalPostCount();
-        int totalPages = (int) Math.ceil(totalPosts / (double) pageSize);
-        
-        System.out.println(posts);
-        System.out.println(totalPosts);
-        System.out.println(totalPages);
+        List<PostVO> posts = dao.getPostPageByCategory(categoryId, start, end);
+        int totalPosts = dao.getTotalPostCountByCategory(categoryId);
 
-        Map<String, Object> result = new HashMap<>();
-        result.put("postList", posts); // postList로 key명 변경
-        result.put("totalPostCount", totalPosts); // totalPostCount로 key명 변경
-        result.put("currentPage", page); // currentPage 추가
+        request.setAttribute("postList", posts);
+        request.setAttribute("totalPostCount", totalPosts);
+        request.setAttribute("currentPage", page);
 
-        // JSON 데이터 문자열로 만들어서 request에 넣어둠
-        request.setAttribute("jsonData", new Gson().toJson(result));
-
-        return "json";
+        return "postData.jsp"; // 
     }
 
 
