@@ -3,16 +3,24 @@ $(document).ready(function() {
     e.preventDefault(); // 폼 기본 제출 막기
 
     $.ajax({
-      url: "controller?cmd=login", // loginAction 호출
+      url: "controller?cmd=login",
       type: "POST",
       data: $(this).serialize(),
       dataType: "json",
       success: function(res) {
-        console.log("[디버깅] 서버 응답:", res); // 응답 확인용
+        console.log("[디버깅] 서버 응답:", res);
 
         if (res.loginSuccess === true) {
           alert("로그인 성공했습니다! 메인 페이지로 이동합니다.");
-          window.location.href = "mainUI.html"; 
+
+          // ⭐ 여기서 바로 이동하지 말고 form 만들어서 POST로 이동
+          const form = document.createElement("form");
+          form.method = "POST";
+          form.action = "mainUI.html"; // 이동할 페이지
+
+          document.body.appendChild(form);
+          form.submit();
+          
         } else {
           alert("로그인 실패! 아이디 또는 비밀번호를 확인하세요.");
           window.location.href = "login.html"; 
@@ -25,4 +33,3 @@ $(document).ready(function() {
     });
   });
 });
-
