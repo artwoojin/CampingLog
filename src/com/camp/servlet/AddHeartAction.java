@@ -18,7 +18,7 @@ public class AddHeartAction implements Action {
         int result = dao.insertLike(postId, memberId);
 
         request.setAttribute("result", result > 0 ? "success" : "fail");
-        return "jsonView";
+        return "addHeart.jsp";
 	}
 
 }
