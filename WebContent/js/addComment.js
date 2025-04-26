@@ -1,6 +1,6 @@
   $(function () {
     $("#comment-btn").click(function () {
-      const commentContents = $("input[type='text']").val();
+      const commentContents = $("#comment-input").val();
       const postId = new URLSearchParams(window.location.search).get("postId");
       const memberId = "silver99"; // 실제 로그인 연동 시 세션  가져오기
 

@@ -58,6 +58,8 @@ async function initPage() {
 
     case 'detailPost.html':
       await loadScript('js/detail.js');
+      await loadScript('js/addComment.js');
+      
       break;
 
     case 'myPage.html':
