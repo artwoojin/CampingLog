@@ -86,8 +86,8 @@
         FROM CATEGORY
     ]]>
 	</select>
-	
-		<select id="getPostsByCategoryPage" parameterType="map"
+
+	<select id="getPostsByCategoryPage" parameterType="map"
 		resultType="com.camp.model.PostVO">
     <![CDATA[
       SELECT * FROM (
@@ -126,6 +126,15 @@
         WHERE ROWNUM <= #{end}
       )
       WHERE rn >= #{start}
+    ]]>
+	</select>
+
+	<select id="getTotalPostCountByCategory" parameterType="int"
+		resultType="int">
+    <![CDATA[
+      SELECT COUNT(*) 
+        FROM POST
+       WHERE CATEGORYID = #{categoryId}
     ]]>
 	</select>
 
@@ -171,7 +180,8 @@
 		postId = #{postId}
 	</delete>
 	<insert id="insertLike" parameterType="map">
-		INSERT INTO LIKES (postId, memberId, likeDate)
+		INSERT INTO LIKES (postId,
+		memberId, likeDate)
 		VALUES (#{postId}, #{memberId}, SYSDATE)
 	</insert>
 </mapper>
