@@ -31,39 +31,25 @@
 	color: #333;
 }
 
-/* 태그 전체 감싸는 영역 */
 .tagList {
 	position: absolute;
 	top: 100%;
-	width: 100%;
-	display: none;
-	background-color: #fff;
-	padding: 20px;
-	border-radius: 20px;
-	box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.05);
-	margin: 20px auto;
-	flex-direction: column;
-	align-items: center;
-	gap: 16px;
-	background-color: #fff;
 	left: 50%;
 	transform: translateX(-50%);
+	width: 100%;
+	display: none;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 14px;
+	padding: 20px;
+	margin-top: 20px;
+	background-color: #fff;
+	border-radius: 20px;
+	box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.05);
 	z-index: 10;
 }
 
-.tagList.active {
-	display: flex;
-}
-
-/* 각 줄(tag1, tag2, tag3) 정렬 */
-.tag1, .tag2, .tag3 {
-	display: flex;
-	gap: 14px;
-	justify-content: center;
-}
-
-/* 각각의 태그 */
-.tag1 p, .tag2 p, .tag3 p {
+.tagList p {
 	background-color: #e0e0e0;
 	padding: 8px 18px;
 	border-radius: 20px;
@@ -74,8 +60,38 @@
 	white-space: nowrap;
 }
 
-.tag1 p:hover, .tag2 p:hover, .tag3 p:hover {
+.tagList p:hover {
 	background-color: #d0d0d0;
+}
+
+.applyTagBtn {
+	right: 6px;
+	top: 50%;
+	transform: translateY(-50%);
+	position: absolute;
+	width: 42px;
+	height: 42px;
+	border-radius: 50%;
+	background-color: black;
+	color: white;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.applyTagBtn:hover {
+	background-color: #222;
+	transform: translateY(-50%) scale(1.05);
+}
+
+.tag-pill.selected {
+	background-color: #333;
+	color: #fff;
 }
 
 /* 게시물 카드 전체 */
@@ -180,7 +196,8 @@
 /* 댓글/좋아요/조회수 묶음 */
 .postStats {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-end;
+	gap: 10px;
 	width: 100%;
 }
 
@@ -197,27 +214,27 @@
 }
 
 .pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	margin: 50px;
 }
 
 .pagination button {
-  background-color: #f0f0f0;
-  border: none;
-  padding: 8px 12px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 4px;
+	background-color: #f0f0f0;
+	border: none;
+	padding: 8px 12px;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 4px;
 }
 
 .pagination button:hover {
-  background-color: #ccc;
+	background-color: #ccc;
 }
 
 .pagination .active {
-  background-color: #333;
-  color: white;
+	background-color: #333;
+	color: white;
 }
