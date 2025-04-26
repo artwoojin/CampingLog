@@ -15,7 +15,7 @@ public class MemberRankListAction implements Action {
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
         MainUIDAO dao = new MainUIDAO();
         Collection<MemberVO> rankList = dao.getTopMembersByLikes(5);
-        request.setAttribute("rankList", rankList); // mainUI.jsp에서 JSON으로 출력
+        request.setAttribute("rankList", rankList);
         return "mainRankList.jsp";
 	}
 
