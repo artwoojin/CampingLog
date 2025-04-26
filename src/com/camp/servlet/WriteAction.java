@@ -41,7 +41,7 @@ public class WriteAction implements Action {
         
         if (image != null) {
             File src = new File(uploadPath, image);
-            File dest = new File("C:/OOPSW/workspace/99_CAMP/WebContent/upload", image); 
+            File dest = new File("C:/OOPSW/workspace/CampingLog/WebContent/upload", image); 
             Files.copy(src.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
         }
 
