@@ -17,9 +17,9 @@ public class YesterdayRankListAction implements Action {
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
         MainUIDAO dao = new MainUIDAO();
 
-        // 어제 날짜를 구해서 (yyyy-MM-dd 형식)
-        String date = "2025-04-21"; // 무조건 2025-04-25로 고정
-        //String date = request.getParameter("date");
+        // 어제 날짜를 구해서 (yyyy-mm-dd 형식)
+        //String date = "2025-04-21"; 
+        String date = request.getParameter("date");
 
         if (date == null || date.isEmpty()) {
             LocalDate yesterday = LocalDate.now().minusDays(1);
