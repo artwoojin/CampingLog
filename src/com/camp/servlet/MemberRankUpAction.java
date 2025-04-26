@@ -21,7 +21,7 @@ public class MemberRankUpAction implements Action {
             request.setAttribute("result", "fail");
         }
 
-        return "jsonView";
+        return "memberRankUp.jsp";
 	}
 
 }
