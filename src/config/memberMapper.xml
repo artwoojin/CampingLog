@@ -169,6 +169,11 @@
     WHERE MEMBERID = #{memberId}
 </update>
 	
+	<delete id="deleteMember" parameterType="map">
+    DELETE FROM member
+    WHERE memberId = #{memberId} AND pw = #{pw}
+</delete>
+	
 	
 	
 
