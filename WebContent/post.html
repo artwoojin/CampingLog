@@ -8,8 +8,6 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="js/include.js" defer></script>
-<script src="js/searchTag.js" defer></script>
-<script src="js/postPage.js" defer></script>
 </head>
 <body>
 	<div id="container">
@@ -17,25 +15,12 @@
 		<div id="section1">
 			<div class="inputTag">
 				<input type="text" name="tagName" placeholder="태그를 선택 해주세요."
-					readonly style="cursor: pointer; caret-color: transparent;">
-				<div class="tagList">
-					<div class="tag1">
-						<p>#유료</p>
-						<p>#무료</p>
-						<p>#캠핑</p>
-						<p>#글램핑</p>
-					</div>
-					<div class="tag2">
-						<p>#개별샤워실</p>
-						<p>#개별화장실</p>
-						<p>#반려동물</p>
-					</div>
-					<div class="tag3">
-						<p>#데크</p>
-						<p>#자갈</p>
-						<p>#잔디</p>
-					</div>
-				</div>
+					readonly style="cursor: pointer; caret-color: transparent;"
+					data-category-id="${categoryId}">
+				<button type="button" class="applyTagBtn">
+					<i class="fas fa-arrow-right"></i>
+				</button>
+				<div class="tagList"></div>
 			</div>
 		</div>
 
