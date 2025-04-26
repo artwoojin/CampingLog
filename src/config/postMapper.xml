@@ -40,24 +40,29 @@
 		GROUP BY
 		pt.POSTID
 		) t ON p.POSTID = t.POSTID
-		LEFT JOIN CATEGORY c ON p.CATEGORYID = c.CATEGORYID
+		LEFT JOIN CATEGORY c ON
+		p.CATEGORYID = c.CATEGORYID
 		WHERE ROWNUM &lt;=
 		#{end}
 		)
 		WHERE rn
-		&gt;= #{start}
+		&gt;=
+		#{start}
 	</select>
 
 	<select id="getContents" parameterType="int" resultType="com.camp.model.PostVO">
 		SELECT
 		c.categoryName, m.nickName, p.postId, (SELECT badgeImage FROM
-		grade g WHERE g.gradeId=m.gradeId) badgeImage, m.memberImage, p.postTitle,
+		grade g
+		WHERE g.gradeId=m.gradeId) badgeImage, m.memberImage, p.postTitle,
 		p.postContents, p.postImage, p.postDate, (SELECT COUNT(postId) FROM
 		bookmark bm
-		WHERE bm.postId=p.postId ) bookmarkCount, (SELECT COUNT(postId) FROM likes
+		WHERE bm.postId=p.postId ) bookmarkCount, (SELECT
+		COUNT(postId) FROM likes
 		l
 		WHERE l.postId=p.postId ) likeCount
-		FROM post p
+		FROM post
+		p
 		INNER JOIN member m ON
 		p.memberId=m.memberId
 		INNER JOIN category c ON
@@ -72,6 +77,56 @@
 		LEFT OUTER JOIN postTag pt ON p.postId=pt.postId
 		LEFT OUTER JOIN tag t ON pt.tagId=t.tagId
 		WHERE p.postId=#{postId}
+	</select>
+
+	<select id="getCategoryName" resultType="com.camp.model.PostVO">
+    <![CDATA[
+      SELECT CATEGORYID AS categoryId,
+             CATEGORYNAME AS categoryName
+        FROM CATEGORY
+    ]]>
+	</select>
+	
+		<select id="getPostsByCategoryPage" parameterType="map"
+		resultType="com.camp.model.PostVO">
+    <![CDATA[
+      SELECT * FROM (
+        SELECT
+          ROWNUM      rn,
+          p.POSTID,
+          p.POSTTITLE,
+          p.POSTCONTENTS,
+          p.POSTIMAGE,
+          p.POSTDATE,
+          p.MEMBERID,
+          p.CATEGORYID,
+          c.CATEGORYNAME,
+          NVL(l.LIKECOUNT, 0) AS LIKECOUNT,
+          NVL(t.TAGLIST, '')   AS TAGLIST
+        FROM (
+          SELECT *
+            FROM POST
+           WHERE CATEGORYID = #{categoryId}
+           ORDER BY POSTID DESC
+        ) p
+        LEFT JOIN (
+          SELECT POSTID, COUNT(*) AS LIKECOUNT
+            FROM LIKES
+           GROUP BY POSTID
+        ) l ON p.POSTID = l.POSTID
+        LEFT JOIN (
+          SELECT pt.POSTID,
+                 LISTAGG(t.TAGNAME, ', ') 
+                   WITHIN GROUP (ORDER BY t.TAGNAME) AS TAGLIST
+            FROM POSTTAG pt
+            JOIN TAG t ON pt.TAGID = t.TAGID
+           GROUP BY pt.POSTID
+        ) t ON p.POSTID = t.POSTID
+        LEFT JOIN CATEGORY c ON p.CATEGORYID = c.CATEGORYID
+        WHERE ROWNUM <= #{end}
+      )
+      WHERE rn >= #{start}
+    ]]>
 	</select>
 
 	<insert id="insertPost" parameterType="com.camp.model.PostVO">
@@ -116,7 +171,7 @@
 		postId = #{postId}
 	</delete>
 	<insert id="insertLike" parameterType="map">
-    	INSERT INTO LIKES (postId, memberId, likeDate)
-    	VALUES (#{postId}, #{memberId}, SYSDATE)
+		INSERT INTO LIKES (postId, memberId, likeDate)
+		VALUES (#{postId}, #{memberId}, SYSDATE)
 	</insert>
 </mapper>
