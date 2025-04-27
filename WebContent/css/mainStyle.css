@@ -18,12 +18,12 @@
 
 .
 .topCamp {
-	flex: 1; /* ¶Ç´Â height: 60%; µµ °¡´É */
+	flex: 1; /* ë˜ëŠ” height: 60%; ë„ ê°€ëŠ¥ */
 	display: flex;
 	flex-direction: column;
 }
 
-/* ÀÎ±â »ó½Â Ä·ÇÎÀå */
+/* ì¸ê¸° ìƒìŠ¹ ìº í•‘ì¥ */
 .topTitle p {
 	font-size: 1.5rem;
 	font-weight: bold;
@@ -46,7 +46,7 @@
 }
 
 .topLeft .topCard {
-	flex: 1; /* ÀÚµ¿À¸·Î ³ôÀÌ ¸ÂÃçÁü */
+	flex: 1; /* ìë™ìœ¼ë¡œ ë†’ì´ ë§ì¶°ì§ */
 }
 
 .topImg1 img {
@@ -59,7 +59,7 @@
 .topRight {
 	width: 30%;
 	gap: 16px;
-	flex: 1; /* ÀüÃ¼ ³ôÀÌ ÀÚµ¿ Ã¤¿ò */
+	flex: 1; /* ì „ì²´ ë†’ì´ ìë™ ì±„ì›€ */
 }
 
 .topCard {
@@ -74,7 +74,7 @@
 }
 
 .topRight .topCard {
-	flex: 1; /* °¢°¢ µ¿ÀÏÇÑ ºñÀ²·Î ³ª´²Áü */
+	flex: 1; /* ê°ê° ë™ì¼í•œ ë¹„ìœ¨ë¡œ ë‚˜ëˆ ì§ */
 }
 
 .topImg1 img, .topImg2 img, .topImg3 img {
@@ -114,6 +114,7 @@
 }
 
 .downCard {
+	flex: 0 0 32%;
 	padding: 10px;
 	height: 100%;
 	border-radius: 12px;
@@ -146,7 +147,7 @@
 	color: #555;
 }
 
-/* ¿À¸¥ÂÊ ·©Å· + ±¤°í */
+/* ì˜¤ë¥¸ìª½ ë­í‚¹ + ê´‘ê³  */
 .content2 {
 	display: flex;
 	flex-direction: column;
@@ -164,7 +165,7 @@
 
 
 .downRank {
-	flex: 0 0 auto; /* ÄÜÅÙÃ÷¸¸Å­¸¸ Â÷Áö */
+	flex: 0 0 auto; /* ì½˜í…ì¸ ë§Œí¼ë§Œ ì°¨ì§€ */
 	background: #fff;
 	border-radius: 12px;
 	padding: 1rem;
@@ -172,7 +173,7 @@
 }
 
 .downAd {
-	flex: 1; /* ³²Àº °ø°£ ÀüºÎ Â÷Áö */
+	flex: 1; /* ë‚¨ì€ ê³µê°„ ì „ë¶€ ì°¨ì§€ */
 	overflow: hidden;
 }
 
@@ -219,7 +220,14 @@
 }
 
 .adImg {
-	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	max-width: 314px; /* ğŸ”¥ downCard ì¹´ë“œ í¬ê¸° ì •ë„ë¡œ */
+	aspect-ratio: 16/9; /* ê¹”ë”í•œ ë¹„ìœ¨ ìœ ì§€ */
+	overflow: hidden;
+	margin: 0 auto; /* ê°€ìš´ë° ì •ë ¬ */
 }
 
 @media ( max-width : 768px) {
