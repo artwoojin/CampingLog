@@ -110,6 +110,7 @@
 
 .downList {
 	display: flex;
+	/*justify-content: space-between;*/
 	gap: 16px;
 }
 
@@ -127,8 +128,8 @@
 }
 
 .downImg img {
-	max-width: 150px;
-	max-height: 100px;
+	max-width: 180px;
+	max-height: 120px;
 	border-radius: 12px;
 	object-fit: cover;
 }
@@ -225,6 +226,7 @@
 	align-items: center;
 	width: 100%;
 	max-width: 314px; /* 🔥 downCard 카드 크기 정도로 */
+	height: 100px;
 	aspect-ratio: 16/9; /* 깔끔한 비율 유지 */
 	overflow: hidden;
 	margin: 0 auto; /* 가운데 정렬 */
