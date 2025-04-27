@@ -180,5 +180,12 @@
 		DELETE FROM member
 		WHERE memberId = #{memberId} AND pw = #{pw}
 	</delete>
+	
+	<select id="getMemberById" parameterType="String" resultType="com.camp.model.MemberVO">
+    SELECT memberId, email, nickName, name, phoneNumber, inDate, memberImage, gradeId
+    FROM member
+    WHERE memberId = #{memberId}
+</select>
+	
 
 </mapper>
