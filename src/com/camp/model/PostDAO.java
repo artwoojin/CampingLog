@@ -126,7 +126,6 @@ public class PostDAO {
 	    conn.close();
 	    return result;
 	}
-	
 
 	public boolean InsertBookmark(SqlSession session, int postId, String memberId) {
 		boolean result = false;
