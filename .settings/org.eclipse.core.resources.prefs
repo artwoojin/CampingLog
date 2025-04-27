@@ -1,6 +1,12 @@
+=\=\=\=\=\=\=
+<<<<<<<=Updated upstream
+>>>>>>>=Stashed changes
 eclipse.preferences.version=1
 encoding//WebContent/footer.html=UTF-8
 encoding//WebContent/header.html=UTF-8
 encoding//WebContent/myPage.html=UTF-8
 encoding//src/com/camp/model/MemberDAO.java=UTF-8
 encoding//src/com/camp/servlet/AddProfilePhotoAction.java=UTF-8
+encoding//src/com/camp/servlet/LoginAction.java=UTF-8
+encoding//src/com/camp/servlet/PasswordCheckAction.java=UTF-8
+encoding//src/com/camp/servlet/SignUpAction.java=UTF-8

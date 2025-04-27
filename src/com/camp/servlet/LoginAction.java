@@ -8,35 +8,33 @@ import com.camp.model.LoginDAO;
 import com.camp.model.MemberVO;
 
 public class LoginAction implements Action {
-    @Override
-    public String execute(HttpServletRequest request)
-            throws ServletException, IOException {
-        System.out.println("¢º LoginAction ÁøÀÔ");
-        String id = request.getParameter("id");
-        String pw = request.getParameter("pw");
+	@Override
+	public String execute(HttpServletRequest request)
+			throws ServletException, IOException {
+		System.out.println("â–¶ LoginAction ì§„ì…");
 
-        MemberVO vo = new MemberVO();
-        vo.setMemberId(id);
-        vo.setPw(pw);
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
 
-        // ·Î±×ÀÎ Ã³¸® ÈÄ MemberVO °´Ã¼ ¹İÈ¯
-        MemberVO member = new LoginDAO().login(vo);
-        System.out.println("[LoginAction] ÆÄ¶ó¹ÌÅÍ id=" + id + ", pw=" + pw);
-        System.out.println("[LoginAction] DAO ¹İÈ¯ member=" + member);
+		MemberVO vo = new MemberVO();
+		vo.setMemberId(id);
+		vo.setPw(pw);
 
-        // ·Î±×ÀÎ ¼º°ø ¿©ºÎ Ã¼Å©: member °´Ã¼°¡ nullÀÌ ¾Æ´Ï°í nicknameÀÌ À¯È¿ÇÑÁö È®ÀÎ
-        boolean loginSuccess = (member != null && member.getNickName() != null
-        		&& !member.getNickName().isEmpty());
-        request.setAttribute("loginSuccess", loginSuccess);
+		MemberVO member = new LoginDAO().login(vo);
+		System.out.println("[LoginAction] íŒŒë¼ë¯¸í„° id=" + id + ", pw=" + pw);
+		System.out.println("[LoginAction] DAO ë°˜í™˜ member=" + member);
 
-        if (loginSuccess) {
-            HttpSession session = request.getSession();
-            session.setAttribute("loginUser", member); // ·Î±×ÀÎÇÑ À¯Àú Á¤º¸¸¦ ¼¼¼Ç¿¡ ÀúÀå
-            System.out.println("[LoginAction] ¼¼¼Ç¿¡ »ç¿ëÀÚ Á¤º¸ ÀúÀå ¿Ï·á");
+		boolean loginSuccess = (member != null && member.getNickName() != null && !member.getNickName().isEmpty());
 
-            request.setAttribute("nickname", member.getNickName()); // nicknameÀ» JSP·Î Àü´Ş
-        }
+		if (loginSuccess) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", member);
+			System.out.println("[LoginAction] ì„¸ì…˜ì— ì‚¬ìš©ì ì •ë³´ ì €ì¥ ì™„ë£Œ");
 
-        return "loginResult.jsp"; // ·Î±×ÀÎ °á°ú ÆäÀÌÁö·Î Æ÷¿öµù
-    }
+			// â­ ë¡œê·¸ì¸ ì„±ê³µí•˜ë©´ controller?cmd=passwordCheckUI ë¡œ ë¦¬ë‹¤ì´ë ‰íŠ¸
+			return "redirect:controller?cmd=passwordCheck";
+		} else {
+			return "login.html"; // ë¡œê·¸ì¸ ì‹¤íŒ¨ ì‹œ ë¡œê·¸ì¸ í¼ìœ¼ë¡œ
+		}
+	}
 }

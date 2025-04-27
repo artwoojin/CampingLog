@@ -17,6 +17,8 @@ $(document).ready(function() {
           const form = document.createElement("form");
           form.method = "POST";
           form.action = "mainUI.html"; // 이동할 페이지
+          
+          //form.action = "passwordCheck.html"; //테스트용 페이지 이동
 
           document.body.appendChild(form);
           form.submit();

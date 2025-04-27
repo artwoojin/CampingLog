@@ -15,17 +15,17 @@ body {
 	
 }
 
-.profile-box {	
-	flex-direction: column;
-	background-color: #fff;
-	padding: 40px;
-	border: 1px solid #ddd;
-	border-radius: 20px;
-	gap: 40px;
-	margin: 40px auto; /* 상하 여백 + 가운데 정렬 */
-	width: 90%; /* 블럭처럼 자연스럽게 */
-	max-width: 1000px; /* 최대 너비 제한 */
-	box-sizing: border-box;
+.profile-box {  
+  flex-direction: column;
+  background-color: #fff;
+  padding: 40px;
+  border: 1px solid #ddd; /* 회색 테두리 */
+  border-radius: 20px;
+  gap: 40px;
+  margin: 40px auto; /* 상하 여백 + 가운데 정렬 */
+  width: 90%; /* 블럭처럼 자연스럽게 */
+  max-width: 1000px; /* 최대 너비 제한 */
+  box-sizing: border-box;
 }
 
 .profile-top-section {
@@ -131,6 +131,19 @@ body {
 	width: 100%;
 	padding: 20px;
 	box-sizing: border-box;
+}
+
+.my-posts-toggle {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+#postType {
+  margin-left: 10px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 16px;
 }
 
 .post-list {
