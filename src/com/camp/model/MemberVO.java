@@ -11,6 +11,8 @@ public class MemberVO {
 	private String memberImage;
 	private int gradeId;
 	private String badgeImage;
+	private int postCount;
+	private int likeCount;
 	
 	public MemberVO() {
 		super();
@@ -85,58 +87,75 @@ public class MemberVO {
 	public String getMemberId() {
 		return memberId;
 	}
+
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
+
 	public String getPw() {
 		return pw;
 	}
+
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getNickName() {
 		return nickName;
 	}
+
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
+
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
 	public String getInDate() {
 		return inDate;
 	}
+
 	public void setInDate(String inDate) {
 		this.inDate = inDate;
 	}
+
 	public String getMemberImage() {
 		return memberImage;
 	}
+
 	public void setMemberImage(String memberImage) {
 		this.memberImage = memberImage;
 	}
+
 	public int getGradeId() {
 		return gradeId;
 	}
+
 	public void setGradeId(int gradeId) {
 		this.gradeId = gradeId;
 	}
-	
+
 	public String getBadgeImage() {
 		return badgeImage;
 	}
@@ -145,12 +164,31 @@ public class MemberVO {
 		this.badgeImage = badgeImage;
 	}
 
+	public int getPostCount() {
+		return postCount;
+	}
+
+	public void setPostCount(int postCount) {
+		this.postCount = postCount;
+	}
+
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberVO [memberId=" + memberId + ", pw=" + pw + ", email=" + email + ", nickName=" + nickName
 				+ ", name=" + name + ", phoneNumber=" + phoneNumber + ", inDate=" + inDate + ", memberImage="
-				+ memberImage + ", gradeId=" + gradeId + ", badgeImage=" + badgeImage + "]";
+				+ memberImage + ", gradeId=" + gradeId + ", badgeImage=" + badgeImage + ", postCount=" + postCount
+				+ ", likeCount=" + likeCount + "]";
 	}
+
+	
 
 	
 	
