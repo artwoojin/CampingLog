@@ -79,6 +79,20 @@
 	font-size: 12px;
 }
 
+.comment-mark{
+	margin-bottom: 14px;
+}
+
+.comment-marks {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.comment-count {
+	font-size: 20px;
+}
+
 .tags {
 	margin-bottom: 8px;
 	display: flex;
@@ -173,6 +187,13 @@
 	font-size: 18px;
 }
 
+.post-footer-set {
+	display: flex; 
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
 .comments {
 	margin-top: 40px;
 }
@@ -247,7 +268,7 @@
 .current-page {
 	font-weight: bold;
 }
-.like-btn {
+.like-btn, .bookmark-btn {
   background-color: #ff7675;
   color: white;
   border: none;
@@ -257,6 +278,7 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
+
 
 .like-btn:hover {
   background-color: #e17055;

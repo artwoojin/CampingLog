@@ -7,25 +7,31 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import com.camp.model.CommentsVO;
 import com.camp.model.DBCP;
 import com.camp.service.DetailService;
 
-public class AddCommentAction implements Action {
+public class AddBookmarkAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
 		SqlSessionFactory factory = DBCP.getSqlSessionFactory();
 		DetailService service = new DetailService(factory);
+		
+		String postIdStr = request.getParameter("postId");
+		System.out.println("postId 파라미터: " + postIdStr);
+		if (postIdStr == null) {
+		    System.out.println("postId가 전달되지 않았다. 요청 URL을 확인해라.");
+		    return "error.jsp"; // 예외 처리하거나, 일단 리턴
+		}
 		int postId = Integer.parseInt(request.getParameter("postId"));
-		String commentContents = request.getParameter("commentContents");
 		String memberId = request.getParameter("memberId");
-		boolean addCheck = service.addComment(new CommentsVO(commentContents, postId, memberId));
+		System.out.println("AddBookmarkAction postId = " + postId);
+		System.out.println("AddBookmarkAction memberId = " + memberId);
+		boolean addCheck = service.InsertBookmark(postId, "silver99");
+		
 		request.setAttribute("addCheck", addCheck);
-		System.out.println("postId: " + request.getParameter("postId"));
-		System.out.println("commentContents: " + request.getParameter("commentContents"));
-		System.out.println("memberId: " + request.getParameter("memberId"));
-		return "addComment.jsp";
+		System.out.println("addbookmarkaction"+request.getAttribute("addCheck"));
+		return "addBookmark.jsp";
 	}
 
 }

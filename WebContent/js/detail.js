@@ -66,7 +66,7 @@ $(document).ready(function () {
 
   // 좋아요 버튼 기능 (동적 이벤트 위임)
   $(document).on("click", ".like-btn", function () {
-    const memberId = $(this).data("memberid");
+    const memberId = $(this).data("memberId");
 
     if (!memberId) {
       alert("⚠️ memberId가 설정되지 않았습니다.");

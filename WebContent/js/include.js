@@ -58,8 +58,10 @@ async function initPage() {
 
     case 'detailPost.html':
       await loadScript('js/detail.js');
+      await loadScript('js/commentCount.js');
+      await loadScript('js/commentByPagination.js');
       await loadScript('js/addComment.js');
-      
+      await loadScript('js/addBookmark.js');
       break;
 
     case 'myPage.html':

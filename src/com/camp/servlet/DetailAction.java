@@ -18,8 +18,6 @@ public class DetailAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
 		int postId=Integer.parseInt(request.getParameter("postId"));
-		System.out.println(postId);
-		
 		SqlSessionFactory factory = DBCP.getSqlSessionFactory();
 		DetailService service = new DetailService(factory);
 		
@@ -27,11 +25,9 @@ public class DetailAction implements Action {
 		List<String> tagList = service.getTagsForPost(postId);
 		List<CommentsVO> commentList = service.getCommentsForPost(postId);
 		
-		
 		request.setAttribute("post", post);
 		request.setAttribute("tagList", tagList);
-		request.setAttribute("commentList", commentList);
-		
+//		request.setAttribute("commentList", commentList);
 		
 		return "detail.jsp";
 	}

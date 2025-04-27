@@ -47,6 +47,14 @@ public class PostDAO {
         return count;
     }
     
+  //댓글 수 조회
+    public int getCommentCount(SqlSession session, int postId) {
+    	int count= session.selectOne("postMapper.getCommentCount", postId);
+    	System.out.println(postId);
+    	System.out.println(count);
+    	return count;
+    }
+    
 	//게시글 카테고리 가져오기
 	public List<PostVO> getCategoryName() {
 		SqlSession conn = DBCP.getSqlSessionFactory().openSession();
@@ -119,4 +127,32 @@ public class PostDAO {
 	    return result;
 	}
 
+	public boolean InsertBookmark(SqlSession session, int postId, String memberId) {
+		boolean result = false;
+		Map<String, Object> param = new HashMap<>();
+		param.put("postId", postId);
+		param.put("memberId", memberId);
+		try{
+			if(!isAlreadyBookmarked(session, memberId, postId)){
+				session.insert("postMapper.insertBookmark", param);
+				result = true;
+			}else {
+				result = false;
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+			System.out.println("북마크 오류");
+		}
+		System.out.println("insertBookmark 결과: " + result);
+		System.out.println("postdao:"+result);
+		return result;
+	}
+	public boolean isAlreadyBookmarked(SqlSession session, String memberId, int postId) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("postId", postId);
+		param.put("memberId", memberId);
+		int count = session.selectOne("postMapper.isAlreadyBookmarked", param);
+		System.out.println("isAlreadyBookmarked() - postId: " + postId + ", memberId: " + memberId + ", count: " + count); // 디버깅용
+		return count>=1;
+	}
 }
