@@ -115,13 +115,24 @@ public class PostDAO {
 	}
 	
 	/* 실시간 좋아요 추가*/
-	public int insertLike(int postId, String memberId) {
-	    Map<String, Object> param = new HashMap<>();
+	public boolean insertLike(int postId, String memberId) {
+	    boolean result = false;
+		Map<String, Object> param = new HashMap<>();
 	    param.put("postId", postId);
 	    param.put("memberId", memberId);
 
 	    SqlSession conn = DBCP.getSqlSessionFactory().openSession();
-	    int result = conn.insert("insertLike", param);
+	    try{
+	    	if(!isAlreadyLiked(conn, memberId, postId)){
+	    		conn.insert("postMapper.insertLike", param);
+	    		result=true;
+	    	}else {
+	    		result = false;
+	    	}
+	    }catch (Exception e){
+			e.printStackTrace();
+			System.out.println("좋아요 오류");
+		}
 	    conn.commit();
 	    conn.close();
 	    return result;
@@ -155,4 +166,14 @@ public class PostDAO {
 		System.out.println("isAlreadyBookmarked() - postId: " + postId + ", memberId: " + memberId + ", count: " + count); // 디버깅용
 		return count>=1;
 	}
+	
+	public boolean isAlreadyLiked(SqlSession conn, String memberId, int postId) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("postId", postId);
+		param.put("memberId", memberId);
+		int count = conn.selectOne("postMapper.isAlreadyLiked", param);
+		System.out.println("isAlreadyLiked() - postId: " + postId + ", memberId: " + memberId + ", count: " + count); // 디버깅용
+		return count>=1;
+	}
+	
 }

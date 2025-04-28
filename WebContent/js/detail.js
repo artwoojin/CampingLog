@@ -66,7 +66,7 @@ $(document).ready(function () {
 
   // 좋아요 버튼 기능 (동적 이벤트 위임)
   $(document).on("click", ".like-btn", function () {
-    const memberId = $(this).data("memberId");
+    const memberId = "silver99";
 
     if (!memberId) {
       alert("⚠️ memberId가 설정되지 않았습니다.");
@@ -79,11 +79,10 @@ $(document).ready(function () {
       data: {
         cmd: "addHeartAction",
         postId: postId,
-        memberId: memberId
+        memberId: "silver99"
       },
       success: function (responseText) {
-        const res = typeof responseText === "string" ? JSON.parse(responseText) : responseText;
-        if (res.result === "success") {
+        if (responseText.status === "true") {
           alert("❤️ 좋아요 성공");
           const current = parseInt($(".like-count").text()) || 0;
           $(".like-count").text(current + 1);

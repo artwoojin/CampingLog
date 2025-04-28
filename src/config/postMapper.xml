@@ -188,14 +188,19 @@
 	INSERT INTO bookmark (memberId, postId, bookmarkDate)
 	VALUES (#{memberId}, #{postId}, SYSDATE)
 	</insert>
-	 <select id="getCommentCount" parameterType="int" resultType="int">
+	  <select id="getCommentCount" parameterType="int" resultType="int">
 		SELECT COUNT(*) count
 		FROM comments
 		WHERE postId=#{postId}
-	</select>
+	</select>  
 	<select id="isAlreadyBookmarked" parameterType="map" resultType="int">
 	    SELECT COUNT(*)
 	    FROM bookmark
+	    WHERE postId = #{postId} AND memberId = #{memberId}
+	</select>
+	<select id="isAlreadyLiked" parameterType="map" resultType="int">
+	    SELECT COUNT(*)
+	    FROM likes
 	    WHERE postId = #{postId} AND memberId = #{memberId}
 	</select>
 </mapper>

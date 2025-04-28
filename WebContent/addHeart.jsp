@@ -1,11 +1,5 @@
-<%@ page language="java" contentType="application/json; charset=UTF-8" pageEncoding="UTF-8" %>
-<%
-String result = (String) request.getAttribute("result");
+<%@ page language="java" contentType="application/json; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-if (result == null) {
-    result = "fail"; // 혹시라도 null이면 fail 처리
-}
-
-String json = "{\"result\":\"" + result + "\"}";
-out.print(json);
-%>
+	 {"status": "<c:out value='${addCheck}'/>"}

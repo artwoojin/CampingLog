@@ -23,7 +23,6 @@ public class DetailAction implements Action {
 		
 		PostVO post = service.getPostDetails(postId);
 		List<String> tagList = service.getTagsForPost(postId);
-		List<CommentsVO> commentList = service.getCommentsForPost(postId);
 		
 		request.setAttribute("post", post);
 		request.setAttribute("tagList", tagList);

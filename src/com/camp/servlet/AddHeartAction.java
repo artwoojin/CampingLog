@@ -13,11 +13,13 @@ public class AddHeartAction implements Action {
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
         int postId = Integer.parseInt(request.getParameter("postId"));
         String memberId = request.getParameter("memberId");
-
+        System.out.println("addheartAction: "+memberId);
+        System.out.println("addheartAction: "+postId);
         PostDAO dao = new PostDAO();
-        int result = dao.insertLike(postId, memberId);
-
-        request.setAttribute("result", result > 0 ? "success" : "fail");
+        boolean addCheck = dao.insertLike(postId, memberId);
+        System.out.println("addheartaction: "+addCheck);
+        request.setAttribute("addCheck", addCheck);
+        System.out.println("addHeartaction: "+request.getAttribute("addCheck"));
         return "addHeart.jsp";
 	}
 
