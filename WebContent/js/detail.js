@@ -1,11 +1,13 @@
 console.log("📄 detail.js 로드됨");
 
 $(document).ready(function () {
-	  const urlParams = new URLSearchParams(window.location.search);
-	  const postId = urlParams.get("postId");
-	  
+  const urlParams = new URLSearchParams(window.location.search);
+  const postId = urlParams.get("postId");
+  $("#postId").val(postId);
+
+
   if (!postId) {
-    console.error("❌ postId 없음. input[type=hidden] 확인 필요.");
+    console.error("postId 없음. input[type=hidden] 확인 필요.");
     return;
   }
 
@@ -66,7 +68,7 @@ $(document).ready(function () {
 
   // 좋아요 버튼 기능 (동적 이벤트 위임)
   $(document).on("click", ".like-btn", function () {
-    const memberId = "silver99";
+    const memberId = $(this).data("memberid");
 
     if (!memberId) {
       alert("⚠️ memberId가 설정되지 않았습니다.");
@@ -79,10 +81,11 @@ $(document).ready(function () {
       data: {
         cmd: "addHeartAction",
         postId: postId,
-        memberId: "silver99"
+        memberId: memberId
       },
       success: function (responseText) {
-        if (responseText.status === "true") {
+        const res = typeof responseText === "string" ? JSON.parse(responseText) : responseText;
+        if (res.result === "success") {
           alert("❤️ 좋아요 성공");
           const current = parseInt($(".like-count").text()) || 0;
           $(".like-count").text(current + 1);
@@ -95,4 +98,42 @@ $(document).ready(function () {
       }
     });
   });
+
+  // 수정 버튼 클릭 시 수정 페이지로 이동
+  $(document).on("click", ".edit-btn", function () {
+    location.href = `postEdit.html?postId=${postId}`;
+  });
+  
+  $(document).on("click", "#delete-btn", function () {
+	  const postId = $("#postId").val() || new URLSearchParams(location.search).get("postId");
+
+	  if (!postId) {
+	    alert("게시글 ID가 없습니다.");
+	    return;
+	  }
+
+	  if (confirm("정말 이 게시글을 삭제하시겠습니까?")) {
+	    $.ajax({
+	      url: "controller",
+	      method: "POST",
+	      data: {
+	        cmd: "deletePostAction",
+	        postId: postId
+	      },
+	      dataType: "json",
+	      success: function (res) {
+	        if (res.result === "success") {
+	          alert("게시글이 삭제되었습니다.");
+	          window.location.href = "mainUI.html"; // 삭제 후 이동할 페이지
+	        } else {
+	          alert("삭제 실패: " + (res.message || "서버 오류"));
+	        }
+	      },
+	      error: function () {
+	        alert("서버 오류로 삭제에 실패했습니다.");
+	      }
+	    });
+	  }
+	});
+
 });

@@ -6,10 +6,11 @@
 <link rel="stylesheet" href="css/detail.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/CampingLog/js/include.js"></script>
-
 </head>
 <body>
 	<div id="container">
+	<input type="hidden" id="postId">
+	
 		<div data-include="header.html"></div>
 		<div class="page-title"></div>
 
@@ -25,12 +26,12 @@
 
 				<div class="title">
 					<div class="manage-post">
-						<button id="edit-btn">수정</button>
+						<button class="edit-btn">수정</button>
 						<button id="delete-btn">삭제</button>
 					</div>
 					<div class="post-title"></div>
 					<div class="tags">
-						<div></div>
+						<div></div> 
 						<div></div>
 					</div>
 				</div>
@@ -48,14 +49,13 @@
 
 				<div class="post-footer">
 					<div class="post-footer-set">
-						<button class="like-btn">❤️</button>
-						<div class="like-count"></div>
-					</div>
-					<div class="post-footer-set">
+					<button class="like-btn" data-memberid="silver99">❤️</button>
+					<div class="like-count"></div>  
+				</div>
+				<div class="post-footer-set">
 						<button class="bookmark-btn">⭐</button>
 						<div class="bookmark-count"></div>
 					</div>
-				</div>
 			</div>
 		</div>
 
@@ -86,6 +86,6 @@
 		</div>
 		<div data-include="footer.html"></div>
 	</div>
-
+</div>
 </body>
 </html>

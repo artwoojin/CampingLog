@@ -19,7 +19,6 @@
       "${tag}"<c:if test="${!status.last}">,</c:if>
     </c:forEach>
   ],
-  
     "commentList": [
 	  <c:forEach var="c" items="${commentList}" varStatus="status">
     {

@@ -93,6 +93,10 @@
 	font-size: 20px;
 }
 
+.comment-nickName {
+	font-size: 12px;
+}
+
 .tags {
 	margin-bottom: 8px;
 	display: flex;
@@ -278,7 +282,6 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
-
 
 .like-btn:hover {
   background-color: #e17055;
