@@ -1,7 +1,11 @@
 <%@ page contentType="application/json; charset=UTF-8" %>
 <%@ page import="com.camp.model.MemberVO" %>
 <%
+	System.out.println(">> myPageInfo.jsp 도달함!");
     MemberVO member = (MemberVO) request.getAttribute("memberInfo");
+    if (member == null) {
+        System.out.println(">> memberInfo가 null입니다.");
+    }
 %>
 {
   "memberId": "<%= member.getMemberId() %>",
