@@ -35,11 +35,15 @@ public class PostDAO {
 	}
 	
 	// 카테고리별 총 게시글 수 조회 
-	public int getTotalPostCountByCategory(int categoryId) {
+	public int getTotalPostCountByCategory(int categoryId, String tagList) {
 		try (SqlSession conn = DBCP.getSqlSessionFactory().openSession()) {
-			return conn.selectOne("postMapper.getTotalPostCountByCategory", categoryId);
+			Map<Object, Object> map = new HashMap<>();
+			map.put("categoryId", categoryId);
+			map.put("tagList",     tagList != null ? tagList : "");
+			return conn.selectOne("postMapper.getTotalPostCountByCategory", map);
 		}
 	}
+
 	
     // 전체 게시글 수 가져오기
     public int getTotalPostCount() {
