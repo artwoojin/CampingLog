@@ -55,6 +55,20 @@ public class MemberDAO {
 			session.close();
 		}
 	}
+	
+	public boolean isDuplicateEmailExcludingSelf(String email, String memberId) {
+	    SqlSession session = DBCP.getSqlSessionFactory().openSession();
+	    try {
+	        Map<String, String> param = new HashMap<>();
+	        param.put("email", email);
+	        param.put("memberId", memberId);
+	        int count = session.selectOne("memberMapper.isDuplicateEmailExcludingSelf", param);
+	        return count > 0;
+	    } finally {
+	        session.close();
+	    }
+	}
+
 
 	// 媛��엯�떆 �땳�꽕�엫 以묐났 �솗�씤
 	public boolean isDuplicateNickName(String nickName) {
@@ -66,6 +80,20 @@ public class MemberDAO {
 			session.close();
 		}
 	}
+	
+	public boolean isDuplicateNickNameExcludingSelf(String nickName, String memberId) {
+	    SqlSession session = DBCP.getSqlSessionFactory().openSession();
+	    try {
+	        Map<String, String> param = new HashMap<>();
+	        param.put("nickname", nickName);
+	        param.put("memberId", memberId);
+	        int count = session.selectOne("memberMapper.isDuplicateNickNameExcludingSelf", param);
+	        return count > 0;
+	    } finally {
+	        session.close();
+	    }
+	}
+
 
 	public List<MemberVO> getMembers(){
 		List<MemberVO> list = null;
@@ -345,12 +373,23 @@ public class MemberDAO {
 	    boolean result = false;
 
 	    try {
+	        // 디버깅 로그 1: 전달받은 입력 값 확인
+	        System.out.println("[deleteMember] 입력 memberId: [" + memberId + "]");
+	        System.out.println(" [deleteMember] 입력 pw: [" + pw + "]");
+
 	        Map<String, String> param = new HashMap<>();
 	        param.put("memberId", memberId);
-	        param.put("pw", pw);
+	        param.put("pw", pw.trim());
+
+	        // 디버깅 로그 2: Mapper 실행 직전 로그
+	        System.out.println(" [deleteMember] MyBatis param: " + param);
 
 	        int deleted = session.delete("memberMapper.deleteMember", param);
 	        session.commit();
+
+	        // 디버깅 로그 3: 결과 확인
+	        System.out.println("[deleteMember] 삭제된 행 수: " + deleted);
+
 	        result = (deleted == 1);
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -361,14 +400,41 @@ public class MemberDAO {
 
 	    return result;
 	}
-
 	
+	public String getPasswordById(String memberId) {
+	    SqlSession session = DBCP.getSqlSessionFactory().openSession();
+	    String pw = null;
+	    try {
+	        pw = session.selectOne("memberMapper.getPasswordById", memberId);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        session.close();
+	    }
+	    return pw;
+	}
 	
+	public boolean updatePassword(String memberId, String newPw) {
+	    SqlSession session = DBCP.getSqlSessionFactory().openSession();
+	    boolean result = false;
 
+	    try {
+	        Map<String, Object> param = new HashMap<>();
+	        param.put("memberId", memberId);
+	        param.put("pw", newPw);
 
+	        int rows = session.update("memberMapper.updatePassword", param);
+	        session.commit();
+	        result = rows > 0;
+	    } catch (Exception e) {
+	        session.rollback();
+	        e.printStackTrace();
+	    } finally {
+	        session.close();
+	    }
 
-
-
+	    return result;
+	}
 
 
 }
