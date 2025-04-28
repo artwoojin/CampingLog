@@ -172,20 +172,59 @@
 		EMAIL = #{email},
 		NICKNAME = #{nickName},
 		NAME = #{name},
-		PHONENUMBER = #{phoneNumber}
+		PHONENUMBER =
+		#{phoneNumber}
 		WHERE MEMBERID = #{memberId}
 	</update>
 
 	<delete id="deleteMember" parameterType="map">
 		DELETE FROM member
-		WHERE memberId = #{memberId} AND pw = #{pw}
+		WHERE
+		memberId = #{memberId} AND pw = #{pw}
 	</delete>
-	
-	<select id="getMemberById" parameterType="String" resultType="com.camp.model.MemberVO">
-    SELECT memberId, email, nickName, name, phoneNumber, inDate, memberImage, gradeId
-    FROM member
-    WHERE memberId = #{memberId}
-</select>
-	
+
+
+	<select id="getMemberById" parameterType="String"
+		resultType="com.camp.model.MemberVO">
+		SELECT memberId, email, nickName, name, phoneNumber,
+		inDate, memberImage,
+		gradeId
+		FROM member
+		WHERE memberId = #{memberId}
+	</select>
+
+
+	<select id="isDuplicateEmailExcludingSelf" parameterType="map"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM member
+		WHERE email = #{email}
+		AND
+		memberId != #{memberId}
+	</select>
+
+	<select id="isDuplicateNickNameExcludingSelf" parameterType="map"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM member
+		WHERE nickName = #{nickName}
+		AND
+		memberId != #{memberId}
+	</select>
+
+	<select id="getPasswordById" resultType="String">
+		SELECT pw FROM member
+		WHERE memberId = #{memberId}
+	</select>
+
+	<update id="updatePassword" parameterType="map">
+		UPDATE member
+		SET pw = #{pw}
+		WHERE memberId = #{memberId}
+	</update>
+
+
+
+
 
 </mapper>
