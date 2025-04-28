@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="postMapper">
-	<select id="getTotalPostCount" resultType="int">
-		SELECT COUNT(*) FROM
-		POST
+	<!-- 전체 게시글 수 -->
+	<select id="getTotalPostCount" parameterType="map" resultType="int">
+		SELECT COUNT(DISTINCT p.POSTID)
+		FROM POST p
+		<where>
+			<!-- searchTerm이 있으면 제목·내용으로 필터링 -->
+			<if test="searchTerm != null and searchTerm.trim() != ''">
+				AND (
+				p.POSTTITLE LIKE '%' || #{searchTerm} || '%'
+				OR p.POSTCONTENTS LIKE '%' || #{searchTerm} || '%'
+				)
+			</if>
+		</where>
 	</select>
 
 	<select id="getPostsByPage" resultType="com.camp.model.PostVO">
