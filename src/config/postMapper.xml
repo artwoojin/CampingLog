@@ -16,47 +16,65 @@
 		</where>
 	</select>
 
-	<select id="getPostsByPage" resultType="com.camp.model.PostVO">
+	<!-- 전체 페이징 + 검색어 조건 -->
+	<select id="getPostsByPage" parameterType="map"
+		resultType="com.camp.model.PostVO">
 		SELECT * FROM (
 		SELECT
-		ROWNUM rn,
-		p.POSTID,
-		p.POSTTITLE,
-		p.POSTCONTENTS,
-		p.POSTIMAGE,
-		p.POSTDATE,
-		p.MEMBERID,
-		p.CATEGORYID,
-		c.CATEGORYNAME,
-		NVL(l.LIKECOUNT, 0) AS
-		LIKECOUNT,
-		NVL(t.TAGLIST, '') AS TAGLIST
+		ROWNUM AS rn,
+		q.*
 		FROM (
-		SELECT * FROM POST ORDER
-		BY POSTID DESC
-		) p
-		LEFT JOIN (
-		SELECT POSTID, COUNT(*) AS LIKECOUNT
-		FROM
-		LIKES
-		GROUP BY POSTID
-		) l ON p.POSTID = l.POSTID
+		SELECT
+		p.POSTID AS postId,
+		p.POSTTITLE AS postTitle,
+		p.POSTCONTENTS AS postContents,
+		p.POSTIMAGE AS
+		postImage,
+		p.POSTDATE AS postDate,
+		p.MEMBERID AS memberId,
+		p.CATEGORYID
+		AS categoryId,
+		c.CATEGORYNAME AS categoryName,
+		NVL(l.LIKECOUNT, 0) AS
+		likeCount,
+		NVL(t.TAGLIST, '') AS tagList
+		FROM POST p
 		LEFT JOIN (
 		SELECT
-		pt.POSTID, LISTAGG(t.TAGNAME, ', ') WITHIN GROUP (ORDER BY t.TAGNAME)
-		AS TAGLIST
+		POSTID, COUNT(*) AS LIKECOUNT
+		FROM LIKES
+		GROUP BY POSTID
+		) l ON p.POSTID
+		= l.POSTID
+		LEFT JOIN (
+		SELECT
+		pt.POSTID,
+		LISTAGG(t.TAGNAME, ', ')
+		WITHIN
+		GROUP (ORDER BY t.TAGNAME) AS TAGLIST
 		FROM POSTTAG pt
-		JOIN TAG t ON pt.TAGID = t.TAGID
-		GROUP BY
-		pt.POSTID
+		JOIN TAG t ON
+		pt.TAGID = t.TAGID
+		GROUP BY pt.POSTID
 		) t ON p.POSTID = t.POSTID
-		LEFT JOIN CATEGORY c ON
-		p.CATEGORYID = c.CATEGORYID
-		WHERE ROWNUM &lt;=
-		#{end}
+		LEFT
+		JOIN CATEGORY c ON p.CATEGORYID = c.CATEGORYID
+
+		<where>
+			<if test="searchTerm != null and searchTerm.trim() != ''">
+				AND (
+				p.POSTTITLE LIKE '%' || #{searchTerm} || '%'
+				OR
+				p.POSTCONTENTS LIKE '%' || #{searchTerm} || '%'
+				)
+			</if>
+		</where>
+
+		ORDER BY p.POSTID DESC
+		) q
+		WHERE ROWNUM &lt;= #{end}
 		)
-		WHERE rn
-		&gt;=
+		WHERE rn &gt;=
 		#{start}
 	</select>
 
