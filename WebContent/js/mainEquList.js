@@ -31,7 +31,6 @@ $(document).ready(function () {
       const swiperEl = document.querySelector(".downList swiper-container");
       if (swiperEl) {
         swiperEl.removeAttribute("navigation"); // 혹시 중복 방지
-        swiperEl.setAttribute("navigation", "true"); // 버튼 보이게 설정
       }
     },
     error: function () {
