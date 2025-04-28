@@ -41,7 +41,7 @@ public class AddProfilePhotoAction implements Action {
 
             //  로그인된 사용자 정보에서 memberId 꺼내기
             HttpSession session = request.getSession();
-            MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
+            MemberVO loginMember = (MemberVO) session.getAttribute("loginUser");
 
             if (loginMember == null) {
                 System.out.println("로그인 세션 없음");
@@ -52,8 +52,6 @@ public class AddProfilePhotoAction implements Action {
 
             memberId = loginMember.getMemberId();
 
-            //  기존 하드코딩 주석 처리
-            // String memberId = "user01";
 
             MemberDAO dao = new MemberDAO();
             boolean result = dao.updateProfileImage(memberId, fileName);

@@ -16,9 +16,18 @@ public class AddBookmarkAction implements Action {
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
 		SqlSessionFactory factory = DBCP.getSqlSessionFactory();
 		DetailService service = new DetailService(factory);
+		
+		String postIdStr = request.getParameter("postId");
+		System.out.println("postId 파라미터: " + postIdStr);
+		if (postIdStr == null) {
+		    System.out.println("postId가 전달되지 않았다. 요청 URL을 확인해라.");
+		    return "error.jsp"; // 예외 처리하거나, 일단 리턴
+		}
 		int postId = Integer.parseInt(request.getParameter("postId"));
 		String memberId = request.getParameter("memberId");
-		boolean addCheck = service.InsertBookmark(postId, memberId);
+		System.out.println("AddBookmarkAction postId = " + postId);
+		System.out.println("AddBookmarkAction memberId = " + memberId);
+		boolean addCheck = service.InsertBookmark(postId, "silver99");
 		
 		request.setAttribute("addCheck", addCheck);
 		System.out.println("addbookmarkaction"+request.getAttribute("addCheck"));

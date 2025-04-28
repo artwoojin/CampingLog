@@ -11,23 +11,21 @@ import com.camp.model.PostVO;
 public class PostDAO {
 	
 	// 전체 게시글 페이징 조회
-	public List<PostVO> getPostPage(int start, int end, String searchTerm) {
-		SqlSession conn = DBCP.getSqlSessionFactory().openSession();
-		Map<Object, Object> map = new HashMap<>();
-		map.put("start", start);
-		map.put("end", end);
-		map.put("searchTerm", searchTerm);
-		List<PostVO> list = conn.selectList("postMapper.getPostsByPage", map);
-		conn.close();
-		return list;
-	}
+	public List<PostVO> getPostPage(int start, int end) {
+        SqlSession conn = DBCP.getSqlSessionFactory().openSession();
+        Map<String, Integer> map = new HashMap<>();
+        map.put("start", start);
+        map.put("end", end);
+        List<PostVO> list = conn.selectList("postMapper.getPostsByPage", map);
+        conn.close();
+        return list;
+    }
 	
 	// 카테고리별 페이징 조회 
-	public List<PostVO> getPostPageByCategory(int categoryId, String tagList , int start, int end) {
+	public List<PostVO> getPostPageByCategory(int categoryId, int start, int end) {
 		try (SqlSession conn = DBCP.getSqlSessionFactory().openSession()) {
-			Map<Object, Object> map = new HashMap<>();
+			Map<String, Integer> map = new HashMap<>();
 			map.put("categoryId", categoryId);
-			map.put("tagList", tagList);
 			map.put("start",      start);
 			map.put("end",        end);
 			return conn.selectList("postMapper.getPostsByCategoryPage", map);
@@ -35,26 +33,19 @@ public class PostDAO {
 	}
 	
 	// 카테고리별 총 게시글 수 조회 
-	public int getTotalPostCountByCategory(int categoryId, String tagList) {
+	public int getTotalPostCountByCategory(int categoryId) {
 		try (SqlSession conn = DBCP.getSqlSessionFactory().openSession()) {
-			Map<Object, Object> map = new HashMap<>();
-			map.put("categoryId", categoryId);
-			map.put("tagList",     tagList != null ? tagList : "");
-			return conn.selectOne("postMapper.getTotalPostCountByCategory", map);
+			return conn.selectOne("postMapper.getTotalPostCountByCategory", categoryId);
 		}
 	}
-
 	
-	// 전체 게시글 수 가져오기
-	public int getTotalPostCount(String searchTerm) {
-		try (SqlSession conn = DBCP.getSqlSessionFactory().openSession()) {
-			Map<String,Object> params = new HashMap<>();
-			// 검색어가 null 이거나 빈 문자열이면, XML에서는 WHERE 절이 제거되어 전체 카운트
-			params.put("searchTerm", searchTerm != null ? searchTerm.trim() : "");
-			return conn.selectOne("postMapper.getTotalPostCount", params);
-		}
-	}
-    
+    // 전체 게시글 수 가져오기
+    public int getTotalPostCount() {
+        SqlSession conn = DBCP.getSqlSessionFactory().openSession();
+        int count = conn.selectOne("postMapper.getTotalPostCount");
+        conn.close();
+        return count;
+    }
   //댓글 수 조회
     public int getCommentCount(SqlSession session, int postId) {
     	int count= session.selectOne("postMapper.getCommentCount", postId);
@@ -145,7 +136,7 @@ public class PostDAO {
 	    conn.close();
 	    return result;
 	}
-
+	
 	public boolean InsertBookmark(SqlSession session, int postId, String memberId) {
 		boolean result = false;
 		Map<String, Object> param = new HashMap<>();
@@ -174,7 +165,6 @@ public class PostDAO {
 		System.out.println("isAlreadyBookmarked() - postId: " + postId + ", memberId: " + memberId + ", count: " + count); // 디버깅용
 		return count>=1;
 	}
-	
 	public boolean isAlreadyLiked(SqlSession conn, String memberId, int postId) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("postId", postId);
@@ -183,5 +173,5 @@ public class PostDAO {
 		System.out.println("isAlreadyLiked() - postId: " + postId + ", memberId: " + memberId + ", count: " + count); // 디버깅용
 		return count>=1;
 	}
-	
+
 }

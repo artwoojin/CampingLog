@@ -1,7 +1,6 @@
 package com.camp.servlet;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,11 +11,10 @@ public class CheckDuplicateAction implements Action {
     public String execute(HttpServletRequest request) throws ServletException, IOException {
         String field = request.getParameter("field"); // id, email, nickname
         String value = request.getParameter("value");
-        
-        // 파라미터 유효성 검사
+
         if (field == null || value == null || value.trim().isEmpty()) {
             request.setAttribute("error", "Invalid parameters");
-            return "signUpResult.jsp";
+            return "checkDuplicateResult.jsp"; // 오류 시에도 JSON 응답 유지
         }
 
         boolean isDuplicate = false;
@@ -35,16 +33,16 @@ public class CheckDuplicateAction implements Action {
                     break;
                 default:
                     request.setAttribute("error", "Invalid field type");
-                    return "signUpResult.jsp";
+                    return "checkDuplicateResult.jsp";
             }
-            
+
             request.setAttribute("isDuplicate", isDuplicate);
-            
+
         } catch (Exception e) {
-            e.printStackTrace(); // 로그에 에러 출력
+            e.printStackTrace();
             request.setAttribute("error", "Database error occurred");
         }
-        
-        return "signUpResult.jsp";
+
+        return "checkDuplicateResult.jsp";
     }
-} 
+}

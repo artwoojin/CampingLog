@@ -15,7 +15,6 @@ public class PostVO {
 	 private int bookmarkCount;
 	 private String categoryName;
 	 private int commentCount;
-	 private String tagList;
 	
 	public PostVO(){}
 	
@@ -182,21 +181,13 @@ public class PostVO {
 		this.commentCount = commentCount;
 	}
 
-	public String getTagList() {
-		return tagList;
-	}
-
-	public void setTagList(String tagList) {
-		this.tagList= tagList;
-	}
-
 	@Override
 	public String toString() {
 		return "PostVO [postId=" + postId + ", postTitle=" + postTitle + ", postContents=" + postContents
 				+ ", postImage=" + postImage + ", postDate=" + postDate + ", memberId=" + memberId + ", categoryId="
 				+ categoryId + ", nickName=" + nickName + ", memberImage=" + memberImage + ", badgeImage=" + badgeImage
 				+ ", likeCount=" + likeCount + ", bookmarkCount=" + bookmarkCount + ", categoryName=" + categoryName
-				+ ", commentCount=" + commentCount + ", tagList=" + tagList + "]";
+				+ ", commentCount=" + commentCount + "]";
 	}
 }
 

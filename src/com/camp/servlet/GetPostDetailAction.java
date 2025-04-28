@@ -10,20 +10,29 @@ import com.camp.service.PostService;
 
 public class GetPostDetailAction implements Action {
 
-    @Override
-    public String execute(HttpServletRequest request) throws ServletException, IOException {
+	@Override
+	public String execute(HttpServletRequest request) throws ServletException, IOException {
+		
+		System.out.println("GetPostDetailAction 진입 성공");
 
-        int postId;
-        if (request.getParameter("postId") != null) {
-            postId = Integer.parseInt(request.getParameter("postId"));
-        } else {
-            postId = 45; // �׽�Ʈ�� �⺻��
-        }
+		if (request.getParameter("postId") == null) {
+			System.out.println("postId 파라미터 없음");
+			request.setAttribute("error", "Invalid request: postId is required.");
+			return null; // 또는 에러 페이지 경로
+		}
 
-        PostService service = new PostService();
-        Map<String, Object> detail = service.getPostDetail(postId);
+		int postId = Integer.parseInt(request.getParameter("postId"));
+		System.out.println("postId 파라미터: " + postId);
 
-        request.setAttribute("result", detail);
-        return "getPostDetail.jsp"; 
-    }
+
+		PostService service = new PostService();
+		Map<String, Object> detail = service.getPostDetail(postId);
+		System.out.println("service.getPostDetail() 결과: " + detail);
+
+		
+
+		request.setAttribute("result", detail);
+		return "getPostDetail.jsp";
+
+	}
 }

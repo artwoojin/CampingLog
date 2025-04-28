@@ -14,13 +14,11 @@ public class DeleteMemberAction implements Action {
     public String execute(HttpServletRequest request) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        // 기존 세션 체크 (실제 사용 시)
-        // MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
-
-        // 테스트용 세션 객체 주입
-        MemberVO loginMember = new MemberVO();
-        loginMember.setMemberId("user01"); // 테스트용 ID
-        session.setAttribute("loginMember", loginMember);
+        MemberVO loginMember = (MemberVO) session.getAttribute("loginUser");
+        if (loginMember == null) {
+            request.setAttribute("result", "unauthorized");
+            return "deleteMember.jsp";
+        }
 
         String inputPw = request.getParameter("pw");
         String memberId = loginMember.getMemberId();

@@ -22,7 +22,7 @@ public class SignUpAction implements Action {
 
         MemberDAO dao = new MemberDAO();
 
-        //ë°±ì—”ë“œì—ì„œ ì¤‘ë³µ ì²´í¬ ì¶”ê°€
+        //¹é¿£µå¿¡¼­ Áßº¹ Ã¼Å© Ãß°¡
         if (dao.isDuplicateId(id) || dao.isDuplicateEmail(email) || dao.isDuplicateNickName(nickName)) {
             request.setAttribute("result", "duplicate");
             return "signUpResult.jsp";
@@ -35,7 +35,7 @@ public class SignUpAction implements Action {
         vo.setNickName(nickName);
         vo.setName(name);
         vo.setPhoneNumber(phoneNumber);
-        vo.setGradeId(1); // ê¸°ë³¸ ë“±ê¸‰
+        vo.setGradeId(1); // ±âº» µî±Ş
 
         boolean isAdded = dao.addMember(vo);
 

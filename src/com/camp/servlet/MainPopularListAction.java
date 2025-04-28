@@ -15,11 +15,11 @@ public class MainPopularListAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
-		// 인기상승캠핑조회 홈화면 -> 상위게시글3개조회
+	
 	    MainUIDAO dao = new MainUIDAO();
 	    Collection<PostVO> list = dao.getPopularCampingList(3);
-        request.setAttribute("popularList", list);  // JSTL로 넘어감
-        return "mainPopularList.jsp";  // FrontController가 포워딩
+        request.setAttribute("popularList", list);  
+        return "mainPopularList.jsp";  
 	}
 
 }

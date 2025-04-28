@@ -18,8 +18,8 @@ public class YesterdayRankListAction implements Action {
         MainUIDAO dao = new MainUIDAO();
 
         // 어제 날짜를 구해서 (yyyy-mm-dd 형식)
-        //String date = "2025-04-21"; 
-        String date = request.getParameter("date");
+        String date = "2025-04-21"; 
+        //String date = request.getParameter("date");
 
         if (date == null || date.isEmpty()) {
             LocalDate yesterday = LocalDate.now().minusDays(1);

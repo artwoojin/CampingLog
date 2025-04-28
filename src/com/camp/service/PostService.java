@@ -51,6 +51,8 @@ public class PostService {
 			TagDAO tagDao = new TagDAO();
 
 			PostVO post = postDao.getPostById(session, postId);
+			System.out.println("post: " + post);
+
 			result.put("post", post);
 
 

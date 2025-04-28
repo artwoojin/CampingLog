@@ -12,32 +12,32 @@ import com.camp.model.MemberVO;
 public class GetMyInfoAction implements Action {
     @Override
     public String execute(HttpServletRequest request) throws ServletException, IOException {
-        System.out.println(" GetMyInfoAction ÁøÀÔ");
+        System.out.println(" GetMyInfoAction ì§„ì…");
 
         HttpSession session = request.getSession();
-        MemberVO loginMember = (MemberVO) session.getAttribute("loginUser"); //  ·Î±×ÀÎ ½Ã ÀúÀåÇÑ key »ç¿ë
+        MemberVO loginMember = (MemberVO) session.getAttribute("loginUser"); //  ë¡œê·¸ì¸ ì‹œ ì €ì¥í•œ key ì‚¬ìš©
 
         if (loginMember == null) {
-            System.out.println(" ¼¼¼Ç¿¡ loginUser ¾øÀ½ ¡æ ·Î±×ÀÎ ¾È µÈ »óÅÂ");
-            request.setAttribute("error", "·Î±×ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.");
+            System.out.println(" ì„¸ì…˜ì— loginUser ì—†ìŒ â†’ ë¡œê·¸ì¸ ì•ˆ ëœ ìƒíƒœ");
+            request.setAttribute("error", "ë¡œê·¸ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.");
             return "login.html"; 
         }
 
-        System.out.println(" ¼¼¼Ç¿¡¼­ °¡Á®¿Â ·Î±×ÀÎ ID: " + loginMember.getMemberId());
+        System.out.println(" ì„¸ì…˜ì—ì„œ ê°€ì ¸ì˜¨ ë¡œê·¸ì¸ ID: " + loginMember.getMemberId());
 
-        // DB¿¡¼­ ÃÖ½Å Á¤º¸ °¡Á®¿À±â
+        // DBì—ì„œ ìµœì‹  ì •ë³´ ê°€ì ¸ì˜¤ê¸°
         MemberDAO dao = new MemberDAO();
         MemberVO updatedInfo = dao.getMyInfo(loginMember.getMemberId());
 
         if (updatedInfo == null) {
-            System.out.println("DAO¿¡¼­ »ç¿ëÀÚ Á¤º¸ °¡Á®¿À±â ½ÇÆĞ");
+            System.out.println("DAOì—ì„œ ì‚¬ìš©ì ì •ë³´ ê°€ì ¸ì˜¤ê¸° ì‹¤íŒ¨");
         } else {
-            System.out.println("DAO¿¡¼­ °¡Á®¿Â ÃÖ½Å »ç¿ëÀÚ Á¤º¸: " + updatedInfo);
+            System.out.println("DAOì—ì„œ ê°€ì ¸ì˜¨ ìµœì‹  ì‚¬ìš©ì ì •ë³´: " + updatedInfo);
         }
 
-        // ¹îÁö ÀÌ¹ÌÁö °è»ê
+        // ë±ƒì§€ ì´ë¯¸ì§€ ê³„ì‚°
         int likeCount = updatedInfo.getLikeCount();
-        System.out.println(" ÁÁ¾Æ¿ä ¼ö: " + likeCount);
+        System.out.println(" ì¢‹ì•„ìš” ìˆ˜: " + likeCount);
 
         String badge;
         if (likeCount >= 100) badge = "vipbadge.png";
@@ -46,13 +46,13 @@ public class GetMyInfoAction implements Action {
         else badge = "familybadge.png";
 
         updatedInfo.setBadgeImage(badge);
-        System.out.println(" Àû¿ëµÈ ¹îÁö ÀÌ¹ÌÁö: " + badge);
+        System.out.println(" ì ìš©ëœ ë±ƒì§€ ì´ë¯¸ì§€: " + badge);
 
-        // ¼¼¼Ç°ú request ÃÖ½ÅÈ­
-        session.setAttribute("loginUser", updatedInfo); // ´Ù½Ã ÃÖ½Å Á¤º¸·Î °»½Å
+        // ì„¸ì…˜ê³¼ request ìµœì‹ í™”
+        session.setAttribute("loginUser", updatedInfo); // ë‹¤ì‹œ ìµœì‹  ì •ë³´ë¡œ ê°±ì‹ 
         request.setAttribute("memberInfo", updatedInfo);
 
-        System.out.println(" request¿Í session¿¡ ÃÖ½Å »ç¿ëÀÚ Á¤º¸ ÀúÀå ¿Ï·á");
+        System.out.println(" requestì™€ sessionì— ìµœì‹  ì‚¬ìš©ì ì •ë³´ ì €ì¥ ì™„ë£Œ");
         return "myPageInfo.jsp"; 
     }
 }

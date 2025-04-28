@@ -58,8 +58,6 @@ public class DetailService {
     		return postDAO.getCommentCount(session, postId);
     	}
     }
-    
-
 
     public boolean addComment(CommentsVO comment) {
         boolean result = false;
