@@ -69,7 +69,7 @@
 	background-color: #fff;
 	border-radius: 12px;
 	padding: 16px;
-	box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.1),0 4px 8px rgba(0,0,0,0.08);
 	box-sizing: border-box;
 }
 
@@ -88,8 +88,21 @@
 	font-size: 1rem;
 	font-weight: 600;
 	margin-bottom: 0.5rem;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }
-
+.campTitleTop {
+    font-size: 1.rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 650px; /* 🔥 TopCard 크기에 딱 맞춤 */
+    min-width: 0;
+}
 .campData {
 	display: flex;
 	justify-content: space-between;
@@ -109,18 +122,19 @@
 }
 
 .downList {
-	display: flex;
-	/*justify-content: space-between;*/
-	gap: 16px;
+	width: 100%;
+	padding: 10px 0;
+	overflow: hidden; 
+	display: block; 
 }
 
 .downCard {
-	flex: 0 0 32%;
+	width: 100%;
 	padding: 10px;
 	height: 100%;
 	border-radius: 12px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-	min-width: 220px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1),0 4px 8px rgba(0,0,0,0.08);
+	background: #fff;
 }
 
 .downtop {
@@ -139,7 +153,17 @@
 	font-weight: bold;
 	padding: 0.75rem 1rem 0.25rem;
 }
-
+.campTitleGear {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 🔥 두 줄까지만 */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    max-height: calc(1.4em * 2);
+    flex: 1 1 auto; 
+    min-width: 0;     
+}
 .downCard .campData {
 	padding: 0 1rem 1rem;
 	font-size: 0.875rem;
@@ -170,7 +194,7 @@
 	background: #fff;
 	border-radius: 12px;
 	padding: 1rem;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1),0 4px 8px rgba(0,0,0,0.08);
 }
 
 .downAd {
@@ -201,6 +225,10 @@
 .rankBadge img {
 	width: 32px;
 	height: 32px;
+	vertical-align: baseline; 
+	margin-left: 4px; 
+	opacity: 0.9;       
+	animation: sparkle 2s infinite ease-in-out; /* 반짝이는 효과 추가 */	
 }
 
 .rankInfo {
@@ -221,6 +249,7 @@
 }
 
 .adImg {
+	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -231,7 +260,22 @@
 	overflow: hidden;
 	margin: 0 auto; /* 가운데 정렬 */
 }
-
+.adImg::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: -75%;
+	width: 50%;
+	height: 100%;
+	background: linear-gradient(
+		120deg, 
+		rgba(255, 255, 255, 0) 0%, 
+		rgba(255, 255, 255, 0.3) 50%, 
+		rgba(255, 255, 255, 0) 100%
+	);
+	transform: skewX(-25deg);
+	animation: shine 7s infinite;
+}
 @media ( max-width : 768px) {
 	#section {
 		grid-template-columns: 1fr;
@@ -239,7 +283,72 @@
 	.topList {
 		flex-direction: column;
 	}
-	.downList {
-		flex-direction: row;
+}
+@keyframes sparkle {
+	0%, 100% {
+		filter: brightness(1);
+	}
+	50% {
+		filter: brightness(1.8);
 	}
 }
+@keyframes shine {
+	0% {
+		left: -75%;
+	}
+	100% {
+		left: 125%;
+	}
+}
+
+/* swiper-container 스타일 */
+swiper-container {
+	width: 942px;
+	height: 100%;
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+/* swiper-slide 스타일 */
+swiper-slide {
+	width: calc(100% / 3);
+	flex-shrink: 0;
+	display: block;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	box-sizing: border-box;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1),0 4px 8px rgba(0,0,0,0.08);
+}
+
+/* navigation 버튼 스타일 */
+
+.swiper-button-prev {
+  left: -50px;
+}
+.swiper-button-next {
+  right: -50px;
+}
+
+/* WebComponent Swiper 버튼 스타일 수정 */
+swiper-container::part(button-prev),
+swiper-container::part(button-next) {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  color: #d47a2c;
+  transition: background-color 0.3s ease;
+}
+
+/* hover 효과 */
+swiper-container::part(button-prev):hover,
+swiper-container::part(button-next):hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  background: white;
+}
+

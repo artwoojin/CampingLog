@@ -1,32 +1,41 @@
 console.log("mainEquList.js 로드됨");
 
 $(document).ready(function () {
-	$.ajax({
-		url: "controller",
-		method: "GET",
-		data: { cmd: "mainEquListAction" },
-		success: function (responseText) {
-			const data = typeof responseText === "string" ? JSON.parse(responseText) : responseText;
+  $.ajax({
+    url: "controller",
+    method: "GET",
+    data: { cmd: "mainEquListAction" },
+    success: function (responseText) {
+      const data = typeof responseText === "string" ? JSON.parse(responseText) : responseText;
 
-			let html = "";
-			for (let i = 0; i < data.length; i++) {
-				const post = data[i];
-				html += ''
-					+ '<div class="downCard">'
-					+ '  <div class="downtop">'
-					+ '    <div class="campTitle"><p>' + post.postTitle + '</p></div>'
-					+ '    <div class="downImg"><img src="img/' + post.postImage + '" alt="장비리뷰' + (i + 1) + '"></div>'
-					+ '  </div>'
-					+ '  <div class="campData">'
-					+ '    <div class="campUser"><p>' + post.nickName + '</p></div>'
-					+ '    <div class="loveDate"><p>좋아요</p><p>' + post.likeCount + '</p><p>' + post.postDate + '</p></div>'
-					+ '  </div>'
-					+ '</div>';
-			}
-			$(".downList").html(html);
-		},
-		error: function () {
-			console.error("장비 리뷰 불러오기 실패");
-		}
-	});
+      let html = "";
+      for (let i = 0; i < data.length; i++) {
+        const post = data[i];
+        html += ''
+          + '<swiper-slide>' //swiper-slide로 감싸기 시작
+          + '  <div class="downCard">'
+          + '    <div class="downtop">'
+          + '  <div class="campTitleTop" title="' + post.postTitle + '">' + post.postTitle + '</div>'
+          + '      <div class="downImg"><img src="img/' + post.postImage + '" alt="장비리뷰' + (i + 1) + '"></div>'
+          + '    </div>'
+          + '    <div class="campData">'
+          + '      <div class="campUser"><p>' + post.nickName + '</p></div>'
+          + '      <div class="loveDate"><p>좋아요</p><p>' + post.likeCount + '</p><p>' + post.postDate + '</p></div>'
+          + '    </div>'
+          + '  </div>'
+          + '</swiper-slide>'; //swiper-slide 끝
+      }
+
+      // downList 안의 swiper-container에 슬라이드 넣기
+      $(".downList").find("swiper-container").html(html);
+      const swiperEl = document.querySelector(".downList swiper-container");
+      if (swiperEl) {
+        swiperEl.removeAttribute("navigation"); // 혹시 중복 방지
+        swiperEl.setAttribute("navigation", "true"); // 버튼 보이게 설정
+      }
+    },
+    error: function () {
+      console.error("장비 리뷰 불러오기 실패");
+    }
+  });
 });

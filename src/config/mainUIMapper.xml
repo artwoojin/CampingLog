@@ -47,7 +47,7 @@
         GROUP BY p.postId, p.postTitle, p.postImage, p.postDate, m.nickName
         ORDER BY likeCount DESC
       ) inner_result
-      WHERE ROWNUM <= 3
+      WHERE ROWNUM <= 6
     )
   ]]>
 	</select>
