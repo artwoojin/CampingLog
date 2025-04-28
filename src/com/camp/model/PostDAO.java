@@ -23,10 +23,11 @@ public class PostDAO {
 	}
 	
 	// 카테고리별 페이징 조회 
-	public List<PostVO> getPostPageByCategory(int categoryId, int start, int end) {
+	public List<PostVO> getPostPageByCategory(int categoryId, String tagList , int start, int end) {
 		try (SqlSession conn = DBCP.getSqlSessionFactory().openSession()) {
-			Map<String, Integer> map = new HashMap<>();
+			Map<Object, Object> map = new HashMap<>();
 			map.put("categoryId", categoryId);
+			map.put("tagList", tagList);
 			map.put("start",      start);
 			map.put("end",        end);
 			return conn.selectList("postMapper.getPostsByCategoryPage", map);
