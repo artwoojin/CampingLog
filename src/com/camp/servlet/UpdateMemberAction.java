@@ -13,43 +13,48 @@ public class UpdateMemberAction implements Action {
 
     @Override
     public String execute(HttpServletRequest request) throws ServletException, IOException {
-        // 세션에서 로그인한 사용자 정보 가져오기
+        request.setCharacterEncoding("UTF-8");
+
         HttpSession session = request.getSession();
-       
-        // 테스트용 세션 주입
-        if (session.getAttribute("loginMember") == null) {
-            MemberVO testUser = new MemberVO();
-            testUser.setMemberId("user01"); // 실제 DB에 존재하는 ID
-            session.setAttribute("loginMember", testUser);
-        }
-        MemberVO loginMember = (MemberVO) session.getAttribute("loginMember");
+        MemberVO loginMember = (MemberVO) session.getAttribute("loginUser");
 
         if (loginMember == null) {
             request.setAttribute("result", "unauthorized");
-            return "passwordCheck.html";
+            return "updateMember.jsp";
         }
 
-        // 수정할 값 파라미터로부터 가져오기
         String email = request.getParameter("email");
         String nickname = request.getParameter("nickname");
         String name = request.getParameter("name");
         String phoneNumber = request.getParameter("phoneNumber");
 
+        MemberDAO dao = new MemberDAO();
+
+        //  중복 이메일 검사 (현재 이메일과 다를 경우만)
+        if (!email.equals(loginMember.getEmail()) && dao.isDuplicateEmail(email)) {
+            request.setAttribute("result", "duplicate_email");
+            return "updateMember.jsp";
+        }
+
+        // 중복 닉네임 검사 (현재 닉네임과 다를 경우만)
+        if (!nickname.equals(loginMember.getNickName()) && dao.isDuplicateNickName(nickname)) {
+            request.setAttribute("result", "duplicate_nickname");
+            return "updateMember.jsp";
+        }
+
         // VO 구성
         MemberVO updatedMember = new MemberVO();
-        updatedMember.setMemberId(loginMember.getMemberId()); // 로그인 ID 유지
+        updatedMember.setMemberId(loginMember.getMemberId());
         updatedMember.setEmail(email);
         updatedMember.setNickName(nickname);
         updatedMember.setName(name);
         updatedMember.setPhoneNumber(phoneNumber);
 
-        // DB 업데이트 수행
-        MemberDAO dao = new MemberDAO();
         boolean result = dao.updateMemberInfo(updatedMember);
 
-        // 성공 시 세션도 업데이트
         if (result) {
-            session.setAttribute("loginMember", updatedMember);
+            MemberVO refreshed = dao.getMyInfo(updatedMember.getMemberId());
+            session.setAttribute("loginUser", refreshed);
         }
 
         request.setAttribute("result", result ? "success" : "fail");
