@@ -11,7 +11,7 @@ public class AddHeartAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
-        int postId = Integer.parseInt(request.getParameter("postId"));
+		int postId = Integer.parseInt(request.getParameter("postId"));
         String memberId = request.getParameter("memberId");
         System.out.println("addheartAction: "+memberId);
         System.out.println("addheartAction: "+postId);

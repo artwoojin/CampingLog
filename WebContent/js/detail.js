@@ -84,8 +84,8 @@ $(document).ready(function () {
         memberId: memberId
       },
       success: function (responseText) {
-        const res = typeof responseText === "string" ? JSON.parse(responseText) : responseText;
-        if (res.result === "success") {
+
+    	  if (responseText.status === true || responseText.status === "true") {
           alert("❤️ 좋아요 성공");
           const current = parseInt($(".like-count").text()) || 0;
           $(".like-count").text(current + 1);
