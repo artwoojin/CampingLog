@@ -15,7 +15,7 @@ public class GetCategoryTagAction implements Action{
 		System.out.println(categoryId);
 		
 		TagDAO dao = new TagDAO();
-		List<TagVO> tags = dao.getCategoryTag(categoryId);
+		List<TagVO> tags = dao.getTagsByCategory(categoryId);
 		
 		request.setAttribute("tagList", tags);
 		

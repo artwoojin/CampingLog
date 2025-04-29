@@ -42,7 +42,7 @@
 		SELECT memberId, email, nickName, inDate, memberImage, name
 		FROM member
 		WHERE
-		memberId = #{memberId} AND pw = #{pw}
+		memberId = #{memberId, jdbcType=VARCHAR} AND pw = #{pw, jdbcType=VARCHAR}
 	</select>
 
 	<select id="pwCheck" parameterType="com.camp.model.MemberVO"
