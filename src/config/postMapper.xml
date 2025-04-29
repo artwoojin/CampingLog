@@ -128,8 +128,7 @@
 		p.POSTID AS postId,
 		p.POSTTITLE AS postTitle,
 		p.POSTCONTENTS AS postContents,
-		p.POSTIMAGE AS
-		postImage,
+		p.POSTIMAGE AS postImage,
 		p.POSTDATE AS postDate,
 		p.MEMBERID AS memberId,
 		p.CATEGORYID
