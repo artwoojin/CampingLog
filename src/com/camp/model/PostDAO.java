@@ -11,15 +11,16 @@ import com.camp.model.PostVO;
 public class PostDAO {
 	
 	// 전체 게시글 페이징 조회
-	public List<PostVO> getPostPage(int start, int end) {
-        SqlSession conn = DBCP.getSqlSessionFactory().openSession();
-        Map<String, Integer> map = new HashMap<>();
-        map.put("start", start);
-        map.put("end", end);
-        List<PostVO> list = conn.selectList("postMapper.getPostsByPage", map);
-        conn.close();
-        return list;
-    }
+	public List<PostVO> getPostPage(int start, int end, String searchTerm) {
+		SqlSession conn = DBCP.getSqlSessionFactory().openSession();
+		Map<Object, Object> map = new HashMap<>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("searchTerm", searchTerm);
+		List<PostVO> list = conn.selectList("postMapper.getPostsByPage", map);
+		conn.close();
+		return list;
+	}
 	
 	// 카테고리별 페이징 조회 
 	public List<PostVO> getPostPageByCategory(int categoryId, int start, int end) {
