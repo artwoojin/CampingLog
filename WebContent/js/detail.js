@@ -66,6 +66,34 @@ $(document).ready(function () {
     }
   });
 
+  $(".comment-profile-img").each(function () {
+	  const $img = $(this);
+	  const memberId = 'silver99'; //$img.data("memberid");
+
+	  if (memberId) {
+	    $.ajax({
+	      url: "controller",
+	      method: "GET",
+	      data: {
+	        cmd: "memberImageUIAction",  // ★ 여기에서 memberId를 보내고
+	        memberId: memberId
+	      },
+	      dataType: "json",
+	      success: function (responseText) {
+	        if (responseText.userImage) { // ★ 서버에서 받은 response.userImage를
+	          $img.attr("src", "img/" + responseText.userImage); // ★ 이미지 src에 넣어준다
+	        } else {
+	          $img.attr("src", "img/defaultMemberImage.png"); // 못 받아오면 기본 이미지
+	        }
+	      },
+	      error: function () {
+	        $img.attr("src", "img/defaultMemberImage.png");
+	      }
+	    });
+	  }
+	});
+  
+  
   // 좋아요 버튼 기능 (동적 이벤트 위임)
   $(document).on("click", ".like-btn", function () {
     const memberId = $(this).data("memberid");

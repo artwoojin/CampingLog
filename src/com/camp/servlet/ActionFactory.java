@@ -90,6 +90,9 @@ public class ActionFactory {
       case "noticeAction":
           a = new NoticeAction();
           break;
+      case "memberImageUIAction":
+    	  a = new MemberImageUIAction();
+    	  break;
       default:
          a = new MainUIAction(); 
          break;
