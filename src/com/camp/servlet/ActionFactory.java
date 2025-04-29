@@ -6,7 +6,6 @@ public class ActionFactory {
 	public static Action getAction(String cmd) {
 		Action a;
 		System.out.println("cmd: " + cmd);
-
 		switch (cmd) {
 		case "detail":
 			a = new DetailAction();
