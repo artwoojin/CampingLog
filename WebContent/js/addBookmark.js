@@ -25,7 +25,7 @@ $(function () {
           const current = parseInt($(".bookmark-count").text()) || 0;
           $(".bookmark-count").text(current + 1);
         } else {
-          alert("이미 북마크했거나 오류가 발생했습니다.");
+          alert("이미 북마크했습니다.");
         }
       },
       error: function () {

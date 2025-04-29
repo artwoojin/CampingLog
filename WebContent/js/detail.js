@@ -90,7 +90,7 @@ $(document).ready(function () {
           const current = parseInt($(".like-count").text()) || 0;
           $(".like-count").text(current + 1);
         } else {
-          alert("이미 좋아요를 누르셨거나 오류가 발생했습니다.");
+          alert("이미 좋아요를 누르셨습니다.");
         }
       },
       error: function () {
