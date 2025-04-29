@@ -1,52 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="postMapper">
-	<select id="getTotalPostCount" resultType="int">
-		SELECT COUNT(*) FROM
-		POST
+	<!-- 전체 게시글 수 -->
+	<select id="getTotalPostCount" parameterType="map" resultType="int">
+		SELECT COUNT(DISTINCT p.POSTID)
+		FROM POST p
+		<where>
+			<!-- searchTerm이 있으면 제목·내용으로 필터링 -->
+			<if test="searchTerm != null and searchTerm.trim() != ''">
+				AND (
+				p.POSTTITLE LIKE '%' || #{searchTerm} || '%'
+				OR
+				p.POSTCONTENTS LIKE '%' || #{searchTerm} || '%'
+				)
+			</if>
+		</where>
 	</select>
 
-	<select id="getPostsByPage" resultType="com.camp.model.PostVO">
+	<!-- 전체 페이징 + 검색어 조건 -->
+	<select id="getPostsByPage" parameterType="map"
+		resultType="com.camp.model.PostVO">
 		SELECT * FROM (
 		SELECT
-		ROWNUM rn,
-		p.POSTID,
-		p.POSTTITLE,
-		p.POSTCONTENTS,
-		p.POSTIMAGE,
-		p.POSTDATE,
-		p.MEMBERID,
-		p.CATEGORYID,
-		c.CATEGORYNAME,
-		NVL(l.LIKECOUNT, 0) AS
-		LIKECOUNT,
-		NVL(t.TAGLIST, '') AS TAGLIST
+		ROWNUM AS rn,
+		q.*
 		FROM (
-		SELECT * FROM POST ORDER
-		BY POSTID DESC
-		) p
-		LEFT JOIN (
-		SELECT POSTID, COUNT(*) AS LIKECOUNT
-		FROM
-		LIKES
-		GROUP BY POSTID
-		) l ON p.POSTID = l.POSTID
+		SELECT
+		p.POSTID AS postId,
+		p.POSTTITLE AS postTitle,
+		p.POSTCONTENTS AS postContents,
+		p.POSTIMAGE AS
+		postImage,
+		p.POSTDATE AS postDate,
+		p.MEMBERID AS memberId,
+		p.CATEGORYID
+		AS categoryId,
+		c.CATEGORYNAME AS categoryName,
+		NVL(l.LIKECOUNT, 0) AS
+		likeCount,
+		NVL(t.TAGLIST, '') AS tagList
+		FROM POST p
 		LEFT JOIN (
 		SELECT
-		pt.POSTID, LISTAGG(t.TAGNAME, ', ') WITHIN GROUP (ORDER BY t.TAGNAME)
-		AS TAGLIST
+		POSTID, COUNT(*) AS LIKECOUNT
+		FROM LIKES
+		GROUP BY POSTID
+		) l ON p.POSTID
+		= l.POSTID
+		LEFT JOIN (
+		SELECT
+		pt.POSTID,
+		LISTAGG(t.TAGNAME, ', ')
+		WITHIN
+		GROUP (ORDER BY t.TAGNAME) AS TAGLIST
 		FROM POSTTAG pt
-		JOIN TAG t ON pt.TAGID = t.TAGID
-		GROUP BY
-		pt.POSTID
+		JOIN TAG t ON
+		pt.TAGID = t.TAGID
+		GROUP BY pt.POSTID
 		) t ON p.POSTID = t.POSTID
-		LEFT JOIN CATEGORY c ON
-		p.CATEGORYID = c.CATEGORYID
-		WHERE ROWNUM &lt;=
-		#{end}
+		LEFT
+		JOIN CATEGORY c ON p.CATEGORYID = c.CATEGORYID
+
+		<where>
+			<if test="searchTerm != null and searchTerm.trim() != ''">
+				AND (
+				p.POSTTITLE LIKE '%' || #{searchTerm} || '%'
+				OR
+				p.POSTCONTENTS LIKE '%' || #{searchTerm} || '%'
+				)
+			</if>
+		</where>
+
+		ORDER BY p.POSTID DESC
+		) q
+		WHERE ROWNUM &lt;= #{end}
 		)
-		WHERE rn
-		&gt;=
+		WHERE rn &gt;=
 		#{start}
 	</select>
 
@@ -87,55 +116,93 @@
     ]]>
 	</select>
 
+	<!-- 카테고리별 페이징 조회 -->
 	<select id="getPostsByCategoryPage" parameterType="map"
 		resultType="com.camp.model.PostVO">
-    <![CDATA[
-      SELECT * FROM (
-        SELECT
-          ROWNUM      rn,
-          p.POSTID,
-          p.POSTTITLE,
-          p.POSTCONTENTS,
-          p.POSTIMAGE,
-          p.POSTDATE,
-          p.MEMBERID,
-          p.CATEGORYID,
-          c.CATEGORYNAME,
-          NVL(l.LIKECOUNT, 0) AS LIKECOUNT,
-          NVL(t.TAGLIST, '')   AS TAGLIST
-        FROM (
-          SELECT *
-            FROM POST
-           WHERE CATEGORYID = #{categoryId}
-           ORDER BY POSTID DESC
-        ) p
-        LEFT JOIN (
-          SELECT POSTID, COUNT(*) AS LIKECOUNT
-            FROM LIKES
-           GROUP BY POSTID
-        ) l ON p.POSTID = l.POSTID
-        LEFT JOIN (
-          SELECT pt.POSTID,
-                 LISTAGG(t.TAGNAME, ', ') 
-                   WITHIN GROUP (ORDER BY t.TAGNAME) AS TAGLIST
-            FROM POSTTAG pt
-            JOIN TAG t ON pt.TAGID = t.TAGID
-           GROUP BY pt.POSTID
-        ) t ON p.POSTID = t.POSTID
-        LEFT JOIN CATEGORY c ON p.CATEGORYID = c.CATEGORYID
-        WHERE ROWNUM <= #{end}
-      )
-      WHERE rn >= #{start}
-    ]]>
+		SELECT * FROM (
+		SELECT
+		ROWNUM AS rn,
+		q.*
+		FROM (
+		SELECT
+		p.POSTID AS postId,
+		p.POSTTITLE AS postTitle,
+		p.POSTCONTENTS AS postContents,
+		p.POSTIMAGE AS
+		postImage,
+		p.POSTDATE AS postDate,
+		p.MEMBERID AS memberId,
+		p.CATEGORYID
+		AS categoryId,
+		c.CATEGORYNAME AS categoryName,
+		NVL(l.LIKECOUNT, 0) AS
+		likeCount,
+		NVL(t.TAGLIST, '') AS tagList
+		FROM POST p
+		LEFT JOIN (
+		SELECT
+		POSTID, COUNT(*) AS LIKECOUNT
+		FROM LIKES
+		GROUP BY POSTID
+		) l ON p.POSTID
+		= l.POSTID
+		LEFT JOIN (
+		SELECT
+		pt.POSTID,
+		LISTAGG(t.TAGNAME, ', ')
+		WITHIN
+		GROUP (ORDER BY t.TAGNAME) AS tagList
+		FROM POSTTAG pt
+		JOIN TAG t ON
+		pt.TAGID = t.TAGID
+		GROUP BY pt.POSTID
+		) t ON p.POSTID = t.POSTID
+		LEFT
+		JOIN CATEGORY c ON p.CATEGORYID = c.CATEGORYID
+		WHERE p.CATEGORYID =
+		#{categoryId}
+
+		<if test="tagList != null and tagList != ''">
+			AND EXISTS (
+			SELECT 1
+			FROM POSTTAG pt2
+			JOIN TAG t2 ON pt2.TAGID =
+			t2.TAGID
+			WHERE pt2.POSTID = p.POSTID
+			AND t2.TAGNAME IN
+			<foreach collection="tagList.split(',')" item="tag" open="("
+				separator="," close=")">
+				#{tag}
+			</foreach>
+			)
+		</if>
+
+		ORDER BY p.POSTID DESC
+		) q
+		WHERE ROWNUM &lt;= #{end}
+		)
+		WHERE rn &gt;=
+		#{start}
 	</select>
 
-	<select id="getTotalPostCountByCategory" parameterType="int"
+	<!-- 2) 카테고리 + 태그 필터 전체 게시글 수 -->
+	<select id="getTotalPostCountByCategory" parameterType="map"
 		resultType="int">
-    <![CDATA[
-      SELECT COUNT(*) 
-        FROM POST
-       WHERE CATEGORYID = #{categoryId}
-    ]]>
+		SELECT COUNT(DISTINCT p.POSTID)
+		FROM POST p
+		<if test="tagList != null and tagList != ''">
+			JOIN POSTTAG pt ON p.POSTID = pt.POSTID
+			JOIN TAG t ON
+			pt.TAGID = t.TAGID
+		</if>
+		WHERE p.CATEGORYID = #{categoryId}
+		<if test="tagList != null and tagList != ''">
+			AND t.TAGNAME IN
+			<foreach item="tag" collection="tagList.split(',')" open="("
+				separator="," close=")">
+				#{tag}
+			</foreach>
+		</if>
 	</select>
 
 	<insert id="insertPost" parameterType="com.camp.model.PostVO">
@@ -184,25 +251,29 @@
 		memberId, likeDate)
 		VALUES (#{postId}, #{memberId}, SYSDATE)
 	</insert>
-	
+
 	<insert id="insertBookmark" parameterType="map">
-	INSERT INTO bookmark (memberId, postId, bookmarkDate)
-	VALUES (#{memberId}, #{postId}, SYSDATE)
+		INSERT INTO bookmark
+		(memberId, postId, bookmarkDate)
+		VALUES (#{memberId}, #{postId},
+		SYSDATE)
 	</insert>
-	 <select id="getCommentCount" parameterType="int" resultType="int">
+	<select id="getCommentCount" parameterType="int" resultType="int">
 		SELECT COUNT(*) count
 		FROM comments
 		WHERE postId=#{postId}
 	</select>
 	<select id="isAlreadyBookmarked" parameterType="map" resultType="int">
-	    SELECT COUNT(*)
-	    FROM bookmark
-	    WHERE postId = #{postId} AND memberId = #{memberId}
+		SELECT COUNT(*)
+		FROM bookmark
+		WHERE postId = #{postId} AND memberId =
+		#{memberId}
 	</select>
-	
+
 	<select id="isAlreadyLiked" parameterType="map" resultType="int">
-	    SELECT COUNT(*)
-	    FROM likes
-	    WHERE postId = #{postId} AND memberId = #{memberId}
+		SELECT COUNT(*)
+		FROM likes
+		WHERE postId = #{postId} AND memberId =
+		#{memberId}
 	</select>
 </mapper>
