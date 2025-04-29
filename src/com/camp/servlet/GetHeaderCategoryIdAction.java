@@ -16,7 +16,6 @@ public class GetHeaderCategoryIdAction implements Action {
 		
 		System.out.println(categoryId);
 		
-		PostDAO dao = new PostDAO();
 		return "header.jsp";
 	}
 }
