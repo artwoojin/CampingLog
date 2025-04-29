@@ -12,32 +12,33 @@ import com.camp.model.MemberVO;
 public class GetMyInfoAction implements Action {
     @Override
     public String execute(HttpServletRequest request) throws ServletException, IOException {
-        System.out.println(" GetMyInfoAction 吏꾩엯");
+    	request.setCharacterEncoding("UTF-8");
+    	System.out.println(" GetMyInfoAction 진입");
 
         HttpSession session = request.getSession();
-        MemberVO loginMember = (MemberVO) session.getAttribute("loginUser"); //  濡쒓렇�씤 �떆 ���옣�븳 key �궗�슜
+        MemberVO loginMember = (MemberVO) session.getAttribute("loginUser"); 
 
         if (loginMember == null) {
-            System.out.println(" �꽭�뀡�뿉 loginUser �뾾�쓬 �넂 濡쒓렇�씤 �븞 �맂 �긽�깭");
-            request.setAttribute("error", "로그인이 필요합니다.");
+            System.out.println("loginUser");
+            request.setAttribute("error", "로그인이 필요합니다");
             return "login.html"; 
         }
 
-        System.out.println(" �꽭�뀡�뿉�꽌 媛��졇�삩 濡쒓렇�씤 ID: " + loginMember.getMemberId());
+        System.out.println(" 세션 ID: " + loginMember.getMemberId());
 
-        // DB�뿉�꽌 理쒖떊 �젙蹂� 媛��졇�삤湲�
+
         MemberDAO dao = new MemberDAO();
         MemberVO updatedInfo = dao.getMyInfo(loginMember.getMemberId());
 
         if (updatedInfo == null) {
-            System.out.println("DAO�뿉�꽌 �궗�슜�옄 �젙蹂� 媛��졇�삤湲� �떎�뙣");
+            System.out.println("DAO에서 정보가져오기 실패");
         } else {
-            System.out.println("DAO�뿉�꽌 媛��졇�삩 理쒖떊 �궗�슜�옄 �젙蹂�: " + updatedInfo);
+            System.out.println("DAO에서 가져온 정보: " + updatedInfo);
         }
 
         // 諭껋� �씠誘몄� 怨꾩궛
         int likeCount = updatedInfo.getLikeCount();
-        System.out.println(" 醫뗭븘�슂 �닔: " + likeCount);
+        System.out.println("좋아요 : " + likeCount);
 
         String badge;
         if (likeCount >= 100) badge = "vipbadge.png";
@@ -46,13 +47,12 @@ public class GetMyInfoAction implements Action {
         else badge = "familybadge.png";
 
         updatedInfo.setBadgeImage(badge);
-        System.out.println(" �쟻�슜�맂 諭껋� �씠誘몄�: " + badge);
+        System.out.println("뱃지: " + badge);
 
-        // �꽭�뀡怨� request 理쒖떊�솕
-        session.setAttribute("loginUser", updatedInfo); // �떎�떆 理쒖떊 �젙蹂대줈 媛깆떊
+        session.setAttribute("loginUser", updatedInfo);
         request.setAttribute("memberInfo", updatedInfo);
 
-        System.out.println(" request�� session�뿉 理쒖떊 �궗�슜�옄 �젙蹂� ���옣 �셿猷�");
+        System.out.println(" request session");
         return "myPageInfo.jsp"; 
     }
 }

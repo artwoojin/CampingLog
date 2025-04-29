@@ -1,21 +1,22 @@
-<%@ page contentType="application/json; charset=UTF-8" %>
-<%@ page import="com.camp.model.MemberVO" %>
+<%@page import="com.camp.model.MemberVO"%>
+<%@ page language="java" contentType="application/json; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-	System.out.println(">> myPageInfo.jsp 도달함!");
     MemberVO member = (MemberVO) request.getAttribute("memberInfo");
-    if (member == null) {
-        System.out.println(">> memberInfo가 null입니다.");
-    }
 %>
-{
-  "memberId": "<%= member.getMemberId() %>",
-  "email": "<%= member.getEmail() %>",
-  "nickName": "<%= member.getNickName() %>",
-  "name": "<%= member.getName() %>",
-  "phoneNumber": "<%= member.getPhoneNumber() %>",
-  "memberImage": "<%= member.getMemberImage() %>",
-  "badgeImage": "<%= member.getBadgeImage() %>",
-  "inDate": "<%= member.getInDate() %>",
-  "postCount": <%= member.getPostCount() %>,
-  "likeCount": <%= member.getLikeCount() %>
-}
+[
+<c:if test="${not empty memberInfo}">
+  {
+    "memberId": "${memberInfo.memberId}",
+    "email": "${memberInfo.email}",
+    "nickName": "${memberInfo.nickName}",
+    "name": "${memberInfo.name}",
+    "phoneNumber": "${memberInfo.phoneNumber}",
+    "memberImage": "${memberInfo.memberImage}",
+    "badgeImage": "${memberInfo.badgeImage}",
+    "inDate": "${memberInfo.inDate}",
+    "postCount": ${memberInfo.postCount},
+    "likeCount": ${memberInfo.likeCount}
+  }
+</c:if>
+]
