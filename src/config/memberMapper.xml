@@ -39,7 +39,7 @@
 
 	<select id="login" parameterType="com.camp.model.MemberVO"
 		resultType="com.camp.model.MemberVO">
-		SELECT memberId, email, nickName, inDate
+		SELECT memberId, email, nickName, inDate, memberImage, name
 		FROM member
 		WHERE
 		memberId = #{memberId} AND pw = #{pw}
