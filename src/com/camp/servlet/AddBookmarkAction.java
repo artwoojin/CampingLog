@@ -27,7 +27,7 @@ public class AddBookmarkAction implements Action {
 		String memberId = request.getParameter("memberId");
 		System.out.println("AddBookmarkAction postId = " + postId);
 		System.out.println("AddBookmarkAction memberId = " + memberId);
-		boolean addCheck = service.InsertBookmark(postId, "silver99");
+		boolean addCheck = service.InsertBookmark(postId, memberId);
 		
 		request.setAttribute("addCheck", addCheck);
 		System.out.println("addbookmarkaction"+request.getAttribute("addCheck"));

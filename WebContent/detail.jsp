@@ -9,6 +9,7 @@
     "nickName": "<c:out value='${post.nickName}'/>",
     "likeCount": "<c:out value='${post.likeCount}'/>",
     "bookmarkCount": "<c:out value='${post.bookmarkCount}'/>",
+    "memberId": "<c:out value='${post.memberId}'/>",
     "postContents": "<c:out value='${post.postContents}'/>",
     "categoryName": "<c:out value='${post.categoryName}'/>",
     "badgeImage": "<c:out value='${post.badgeImage}'/>",

@@ -111,6 +111,9 @@ public class ActionFactory {
 		case "memberImageUIAction":
 			a = new MemberImageUIAction();
 			break;
+		case "getSessionMember":
+			a = new GetSessionMemberAction();
+			break;
 		default:
 			a = new MainUIAction(); 
 			break;

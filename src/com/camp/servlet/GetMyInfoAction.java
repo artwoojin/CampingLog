@@ -12,32 +12,32 @@ import com.camp.model.MemberVO;
 public class GetMyInfoAction implements Action {
     @Override
     public String execute(HttpServletRequest request) throws ServletException, IOException {
-        System.out.println(" GetMyInfoAction 진입");
+        System.out.println(" GetMyInfoAction 吏꾩엯");
 
         HttpSession session = request.getSession();
-        MemberVO loginMember = (MemberVO) session.getAttribute("loginUser"); //  로그인 시 저장한 key 사용
+        MemberVO loginMember = (MemberVO) session.getAttribute("loginUser"); //  濡쒓렇�씤 �떆 ���옣�븳 key �궗�슜
 
         if (loginMember == null) {
-            System.out.println(" 세션에 loginUser 없음 → 로그인 안 된 상태");
+            System.out.println(" �꽭�뀡�뿉 loginUser �뾾�쓬 �넂 濡쒓렇�씤 �븞 �맂 �긽�깭");
             request.setAttribute("error", "로그인이 필요합니다.");
             return "login.html"; 
         }
 
-        System.out.println(" 세션에서 가져온 로그인 ID: " + loginMember.getMemberId());
+        System.out.println(" �꽭�뀡�뿉�꽌 媛��졇�삩 濡쒓렇�씤 ID: " + loginMember.getMemberId());
 
-        // DB에서 최신 정보 가져오기
+        // DB�뿉�꽌 理쒖떊 �젙蹂� 媛��졇�삤湲�
         MemberDAO dao = new MemberDAO();
         MemberVO updatedInfo = dao.getMyInfo(loginMember.getMemberId());
 
         if (updatedInfo == null) {
-            System.out.println("DAO에서 사용자 정보 가져오기 실패");
+            System.out.println("DAO�뿉�꽌 �궗�슜�옄 �젙蹂� 媛��졇�삤湲� �떎�뙣");
         } else {
-            System.out.println("DAO에서 가져온 최신 사용자 정보: " + updatedInfo);
+            System.out.println("DAO�뿉�꽌 媛��졇�삩 理쒖떊 �궗�슜�옄 �젙蹂�: " + updatedInfo);
         }
 
-        // 뱃지 이미지 계산
+        // 諭껋� �씠誘몄� 怨꾩궛
         int likeCount = updatedInfo.getLikeCount();
-        System.out.println(" 좋아요 수: " + likeCount);
+        System.out.println(" 醫뗭븘�슂 �닔: " + likeCount);
 
         String badge;
         if (likeCount >= 100) badge = "vipbadge.png";
@@ -46,13 +46,13 @@ public class GetMyInfoAction implements Action {
         else badge = "familybadge.png";
 
         updatedInfo.setBadgeImage(badge);
-        System.out.println(" 적용된 뱃지 이미지: " + badge);
+        System.out.println(" �쟻�슜�맂 諭껋� �씠誘몄�: " + badge);
 
-        // 세션과 request 최신화
-        session.setAttribute("loginUser", updatedInfo); // 다시 최신 정보로 갱신
+        // �꽭�뀡怨� request 理쒖떊�솕
+        session.setAttribute("loginUser", updatedInfo); // �떎�떆 理쒖떊 �젙蹂대줈 媛깆떊
         request.setAttribute("memberInfo", updatedInfo);
 
-        System.out.println(" request와 session에 최신 사용자 정보 저장 완료");
+        System.out.println(" request�� session�뿉 理쒖떊 �궗�슜�옄 �젙蹂� ���옣 �셿猷�");
         return "myPageInfo.jsp"; 
     }
 }

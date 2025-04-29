@@ -63,6 +63,7 @@ async function initPage() {
 		await loadScript('js/commentByPagination.js');
 		await loadScript('js/addComment.js');
 		await loadScript('js/addBookmark.js');
+		await loadScript('js/addHeart.js');
 		break;
 
 	case 'myPage.html':

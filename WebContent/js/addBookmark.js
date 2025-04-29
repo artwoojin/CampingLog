@@ -1,35 +1,50 @@
 $(function () {
-  const urlParams = new URLSearchParams(window.location.search);
-  const postId = urlParams.get("postId");
-  const memberId = "silver99";
+  $(".bookmark-btn").click(function () {  // ⭐ 북마크 버튼 id 맞춰야 해!
+    const postId = new URLSearchParams(window.location.search).get("postId");
 
-  // 북마크 버튼 클릭
-  $(document).on("click", ".bookmark-btn", function () {
-    if (!postId || !memberId) {
-      alert("⚠️ postId 또는 memberId가 없습니다.");
+    if (!postId) {
+      alert("postId가 없습니다.");
       return;
     }
 
+    // (1) 세션에서 memberId 먼저 가져오기
     $.ajax({
       url: "controller",
-      method: "POST",
-      data: {
-        cmd: "addBookmark",
-        postId: postId,
-        memberId: memberId
-      },
-      success: function (responseText) {
-    	  console.log(responseText.status)
-        if (responseText.status === "true") {
-          alert("⭐ 북마크 완료!");
-          const current = parseInt($(".bookmark-count").text()) || 0;
-          $(".bookmark-count").text(current + 1);
-        } else {
-          alert("이미 북마크했습니다.");
+      method: "GET",
+      data: { cmd: "getSessionMember" },
+      dataType: "json",
+      success: function (data) {
+        const memberId = data.memberId;
+
+        if (!memberId) {
+          alert("로그인이 필요합니다.");
+          return;
         }
+
+        // (2) 가져온 memberId로 북마크 등록
+        $.ajax({
+          url: "controller?cmd=addBookmark",
+          method: "POST",
+          data: {
+            postId: postId,
+            memberId: memberId
+          },
+          success: function (data) {
+            if (data.status === "true") {
+              alert("⭐ 북마크 완료!");
+              const current = parseInt($(".bookmark-count").text()) || 0;
+              $(".bookmark-count").text(current + 1);
+            } else {
+              alert("이미 북마크했습니다.");
+            }
+          },
+          error: function () {
+            alert("북마크 등록 실패");
+          }
+        });
       },
       error: function () {
-        alert("❌ 서버 통신 중 오류 발생");
+        alert("로그인 정보를 가져오는 데 실패했습니다.");
       }
     });
   });

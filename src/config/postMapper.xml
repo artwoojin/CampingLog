@@ -81,7 +81,7 @@
 
 	<select id="getContents" parameterType="int" resultType="com.camp.model.PostVO">
 		SELECT
-		c.categoryName, m.nickName, p.postId, (SELECT badgeImage FROM
+		c.categoryName, m.nickName, p.postId, p.memberId, (SELECT badgeImage FROM
 		grade g
 		WHERE g.gradeId=m.gradeId) badgeImage, m.memberImage, p.postTitle,
 		p.postContents, p.postImage, p.postDate, (SELECT COUNT(postId) FROM
