@@ -110,6 +110,14 @@ public class ActionFactory {
 			break;
 		case "memberImageUIAction":
 			a = new MemberImageUIAction();
+		case "myPage":
+			a = new MyPageAction();
+			break;
+		case "myPageBookmarks":
+			a = new MyPageBookmarksAction();
+			break;
+		case "myPagePosts":
+			a = new MyPagePostsAction();
 			break;
 		default:
 			a = new MainUIAction(); 
