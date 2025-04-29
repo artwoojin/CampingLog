@@ -11,12 +11,16 @@
 		WHERE p.postId=#{postId}
 	</select>
 
+	<!-- 카테고리별 태그 이름 -->
 	<select id="getTagsByCategory" parameterType="int"
 		resultType="com.camp.model.TagVO">
-		SELECT tagId, tagName
-		FROM TAG
-		WHERE categoryId =
+		SELECT
+		t.tagId,
+		t.tagName
+		FROM Tag t
+		WHERE t.categoryId =
 		#{categoryId}
+		ORDER BY t.tagName
 	</select>
 	<select id="getAllTags" resultType="com.camp.model.TagVO">
 		SELECT * FROM tag
