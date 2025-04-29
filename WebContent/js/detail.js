@@ -70,7 +70,7 @@ $(document).ready(function () {
             commentHtml += ''
               + '<div class="comment">'
               + '  <div class="profile">'
-              + '    <img src="img/defaultMemberImage.png" alt="프로필 이미지" class="comment-profile-img" data-memberid="' + c.memberId + '">'
+              + '    <img src="img/defaultMemberImage.png" alt="프로필 이미지" onerror="this.src=&#39;img/defaultMemberImage.png&#39;" class="comment-profile-img" data-memberid="' + c.memberId + '">'
               + '    <div class="profile-name-badge">'
               + '      <img class="comment-badge" src="img/' + c.badgeImage + '">'
               + '      <div class="comment-nickName">' + c.nickName + '</div>'
@@ -100,7 +100,7 @@ $(document).ready(function () {
                 dataType: "json",
                 success: function (response) {
                   if (response.userImage) {
-                    $img.attr("src", "img/" + response.userImage);
+                	  $img.attr("src", "img/" + (response.userImage || "defaultMemberImage.png"));
                   }
                 },
                 error: function () {

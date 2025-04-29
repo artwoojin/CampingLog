@@ -28,7 +28,7 @@ $(document).ready(function () {
           const commentHtml = `
             <div class="comment">
               <div class="profile">
-                <img src="img/${c.memberImage}" alt="프로필 이미지" class="comment-profile-img">
+              <img src="img/${c.memberImage || 'defaultMemberImage.png'}" alt="프로필 이미지" class="comment-profile-img">
                 <div class="profile-name-badge">
                   <img src="img/${c.badgeImage}" class="comment-badge">
                   <div class="comment-nickName">${c.nickName}</div>
