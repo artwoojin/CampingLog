@@ -1,23 +1,24 @@
 package com.camp.model;
 
 public class PostVO {
-	 private int postId;
-	 private String postTitle;
-	 private String postContents;
-	 private String postImage;     
-	 private String postDate;
-	 private String memberId;      
-	 private int categoryId;
-	 private String nickName;
-	 private String memberImage;
-	 private String badgeImage;
-	 private int likeCount;
-	 private int bookmarkCount;
-	 private String categoryName;
-	 private int commentCount;
-	
+	private int postId;
+	private String postTitle;
+	private String postContents;
+	private String postImage;     
+	private String postDate;
+	private String memberId;      
+	private int categoryId;
+	private String nickName;
+	private String memberImage;
+	private String badgeImage;
+	private int likeCount;
+	private int bookmarkCount;
+	private String categoryName;
+	private int commentCount;
+	private String tagList;
+
 	public PostVO(){}
-	
+
 	public PostVO(String nickName, String memberImage, String badgeImage) {
 		this.nickName = nickName;
 		this.memberImage = memberImage;
@@ -42,7 +43,7 @@ public class PostVO {
 		this.memberId = memberId;
 		this.categoryId = categoryId;
 	}
-	
+
 
 	public PostVO(int postId, String postTitle, String postContents, String postImage, String postDate, String memberId,
 			int categoryId, String nickName, String memberImage, String badgeImage) {
@@ -57,14 +58,14 @@ public class PostVO {
 		this.memberImage = memberImage;
 		this.badgeImage = badgeImage;
 	}
-	
+
 	public PostVO(int postId, String title, String contents, String image, String memberId, int categoryId) {
-	    this.postId = postId;
-	    this.postTitle = title;
-	    this.postContents = contents;
-	    this.postImage = image;
-	    this.memberId = memberId;
-	    this.categoryId = categoryId;
+		this.postId = postId;
+		this.postTitle = title;
+		this.postContents = contents;
+		this.postImage = image;
+		this.memberId = memberId;
+		this.categoryId = categoryId;
 	}
 
 	public int getPostId() {
@@ -162,7 +163,7 @@ public class PostVO {
 	public void setBookmarkCount(int bookmarkCount) {
 		this.bookmarkCount = bookmarkCount;
 	}
-	
+
 	public String getCategoryName() {
 		return categoryName;
 	}
@@ -170,8 +171,8 @@ public class PostVO {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	
-	
+
+
 
 	public int getCommentCount() {
 		return commentCount;
@@ -180,6 +181,13 @@ public class PostVO {
 	public void setCommentCount(int commentCount) {
 		this.commentCount = commentCount;
 	}
+	public String getTagList() {
+		return tagList;
+	}
+
+	public void setTagList(String tagList) {
+		this.tagList= tagList;
+	}
 
 	@Override
 	public String toString() {
@@ -187,7 +195,7 @@ public class PostVO {
 				+ ", postImage=" + postImage + ", postDate=" + postDate + ", memberId=" + memberId + ", categoryId="
 				+ categoryId + ", nickName=" + nickName + ", memberImage=" + memberImage + ", badgeImage=" + badgeImage
 				+ ", likeCount=" + likeCount + ", bookmarkCount=" + bookmarkCount + ", categoryName=" + categoryName
-				+ ", commentCount=" + commentCount + "]";
+				+ ", commentCount=" + commentCount + ", tagList=" + tagList + "]";
 	}
 }
 
