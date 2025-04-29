@@ -3,7 +3,7 @@
 #section {
 	display: grid;
 	margin-top: 20px;
-	margin-bottom: 10px;
+	margin-bottom: 0;
 	grid-template-columns: 3fr 1fr;
 	gap: 24px;
 	grid-template-columns: 3fr 1fr;
@@ -13,17 +13,16 @@
 .content1 {
 	display: flex;
 	flex-direction: column;
-	gap: 32px;
+	gap: 16px;
 }
 
 .
 .topCamp {
-	flex: 1; /* 또는 height: 60%; 도 가능 */
+	flex: 1;
 	display: flex;
 	flex-direction: column;
 }
 
-/* 인기 상승 캠핑장 */
 .topTitle p {
 	font-size: 1.5rem;
 	font-weight: bold;
@@ -46,7 +45,7 @@
 }
 
 .topLeft .topCard {
-	flex: 1; /* 자동으로 높이 맞춰짐 */
+	flex: 1;
 }
 
 .topImg1 img {
@@ -59,7 +58,7 @@
 .topRight {
 	width: 30%;
 	gap: 16px;
-	flex: 1; /* 전체 높이 자동 채움 */
+	flex: 1;
 }
 
 .topCard {
@@ -74,7 +73,7 @@
 }
 
 .topRight .topCard {
-	flex: 1; /* 각각 동일한 비율로 나눠짐 */
+	flex: 1;
 }
 
 .topImg1 img, .topImg2 img, .topImg3 img {
@@ -93,15 +92,17 @@
     text-overflow: ellipsis;
     max-width: 200px;
 }
+
 .campTitleTop {
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
     overflow: hidden;
-    max-width: 650px; /* 🔥 TopCard 크기에 딱 맞춤 */
+    max-width: 650px;
     min-width: 0;
     line-height: 1.4;
 }
+
 .campData {
 	display: flex;
 	justify-content: space-between;
@@ -117,7 +118,8 @@
 .downTitle p {
 	font-size: 1.5rem;
 	font-weight: bold;
-	margin-bottom: 1rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.05rem;
 }
 
 .downList {
@@ -126,15 +128,17 @@
 	overflow: hidden; 
 	display: block; 
 }
+
 .downList .campTitleTop {
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
     overflow: hidden;
-    max-width: 650px; /* 🔥 TopCard 크기에 딱 맞춤 */
+    max-width: 650px;
     min-width: 0;
     line-height: 1.4;
 }
+
 .downCard {
 	width: 100%;
 	padding: 10px;
@@ -147,11 +151,13 @@
 .downtop {
 	display: flex;
 }
+
 .downImg {
     display: flex;
-    justify-content: flex-end; /* 🔥 이미지를 왼쪽으로 */
+    justify-content: flex-end;
     width: 100%;
 }
+
 .downImg img {
 	max-width: 180px;
 	max-height: 110px;
@@ -164,10 +170,11 @@
 	font-weight: bold;
 	padding: 0.75rem 1rem 0.25rem;
 }
+
 .campTitleGear {
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* 🔥 두 줄까지만 */
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     line-height: 1.4;
@@ -175,6 +182,7 @@
     flex: 1 1 auto; 
     min-width: 0;     
 }
+
 .downCard .campData {
 	padding: 0 1rem 1rem;
 	font-size: 0.875rem;
@@ -183,38 +191,37 @@
 	color: #555;
     margin-top: 10px;
 }
+
 .loveDate {
     display: flex;
     gap: 8px;
-    margin-left: auto; /* 🔥 추가: loveDate를 오른쪽 끝으로 밀기 */
+    margin-left: auto;
 }
-/* 오른쪽 랭킹 + 광고 */
+
 .content2 {
 	display: flex;
 	flex-direction: column;
-	height: 100%;
 }
 
 .downRankAd {
 	display: flex;
 	flex-direction: column;
-	height: 100%;
-	flex: 1;
-	gap: 10px;
+	gap: 15px;
 }
+
 .downRank {
-	flex: 0 0 auto; /* 콘텐츠만큼만 차지 */
+	flex: 0 0 auto;
 	background: #fff;
 	border-radius: 12px;
 	padding: 1rem;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1),0 4px 8px rgba(0,0,0,0.08);
+	margin-top: 0.5rem;
 }
 
 .downAd {
-	flex: 1; /* 남은 공간 전부 차지 */
+	flex: 1;
 	overflow: hidden;
 }
-
 
 .rankList {
 	display: flex;
@@ -241,7 +248,7 @@
 	vertical-align: baseline; 
 	margin-left: 4px; 
 	opacity: 0.9;       
-	animation: sparkle 2s infinite ease-in-out; /* 반짝이는 효과 추가 */	
+	animation: sparkle 2s infinite ease-in-out;
 }
 
 .rankInfo {
@@ -267,12 +274,13 @@
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	max-width: 314px; /* 🔥 downCard 카드 크기 정도로 */
+	max-width: 314px;
 	height: 100px;
-	aspect-ratio: 16/9; /* 깔끔한 비율 유지 */
+	aspect-ratio: 16/9; 
 	overflow: hidden;
-	margin: 0 auto; /* 가운데 정렬 */
+	margin: 0 auto;
 }
+
 .adImg::after {
 	content: "";
 	position: absolute;
@@ -289,6 +297,7 @@
 	transform: skewX(-25deg);
 	animation: shine 7s infinite;
 }
+
 @media ( max-width : 768px) {
 	#section {
 		grid-template-columns: 1fr;
@@ -297,6 +306,7 @@
 		flex-direction: column;
 	}
 }
+
 @keyframes sparkle {
 	0%, 100% {
 		filter: brightness(1);
@@ -305,6 +315,7 @@
 		filter: brightness(1.8);
 	}
 }
+
 @keyframes shine {
 	0% {
 		left: -75%;
@@ -314,15 +325,13 @@
 	}
 }
 
-/* swiper-container 스타일 */
 swiper-container {
 	width: 942px;
-	height: 202px;
+	height: 185px;
 	display: block;
 	position: relative;
 }
 
-/* swiper-slide 스타일 */
 swiper-slide {
 	width: 295px;
 	flex-shrink: 0;
@@ -334,18 +343,22 @@ swiper-slide {
 	overflow: visible;
 	height: 170px;
 }
+
 swiper-slide:first-child {
-    margin-left: 5px; /* 🔥 왼쪽에 여백 주기 */
+    margin-left: 5px;
 }
-/* hover 효과 */
+
 swiper-container::part(button-prev):hover,
 swiper-container::part(button-next):hover {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   background: white;
 }
+
 .topCard:hover,
 .downCard:hover,
 .rankCard:hover {
   cursor: pointer;
+  background-color: #f5f5f5;
+  transition: background-color 0.3s ease;
 }

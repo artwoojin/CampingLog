@@ -22,7 +22,7 @@ $(document).ready(function () {
 
 					$.each(data.rankList, function (index, member) {
 						html += ''
-							+ '<div class="rankCard">'
+							+ '<div class="rankCard" data-memberid="' + member.memberId + '">'
 							+ '  <div class="rankBadge"><img src="img/' + member.badgeImage + '" alt="' + (index + 1) + '등 뱃지"></div>'
 							+ '  <div class="rankInfo">'
 							+ '    <p class="rankDetail">' + (index + 1) + '등</p>'
@@ -33,6 +33,10 @@ $(document).ready(function () {
 
 					html += "</div>";
 					$(".downRank").html(html);
+					$(document).on("click", ".rankCard", function () {
+						  const memberId = $(this).data("memberid");
+						  location.href = "yourPage.html?memberId=" + memberId;
+					});
 				},
 				error: function () {
 					console.error("명예의 캠핑로거 데이터 불러오기 실패");

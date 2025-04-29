@@ -1,7 +1,7 @@
 $(function () {
   const urlParams = new URLSearchParams(window.location.search);
   const postId = urlParams.get("postId");
-  
+  const memberId = "silver99";
 
   // 북마크 버튼 클릭
   $(document).on("click", ".bookmark-btn", function () {
@@ -25,7 +25,7 @@ $(function () {
           const current = parseInt($(".bookmark-count").text()) || 0;
           $(".bookmark-count").text(current + 1);
         } else {
-          alert("이미 북마크했거나 오류가 발생했습니다.");
+          alert("이미 북마크했습니다.");
         }
       },
       error: function () {
