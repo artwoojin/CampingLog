@@ -44,13 +44,15 @@ public class PostDAO {
 		}
 	}
 	
-    // 전체 게시글 수 가져오기
-    public int getTotalPostCount() {
-        SqlSession conn = DBCP.getSqlSessionFactory().openSession();
-        int count = conn.selectOne("postMapper.getTotalPostCount");
-        conn.close();
-        return count;
-    }
+	// 전체 게시글 수 가져오기
+	public int getTotalPostCount(String searchTerm) {
+		try (SqlSession conn = DBCP.getSqlSessionFactory().openSession()) {
+			Map<String,Object> params = new HashMap<>();
+			// 검색어가 null 이거나 빈 문자열이면, XML에서는 WHERE 절이 제거되어 전체 카운트
+			params.put("searchTerm", searchTerm != null ? searchTerm.trim() : "");
+			return conn.selectOne("postMapper.getTotalPostCount", params);
+		}
+	}
   //댓글 수 조회
     public int getCommentCount(SqlSession session, int postId) {
     	int count= session.selectOne("postMapper.getCommentCount", postId);
