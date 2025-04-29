@@ -14,7 +14,8 @@
         "categoryId": ${post.categoryId},
         "categoryName": "${post.categoryName}",
         "likeCount": ${post.likeCount},
-        "commentCount": ${post.commentCount}
+        "commentCount": ${post.commentCount},
+        "tagList": "<c:out value='${post.tagList}'/>"
       }<c:if test="${!st.last}">,</c:if>
     </c:forEach>
   ],
