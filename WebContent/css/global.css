@@ -195,29 +195,72 @@ body {
   justify-content: flex-end;
 }
 
-.authButton button,
-.loginButton button {
+.authButton a,
+.loginButton a {
+  display: inline-block;
   padding: 8px 16px;
   font-size: 16px;
   border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
   border: 2px solid #4B6320;
-  white-space: nowrap; /* 한 줄로 유지 */
+  white-space: nowrap;
+  text-decoration: none;
+  text-align: center;
 }
 
-/* 회원가입 버튼 */
-.authButton button {
-  background-color: white;
+/* 회원가입 링크 스타일 */
+.authButton a {
+  background-color: #fff;
   color: #4B6320;
 }
-
-/* 로그인 버튼 */
-.loginButton button {
-  background-color: #4B6320;
-  color: white;
+.authButton a:hover {
+  background-color: #f5f5f5;
 }
 
+/* 로그인 링크 스타일 */
+.loginButton a {
+  background-color: #4B6320;
+  color: #fff;
+}
+.loginButton a:hover {
+  background-color: #3e5720;
+}
+
+/* 로그인 후 사용자 정보 박스 */
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 프로필 이미지 */
+.userInfo .profile-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+}
+
+/* 로그아웃 버튼 스타일 (한 줄 텍스트) */
+#logoutBtn {
+  display: inline-block;
+  height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #4B6320;
+  border: none;
+  border-radius: 10px;
+  line-height: 40px; /* 수직 중앙 정렬 */
+  white-space: nowrap; /* 줄 바꿈 방지 */
+  cursor: pointer;
+}
+#logoutBtn:hover {
+  background-color: #3e5720;
+}
 /* ========== Footer ========== */
 #footer {
 	background-color: #FAF6F0;

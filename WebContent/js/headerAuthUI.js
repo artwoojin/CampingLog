@@ -13,8 +13,8 @@ $(document).ready(function () {
 					$('.authButton, .loginButton').hide();
 					// data.profileImage 가 빈 문자열이면 디폴트로 교체
 					const src = data.profileImage
-					? `/CampingLogg/img/${data.profileImage}`
-							: `/CampingLogg/img/duck.jpg`;
+					? `/CampingLog/img/${data.profileImage}`
+							: `/CampingLog/img/duck.jpg`;
 					$('.userInfo .profile-img').attr('src', src);
 					$('.userInfo').show();
 				} else {

@@ -13,6 +13,6 @@ public class LogoutAction implements Action {
         if (session != null) {
             session.invalidate(); // 세션 종료
         }
-        return "redirect:mainUI.html"; 
+        return "mainUI.html"; 
     }
 }
