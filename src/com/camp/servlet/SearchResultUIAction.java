@@ -5,11 +5,12 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-public class PostUIAction implements Action {
+public class SearchResultUIAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
-		return "post.html";
+		return "searchResult.html";
 	}
+
 
 }
