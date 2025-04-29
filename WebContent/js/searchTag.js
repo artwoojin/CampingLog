@@ -1,72 +1,58 @@
+//searchTag.js
 console.log("searchTag.js 로드됨");
 
+//전역으로 선언 (postPage.js와 공유)
+var selectedTags = [];
+
 $(document).ready(function () {
-	const $input = $(".inputTag input");
-	const $tagList = $(".tagList");
-	const $submitBtn = $(".applyTagBtn");
-	const params = new URLSearchParams(window.location.search);
+	const $input     = $(".inputTag input");
+	const $tagList   = $(".tagList");
+	const $applyBtn  = $(".applyTagBtn");
+	const params     = new URLSearchParams(window.location.search);
 	const categoryId = params.get("categoryId");
 	console.log("tag categoryId:", categoryId);
 
-	if (!$input.length || !$tagList.length || !$submitBtn.length) {
-		console.warn("searchTag: .inputTag, .tagList, .applyTagBtn 중 일부가 없습니다.");
-		return;
-	}
-
+	// 카테고리 5번(예: Q&A 등)은 태그 숨기기
 	if (categoryId === "5") {
-		console.log("카테고리 5번이므로 태그 입력창 숨김");
 		$(".inputTag").hide();
 		return;
 	}
 
 	$tagList.hide();
-	const selectedTags = [];
 
+	// 1) 서버에서 태그 목록을 받아와서 렌더링
 	function loadTags() {
-		if (!categoryId) {
-			console.error("searchTag: categoryId 없음");
-			return;
-		}
+		if (!categoryId) return console.error("searchTag: categoryId 없음");
 
 		$.ajax({
 			url: "controller",
 			method: "GET",
-			data: {
-				cmd: "getTagList",
-				categoryId: categoryId
-			},
+			data: { cmd: "getTagList", categoryId },
 			dataType: "json",
-			success: function (resp) {
-				try {
-					if (typeof resp === "string") {
-						resp = JSON.parse(resp);
-					}
-				} catch (e) {
-					console.error("searchTag: JSON 파싱 오류", e);
-					return;
-				}
+			success(resp) {
+				if (typeof resp === "string") resp = JSON.parse(resp);
 
 				$tagList.empty();
-
-				$.each(resp.tagList, function (i, tag) {
+				resp.tagList.forEach(tag => {
 					const $pill = $("<p>")
 					.addClass("tag-pill")
 					.text(tag.tagName)
-					.attr("data-tag-id", tag.tagId)
 					.on("click", function () {
-						const index = selectedTags.indexOf(tag.tagName);
-
-						if (index > -1) {
-							selectedTags.splice(index, 1);
+						const t = tag.tagName;
+						const idx = selectedTags.indexOf(t);
+						if (idx > -1) {
+							selectedTags.splice(idx, 1);
 							$pill.removeClass("selected");
 						} else {
 							if (selectedTags.length >= 6) {
 								alert("태그는 최대 6개까지만 선택할 수 있습니다.");
 								return;
 							}
-							selectedTags.push(tag.tagName);
+							selectedTags.push(t);
 							$pill.addClass("selected");
 						}
+						// 선택된 태그를 input에 표시
+						$input.val(selectedTags.map(x => `#${x}`).join(" "));
 					});
 
 					$tagList.append($pill);
@@ -74,50 +60,34 @@ $(document).ready(function () {
 
 				console.log("✅ 태그 로드 완료:", resp.tagList);
 			},
-			error: function (xhr, status, error) {
+			error(xhr, status, error) {
 				console.error("❌ 태그 로드 실패", error);
 			}
 		});
 	}
 
+	// 2) input 클릭 시 태그 박스 표시 & loadTags 호출
 	$input.on("click", function (e) {
 		e.stopPropagation();
 		$tagList.css("display", "flex");
 		loadTags();
 	});
 
+	// 3) 바깥 클릭 시 태그 박스 숨기기
 	$(document).on("click", function (e) {
-		const $section1 = $("#section1");
-		if (!$section1.has(e.target).length) {
+		if (!$("#section1").has(e.target).length) {
 			$tagList.hide();
 		}
 	});
 
-	$submitBtn.on("click", function () {
+	// 4) 적용 버튼 클릭 시 전역 selectedTags 사용해 1페이지 재렌더링
+	$applyBtn.on("click", function () {
 		if (selectedTags.length === 0) {
 			alert("먼저 태그를 선택해주세요!");
 			return;
 		}
-
 		console.log("🔵 선택한 태그들:", selectedTags);
-
-		$.ajax({
-			url: "controller",
-			method: "GET",
-			data: {
-				cmd: "filterPostsByTags",
-				tags: selectedTags.join(",")
-			},
-			traditional: true,
-			success: function (resp) {
-				console.log("✅ 태그 필터 전송 성공:", resp);
-				alert("태그에 맞는 게시글을 불러옵니다!");
-				// TODO: resp로 게시글 렌더링 로직 연결할 수 있음
-			},
-			error: function (xhr, status, error) {
-				console.error("❌ 태그 필터 전송 실패", error);
-				alert("태그 필터 요청에 실패했습니다.");
-			}
-		});
+		// 전역 함수를 호출
+		loadPage(1);
 	});
 });
