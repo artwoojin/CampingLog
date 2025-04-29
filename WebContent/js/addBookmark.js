@@ -1,7 +1,7 @@
 $(function () {
   const urlParams = new URLSearchParams(window.location.search);
   const postId = urlParams.get("postId");
-  
+  const memberId = "silver99";
 
   // 북마크 버튼 클릭
   $(document).on("click", ".bookmark-btn", function () {
