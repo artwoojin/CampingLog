@@ -41,10 +41,10 @@ public class GetMyInfoAction implements Action {
         System.out.println("좋아요 : " + likeCount);
 
         String badge;
-        if (likeCount >= 100) badge = "vipbadge.png";
-        else if (likeCount >= 50) badge = "goldenbadge.png";
-        else if (likeCount >= 10) badge = "silverbadge.png";
-        else badge = "familybadge.png";
+        if (likeCount >= 100) badge = "grade4.png";
+        else if (likeCount >= 50) badge = "grade3.png";
+        else if (likeCount >= 10) badge = "grade2.png";
+        else badge = "grade1.png";
 
         updatedInfo.setBadgeImage(badge);
         System.out.println("뱃지: " + badge);
