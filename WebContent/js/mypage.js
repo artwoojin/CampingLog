@@ -1,15 +1,8 @@
 $(function () {
 	const ctx = '/CampingLog';
-	const params = new URLSearchParams(location.search);
-	const memberId = params.get('memberId');
-	
-	if (!memberId) {
-		  alert('회원 ID가 없습니다.');
-		  return location.href = `${ctx}/controller?cmd=login`;
-	}
 
 	// 1) 프로필 정보 불러오기
-	$.getJSON(`${ctx}/controller?cmd=getMyInfo&memberId=${memberId}`)
+	$.getJSON(`${ctx}/controller?cmd=getMyInfo`)
 	.done(function(data) {
 		// (1) 로그인 체크
 		if (data.error === 'unauthorized') {
