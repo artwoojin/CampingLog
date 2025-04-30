@@ -42,7 +42,7 @@ $(document).ready(function () {
 		.off("click")
 		.on("click", function () {
 			const id = $(this).data("categoryId");
-			if (id === 1) {
+			if (id === 21) {
 				// 카테고리 ID가 1번이면 notice.html 로
 				window.location.href = "notice.html";
 			} else {

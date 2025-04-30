@@ -38,6 +38,7 @@ async function initPage() {
 	// 2) header.html을 include한 페이지라면 headerCategory.js 로드
 	if (document.querySelector('[data-include="header.html"]')) {
 		await loadScript('js/headerCategory.js');
+		await loadScript('js/headerSearch.js');
 		await loadScript('js/headerAuthUI.js');
 	}
 

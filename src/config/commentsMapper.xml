@@ -12,7 +12,7 @@
 
 	<insert id="addComments" parameterType="com.camp.model.CommentsVO">
 		INSERT INTO Comments VALUES 
-		(comment_seq.NEXTVAL, #{commentContents}, SYSDATE, #{postId}, #{memberId})
+		(comments_seq.NEXTVAL, #{commentContents}, SYSDATE, #{postId}, #{memberId})
 	</insert>
 	
 	<select id="getMemberImage" parameterType="String" resultType="String">

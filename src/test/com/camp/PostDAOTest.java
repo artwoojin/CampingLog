@@ -20,7 +20,7 @@ public class PostDAOTest {
 	
 	@Test
 	public void 전체_게시글_페이징_조회() {
-		(pdao.getPostPage(0, 4).get(1));
+		
 	}
 	
 	@Test
