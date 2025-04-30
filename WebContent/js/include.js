@@ -68,6 +68,14 @@ async function initPage() {
 		break;
 
 	case 'myPage.html':
+		await loadScript('js/headerCategory.js');
+		await loadScript('js/headerSearch.js');
+		await loadScript('js/headerAuthUI.js');
+		await loadScript('js/mypage.js');
+		await loadScript('js/mypagephoto.js');
+		await loadScript('js/mypagePosts.js');
+		await loadScript('js/myPageBookmarks.js');
+		break;
 	case 'yourPage.html':
 		// 예: 마이/상대 페이지 전용 스크립트가 있다면 여기서 로드
 		break;

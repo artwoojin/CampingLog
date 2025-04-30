@@ -87,4 +87,14 @@ $(function () {
 	// 4) 초기 로드
 	loadSection('myPagePosts',     'my-posts',     '작성한 글이 없습니다.');
 	loadSection('myPageBookmarks', 'my-bookmarks', '북마크한 글이 없습니다.');
+	// 5) 정보 수정 버튼 클릭 → 비밀번호 확인 페이지로 이동
+	$(document).on('click', '.edit-btn', function () {
+	  window.location.href = 'passwordCheck.html?target=edit';
+	});
+
+	// 6) 회원 탈퇴 버튼 클릭 → 비밀번호 확인 페이지로 이동
+	$(document).on('click', '.delete-btn', function () {
+	  window.location.href = 'passwordCheck.html?target=delete';
+	console.log("✅ mypage.js 실행됨");
+	});
 });
