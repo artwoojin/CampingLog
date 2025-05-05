@@ -123,6 +123,9 @@ public class ActionFactory {
 		case "getSessionMember":
 			a = new GetSessionMemberAction();
 			break;
+		case "signUpUI":
+			a = new SignUpUIAction();
+			break;
 		default:
 			a = new MainUIAction(); 
 			break;

@@ -136,7 +136,7 @@ $(document).ready(function () {
 			dataType: "json",
 			success: function (response) {
 				if (response.result === "success") {
-					window.location.href = "/CampingLog/mainUI.html";
+					window.location.href = "/CampingLog/controller?cmd=mainUI";
 				} else {
 					alert("회원가입 실패: 다시 시도해주세요.");
 				}
