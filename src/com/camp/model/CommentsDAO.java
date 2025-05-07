@@ -19,7 +19,6 @@ public class CommentsDAO {
     	map.put("postId", postId);
     	map.put("startRow", startRow);
     	map.put("endRow", endRow);
-    	System.out.println("commentsdao¿« endrow: "+map.get("endRow"));
     	return session.selectList("commentsMapper.getCommentsPagination", map);
     }
 

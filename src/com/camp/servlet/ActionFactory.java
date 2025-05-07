@@ -6,8 +6,6 @@ public class ActionFactory {
 
 	public static Action getAction(String cmd) {
 		Action a;
-		System.out.println("cmd: " + cmd);
-
 		switch (cmd) {
 		case "detail":
 			a = new DetailAction();
@@ -111,15 +109,15 @@ public class ActionFactory {
 		case "memberImageUIAction":
 			a = new MemberImageUIAction();
 			break;
-//		case "myPage":
-//			a = new MyPageAction();
-//			break;
-//		case "myPageBookmarks":
-//			a = new MyPageBookmarksAction();
-//			break;
-//		case "myPagePosts":
-//			a = new MyPagePostsAction();
-//			break;
+		case "myPage":
+			a = new MyPageAction();
+			break;
+		case "myPageBookmarks":
+			a = new MyPageBookmarksAction();
+			break;
+		case "myPagePosts":
+			a = new MyPagePostsAction();
+			break;
 		case "getSessionMember":
 			a = new GetSessionMemberAction();
 			break;

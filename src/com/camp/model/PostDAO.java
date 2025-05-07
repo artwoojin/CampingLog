@@ -56,8 +56,7 @@ public class PostDAO {
   //´ñ±Û ¼ö Á¶È¸
     public int getCommentCount(SqlSession session, int postId) {
     	int count= session.selectOne("postMapper.getCommentCount", postId);
-    	System.out.println(postId);
-    	System.out.println(count);
+    	
     	return count;
     }
     
@@ -160,8 +159,7 @@ public class PostDAO {
 			e.printStackTrace();
 			System.out.println("ºÏ¸¶Å© ¿À·ù");
 		}
-		System.out.println("insertBookmark °á°ú: " + result);
-		System.out.println("postdao:"+result);
+		
 		return result;
 	}
 	public boolean isAlreadyBookmarked(SqlSession session, String memberId, int postId) {
@@ -169,7 +167,7 @@ public class PostDAO {
 		param.put("postId", postId);
 		param.put("memberId", memberId);
 		int count = session.selectOne("postMapper.isAlreadyBookmarked", param);
-		System.out.println("isAlreadyBookmarked() - postId: " + postId + ", memberId: " + memberId + ", count: " + count); // µð¹ö±ë¿ë
+		
 		return count>=1;
 	}
 	public boolean isAlreadyLiked(SqlSession conn, String memberId, int postId) {
@@ -177,7 +175,7 @@ public class PostDAO {
 		param.put("postId", postId);
 		param.put("memberId", memberId);
 		int count = conn.selectOne("postMapper.isAlreadyLiked", param);
-		System.out.println("isAlreadyLiked() - postId: " + postId + ", memberId: " + memberId + ", count: " + count); // µð¹ö±ë¿ë
+		
 		return count>=1;
 	}
 

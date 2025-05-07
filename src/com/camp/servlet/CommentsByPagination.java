@@ -30,7 +30,6 @@ public class CommentsByPagination implements Action {
 		List<CommentsVO> comments = ds.getCommentsByPagination(postId, start, end);
 		int commentCount = ds.getCommentCount(postId);
 		
-		System.out.println("commpagina"+commentCount);
 		
 		request.setAttribute("commentList", comments);
 		request.setAttribute("commentCount", commentCount);

@@ -46,9 +46,7 @@ public class DetailService {
     public List<CommentsVO> getCommentsByPagination(int postId, int startRow, int endRow) {
     	try (SqlSession session = factory.openSession()) {
     		List<CommentsVO> vo = commentsDAO.getCommentsByPagination(session, postId, startRow, endRow);
-    		for (CommentsVO comment : vo) {
-    		    System.out.println(comment);
-    		}
+    		
     		return vo;
     	}
     }
@@ -81,7 +79,7 @@ public class DetailService {
     	boolean result = false;
     	try (SqlSession session = factory.openSession()) {
     		result = postDAO.InsertBookmark(session, postId, memberId);
-    		System.out.println("ds: "+result);
+    		
     		if (result) session.commit();
     		else session.rollback();
     	}catch (Exception e) {

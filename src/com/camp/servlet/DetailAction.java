@@ -27,7 +27,6 @@ public class DetailAction implements Action {
 		
 		request.setAttribute("post", post);
 		request.setAttribute("tagList", tagList);
-//		request.setAttribute("commentList", commentList);
 		
 		return "detail.jsp";
 	}

@@ -22,9 +22,6 @@ public class AddCommentAction implements Action {
 		String memberId = request.getParameter("memberId");
 		boolean addCheck = service.addComment(new CommentsVO(commentContents, postId, memberId));
 		request.setAttribute("addCheck", addCheck);
-		System.out.println("postId: " + request.getParameter("postId"));
-		System.out.println("commentContents: " + request.getParameter("commentContents"));
-		System.out.println("memberId: " + request.getParameter("memberId"));
 		return "addComment.jsp";
 	}
 
